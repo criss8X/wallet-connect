@@ -1,0 +1,17 @@
+{
+  "name": "wallet-connect",
+  "version": "1.0.0",
+  "author": "Cristian Carralero García",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "scripts": {
+    "wcs-app": "pnpm --filter wallet-connect-shadcn",
+    "wcs": "pnpm --filter wcs-npm",
+    "doc": "pnpm --filter doc dev"
+  },
+  "packageManager": "pnpm@10.17.0",
+  "devDependencies": {
+    "typescript": "5.9.2"
+  }
+}
