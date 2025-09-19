@@ -1,5 +1,5 @@
 export function useAccountActions() {
-  return `import { useState } from "react";
+	return `import { useState } from "react";
 import { toast } from "sonner";
 import { useAccount, useDisconnect } from "wagmi";
 
@@ -44,5 +44,5 @@ export function useAccountActions() {
 		handleDisconnect,
 	};
 }
-`
+`;
 }
