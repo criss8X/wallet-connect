@@ -8,10 +8,12 @@
 	"scripts": {
 		"wcs-app": "pnpm --filter wallet-connect-shadcn",
 		"wcs": "pnpm --filter wcs-npm",
-		"doc": "pnpm --filter doc"
+		"doc": "pnpm --filter doc",
+		"check": "biome check"
 	},
 	"packageManager": "pnpm@10.17.0",
 	"devDependencies": {
+		"@biomejs/biome": "2.2.4",
 		"typescript": "5.9.2"
 	}
 }
