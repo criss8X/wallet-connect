@@ -8,7 +8,7 @@
 	"scripts": {
 		"wcs-app": "pnpm --filter wallet-connect-shadcn",
 		"wcs": "pnpm --filter wcs-npm",
-		"doc": "pnpm --filter doc",
+		"doc": "pnpm --filter wc-doc",
 		"check": "biome check"
 	},
 	"packageManager": "pnpm@10.17.0",

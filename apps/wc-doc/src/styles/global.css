@@ -1,0 +1,6 @@
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: <explanation> */
+@import "tailwindcss";
+
+body {
+	@apply text-neutral-100;
+}
