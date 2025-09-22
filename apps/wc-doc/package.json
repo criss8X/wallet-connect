@@ -13,7 +13,10 @@
 		"astro": "5.13.9",
 		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
+<<<<<<< HEAD
 		"shiki": "^3.13.0",
+=======
+>>>>>>> 52edd2f (feat: Implement getting started basic)
 		"tailwind-merge": "3.3.1",
 		"tailwindcss": "4.1.11"
 	}

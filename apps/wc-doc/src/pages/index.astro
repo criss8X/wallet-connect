@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
 import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
 import chainSelectorQuickDesc from "@/assets/content/quick-start/chainSelectorQuickDesc.md?raw";
@@ -233,3 +234,35 @@ const headerTsxExample = `<header className="flex items-center justify-between p
     content: "• ";
   }
 </style>
+=======
+import gettingStartedContent from "@/assets/content/getting-started.json";
+import CodeSnippet from "@/components/code-snippet.astro";
+import StepSection from "@/components/step-section.astro";
+import RootLayout from "@/layouts/RootLayout.astro";
+import { parseHighlightsFromParagraph } from "@/lib/markdown";
+
+const { descInMarkdown, descConnectWallet } = gettingStartedContent.es;
+const descInHtml = parseHighlightsFromParagraph(descInMarkdown);
+const descConnectWalletInHtml = parseHighlightsFromParagraph(descConnectWallet);
+---
+
+<RootLayout title="Wallet Connect">
+  <div class="flex flex-col gap-18">
+    <StepSection title="Getting Started" className="mt-15 gap-8">
+      <div class="flex flex-col gap-12">
+        <p set:html={descInHtml} />
+
+        <p set:html={descConnectWalletInHtml} />
+      </div>
+
+      <CodeSnippet title="ConnectWallet.tsx">
+        {
+          `function some() {
+            alert("some")
+        };`
+        }
+      </CodeSnippet>
+    </StepSection>
+  </div>
+</RootLayout>
+>>>>>>> 52edd2f (feat: Implement getting started basic)

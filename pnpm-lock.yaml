@@ -29,9 +29,12 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
+<<<<<<< HEAD
       shiki:
         specifier: ^3.13.0
         version: 3.13.0
+=======
+>>>>>>> 52edd2f (feat: Implement getting started basic)
       tailwind-merge:
         specifier: 3.3.1
         version: 3.3.1
