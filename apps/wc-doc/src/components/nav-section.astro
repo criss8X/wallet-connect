@@ -8,17 +8,19 @@ interface Props {
 }
 
 const { title, items } = Astro.props;
+const pathName = Astro.url.pathname;
 ---
 
 <article class="pt-4 flex flex-col gap-1">
   <h2 class="px-4 opacity-60 text-sm">{title}</h2>
 
-  <nav class="flex flex-col">
+  <nav class="flex flex-col gap-1">
     {
       items.map(({ name, href }) => (
         <a
+          data-active={pathName === href ? true : false}
           href={href}
-          class="px-6 h-12 text-md flex items-center select-none hover:bg-neutral-900"
+          class="px-6 h-10 text-md flex items-center select-none hover:bg-neutral-900 data-[active=true]:bg-blue-900/50"
         >
           {name}
         </a>

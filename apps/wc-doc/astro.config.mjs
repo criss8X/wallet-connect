@@ -7,5 +7,8 @@ export default defineConfig({
 	vite: {
 		// @ts-expect-error
 		plugins: [tailwindcss()],
+		optimizeDeps: {
+			include: ["class-variance-authority"],
+		},
 	},
 });

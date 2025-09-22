@@ -2,5 +2,8 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
+	"[snippets]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
 	}
 }

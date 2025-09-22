@@ -1,0 +1,30 @@
+---
+import { cva, type VariantProps } from "class-variance-authority";
+import cn from "clsx";
+
+const anchorVariants = cva(
+  "h-10 px-4 flex justify-center items-center select-none rounded-sm",
+  {
+    variants: {
+      variant: {
+        default: "bg-blue-900 text-blue-50 hover:bg-blue-900/90",
+        secondary: "bg-neutral-700/50 text-neutral-50 hover:bg-neutral-700/70",
+        outline:
+          "border border-neutral-800 bg-neutral-900 hover:bg-neutral-900/90",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+interface Props extends Omit<astroHTML.JSX.AnchorHTMLAttributes, "class"> {
+  variant?: VariantProps<typeof anchorVariants>["variant"];
+  className?: string;
+}
+
+const { variant, className, ...props } = Astro.props;
+---
+
+<a class={cn(anchorVariants({ variant, className }))} {...props}><slot /></a>
