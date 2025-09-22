@@ -237,7 +237,7 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 =======
 import gettingStartedContent from "@/assets/content/getting-started.json";
 import CodeSnippet from "@/components/code.astro";
-import StepSection from "@/components/step-section.astro";
+import StepSection from "@/components/step.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
 import { parseHighlightsFromParagraph } from "@/lib/markdown";
 
@@ -248,7 +248,7 @@ const descConnectWalletInHtml = parseHighlightsFromParagraph(descConnectWallet);
 
 <RootLayout title="Wallet Connect">
   <div class="flex flex-col gap-18">
-    <StepSection title="Getting Started" className="mt-15 gap-8">
+    <StepSection title="Getting Started" className="mt-10 gap-8">
       <div class="flex flex-col gap-12">
         <p set:html={descInHtml} />
 
