@@ -1,6 +1,9 @@
 ---
 import cn from "@/lib/cn";
+<<<<<<< HEAD
 import CopyButton from "./copy-button.astro";
+=======
+>>>>>>> c88d191 (refactor(doc): Change names for code and script snippets comp)
 import { Copy } from "./icon.astro";
 
 interface Props {
@@ -25,7 +28,17 @@ const scriptBody = Array.isArray(scripts) ? scripts.join("<br />") : scripts;
     data-copy
   />
 
+<<<<<<< HEAD
   <CopyButton
     contentToCopy={typeof scripts === "string" ? scripts : scripts.join("\n")}
   />
+=======
+  <button
+    class="text-neutral-100/50 size-8 hover:cursor-pointer hover:text-neutral-100 hover:bg-neutral-800 rounded-md flex items-center justify-center transition-colors"
+    title="Copy to clipboard"
+    onclick="navigator.clipboard.writeText(document.querySelector('[data-copy]').innerText);"
+  >
+    <Copy class="size-5" />
+  </button>
+>>>>>>> c88d191 (refactor(doc): Change names for code and script snippets comp)
 </div>
