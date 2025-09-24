@@ -1,8 +1,8 @@
 ---
+import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
 import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
 import walletConnectDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
 import CodeSnippet from "@/components/code.astro";
-import Link from "@/components/link.astro";
 import Script from "@/components/script.astro";
 import StepSection from "@/components/step.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
@@ -99,8 +99,19 @@ const wcInitialDescriptionHtml = parseMinimalMdToHtml(walletConnectDesc);
 
       <p>
         Primero deberás crear un nuevo archivo
-        <em class="highlight">ConnectWallet.tsx</em>
-        y pega el siguiente código:
+        <em class="highlight">ChainSelector.tsx</em>
+        que tendrá como contenido el código que se mostrará a continuación, este
+        componente se encargará de permitir que se pueda cambiar la cadena.
+      </p>
+
+      <CodeSnippet title="ChainSelector.tsx" code={chainSelectorTsx} />
+
+      <p>
+        Ahora solo deberás crear el archivo
+        <em class="highlight">ConnectWallet.tsx</em> que usa el componente
+        <b>ChainSelector.tsx</b>. Una vez pegado el código que sale a
+        continuación podrás usar el componente en cualquier parte de tu
+        aplicación.
       </p>
 
       <CodeSnippet title="ConnectWallet.tsx" code={connectWalletTsx} />
