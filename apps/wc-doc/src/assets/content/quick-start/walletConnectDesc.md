@@ -1,0 +1,1 @@
+Wallet Connect es un componente **basado en shadcn** dedicado a las conexiones de billetera con **wagmi** y **viem**. El objetivo es que los desarrolladores web3 puedan tener un componente **listo para usar** y que sea altamente **personalizable**. El estilo del componente fue basado en **rainbowkit**, pero, usando el estilo y la forma de estructurar de **shadcn**.

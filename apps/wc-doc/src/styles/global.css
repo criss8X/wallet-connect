@@ -4,3 +4,11 @@
 body {
 	@apply text-neutral-100;
 }
+
+.highlight {
+	@apply bg-blue-900/50 px-1;
+}
+
+em {
+	@apply not-italic;
+}

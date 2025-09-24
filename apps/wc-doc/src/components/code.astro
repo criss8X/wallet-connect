@@ -1,52 +1,59 @@
 ---
+import { codeToHtml } from "shiki";
 import cn from "@/lib/cn";
 
 interface Props {
   title: string;
+  code: string;
   className?: string;
 }
 
-const { className, title } = Astro.props;
+const { className, title, code } = Astro.props;
+
+const codeInHtml = await codeToHtml(code, {
+  lang: "tsx",
+  theme: "one-dark-pro",
+  colorReplacements: {
+    "#282c34": "#171717",
+  },
+});
 ---
 
 <div
   class={cn(
-    "relative flex w-full max-w-3xl max-h-100 bg-neutral-900/20 border border-neutral-800",
+    "relative flex w-full max-w-4xl max-h-125 bg-neutral-900 border border-neutral-800",
     className,
   )}
 >
-  <div
-    class="absolute h-14 w-full flex items-center justify-between px-4 bg-neutral-950/10 backdrop-blur-2xl"
-  >
+  <div class="absolute h-14 w-full flex items-center justify-between px-4">
     <span class="opacity-50">{title}</span>
 
     <button
-      class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer w-20 rounded-xs"
+      class="bg-neutral-800/60 hover:bg-neutral-800 hover:cursor-pointer w-20 rounded-xs py-0.5"
+      data-code={code}
       onclick="copyToClipboard(this);"
     >
       Copy
     </button>
   </div>
 
-  <div class="flex-1 mt-12 p-4 overflow-auto" data-copy>
-    <slot />
-  </div>
+  <div class="flex-1 mt-14 p-4 overflow-auto" data-copy set:html={codeInHtml} />
 </div>
 
 <script is:inline>
-  async function copyToClipboard(e) {
-    const internalContainerElement = e.parentElement.parentElement;
+  async function copyToClipboard(button) {
+    const code = button.dataset.code;
 
-    const contentInText =
-      internalContainerElement.querySelector("[data-copy]").textContent;
-
-    if (typeof contentInText !== "string") {
+    if (typeof code !== "string") {
       return;
     }
 
-    navigator.clipboard.writeText(contentInText);
+    await navigator.clipboard.writeText(code);
+    button.textContent = "Copied!";
 
-    // TODO: Show a toast when text has been copied.
+    setTimeout(() => {
+      button.textContent = "Copy";
+    }, 2000);
   }
 </script>
 
