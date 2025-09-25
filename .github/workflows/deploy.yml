@@ -27,11 +27,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build docs
-        run: pnpm doc build
-
-      - name: Build Storybook
-        run: pnpm wcs-app storybook:build
+      - name: Build all
+        run: pnpm build:all
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

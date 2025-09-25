@@ -6,6 +6,7 @@
 	"keywords": [],
 	"license": "ISC",
 	"scripts": {
+		"build:all": "pnpm doc build && pnpm wcs-app storybook:build",
 		"wcs-app": "pnpm --filter wc-shadcn",
 		"wcs": "pnpm --filter wcs-npm",
 		"doc": "pnpm --filter wc-doc",
