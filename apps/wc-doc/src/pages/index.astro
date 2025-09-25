@@ -140,10 +140,21 @@ const headerTsxExample = `<header className="flex items-center justify-between p
     <StepSection title="Example" className="gap-8">
       <div class="space-y-4">
         <p>
-          A continuación te muestro un ejemplo básico de cómo integrar el
-          componente en tu aplicación de React paso a paso desde cero. Primero
-          configura el proveedor de wagmi, deberás obtener un identificador del
-          proyecto si vas a usar WalletConnect.
+          A continuación, se presenta un ejemplo básico para integrar los
+          componentes en una aplicación de React. El primer paso es configurar{
+            " "
+          }
+          <code>wagmi</code>. Si planeas utilizar WalletConnect, necesitarás un{
+            " "
+          }
+          <code>projectId</code> que puedes obtener en{" "}
+          <a
+            href="https://cloud.walletconnect.com"
+            target="_blank"
+            class="text-blue-500 hover:underline"
+          >
+            WalletConnect Cloud
+          </a>.
         </p>
 
         <CodeSnippet title="providers.tsx" code={wagmiConfigCode} />
@@ -151,8 +162,10 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
       <div class="space-y-4">
         <p>
-          Configura el QueryClient y establece el componente Providers que
-          envolverá tu aplicación.
+          A continuación, configura <code>QueryClient</code> y crea un componente
+          <code>Providers</code> que envuelva tu aplicación. Esto proporcionará el
+          contexto necesario para <code>wagmi</code> y{" "}
+          <code>react-query</code>.
         </p>
 
         <CodeSnippet title="providers.tsx" code={queryClientCode} />
@@ -160,10 +173,12 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
       <div class="space-y-4">
         <p>
-          Ahora toca envolver toda tu aplicación de React con el componente
-          Providers.tsx creado anteriormente, si estas usando storybook debo
-          recordarte que en el archivo .storybook/preview.tsx es donde deberás
-          envolver a storybook con el componente Providers.tsx.
+          Envuelve tu aplicación de React con el componente <code
+            >Providers</code
+          > que creaste. Si utilizas Storybook, recuerda hacer lo mismo en tu archivo
+          de configuración, como <code>.storybook/preview.tsx</code>, para
+          asegurar que los componentes tengan acceso al contexto de{" "}
+          <code>wagmi</code>.
         </p>
 
         <CodeSnippet title="index.tsx" code={indexTsxExample} />
@@ -171,8 +186,11 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
       <div class="space-y-4">
         <p>
-          Y una vez hecho lo anterior puedes poner el componente ConnectWallet
-          en cualquier lugar de tu aplicación.
+          Una vez completada la configuración, puedes integrar el componente{
+            " "
+          }
+          <code>ConnectWallet</code> en cualquier parte de tu aplicación para gestionar
+          la conexión de la billetera.
         </p>
 
         <CodeSnippet title="header.tsx" code={headerTsxExample} />
