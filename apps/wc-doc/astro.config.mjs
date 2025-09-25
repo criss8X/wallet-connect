@@ -13,5 +13,5 @@ export default defineConfig({
 	},
 
 	outDir: "../../docs",
-	base: "criss8x.github.io/wallet-connect/",
+	base: "wallet-connect/",
 });
