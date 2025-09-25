@@ -1,6 +1,8 @@
 ---
 import { codeToHtml } from "shiki";
 import cn from "@/lib/cn";
+import CopyButton from "./copy-button.astro";
+import { Check } from "./icon.astro";
 
 interface Props {
   title: string;
@@ -28,34 +30,11 @@ const codeInHtml = await codeToHtml(code, {
   <div class="absolute h-14 w-full flex items-center justify-between px-4">
     <span class="opacity-50">{title}</span>
 
-    <button
-      class="bg-neutral-800/60 hover:bg-neutral-800 hover:cursor-pointer w-20 rounded-xs py-0.5"
-      data-code={code}
-      onclick="copyToClipboard(this);"
-    >
-      Copy
-    </button>
+    <CopyButton contentToCopy={code} />
   </div>
 
-  <div class="flex-1 mt-14 p-4 overflow-auto" data-copy set:html={codeInHtml} />
+  <div class="flex-1 mt-14 p-4 overflow-auto" set:html={codeInHtml} />
 </div>
-
-<script is:inline>
-  async function copyToClipboard(button) {
-    const code = button.dataset.code;
-
-    if (typeof code !== "string") {
-      return;
-    }
-
-    await navigator.clipboard.writeText(code);
-    button.textContent = "Copied!";
-
-    setTimeout(() => {
-      button.textContent = "Copy";
-    }, 2000);
-  }
-</script>
 
 <style is:inline>
   ::-webkit-scrollbar {
@@ -72,5 +51,4 @@ const codeInHtml = await codeToHtml(code, {
 </style>
 
 <!-- TODO: Checklist for I do -->
-<!-- Implement syntax highlight, prefer use `react-ts` highlight -->
 <!-- Implement mobile responsive -->

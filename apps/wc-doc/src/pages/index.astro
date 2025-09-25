@@ -17,7 +17,7 @@ const connectWalletQuickDescHtml = parseMinimalMdToHtml(connectWalletQuickDesc);
 const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
   (name) => ({
     name: name,
-    command: `pnpm add ${name.toLowerCase().replaceAll(" ", "-")}`,
+    command: `pnpm dlx shadcn@latest add ${name.toLowerCase().replaceAll(" ", "-")}`,
     url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
   }),
 );
