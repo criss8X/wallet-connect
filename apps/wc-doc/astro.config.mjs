@@ -12,5 +12,5 @@ export default defineConfig({
 		},
 	},
 
-	outDir: "../../docs/docs",
+	outDir: "../../docs",
 });
