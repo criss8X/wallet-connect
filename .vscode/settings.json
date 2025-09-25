@@ -9,5 +9,8 @@
 	"cSpell.enabledFileTypes": {
 		"*": true,
 		"markdown": false
+	},
+	"files.associations": {
+		"*.css": "tailwindcss"
 	}
 }

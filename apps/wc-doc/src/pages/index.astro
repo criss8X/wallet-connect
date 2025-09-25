@@ -62,7 +62,11 @@ const shadcnReqComponentsScript = shadcnReqComponents.map(
                 shadcnReqComponents.map(({ name, url }) => (
                   <li>
                     {name}
-                    <a class="text-blue-500" href={url} target="_blank">
+                    <a
+                      class="text-blue-500 hover:underline"
+                      href={url}
+                      target="_blank"
+                    >
                       {"(link)"}
                     </a>
                   </li>
