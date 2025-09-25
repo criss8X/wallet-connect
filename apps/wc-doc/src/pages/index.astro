@@ -25,6 +25,57 @@ const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
 const shadcnReqComponentsScript = shadcnReqComponents.map(
   ({ command }) => command,
 );
+
+const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
+import { base, mainnet } from "wagmi/chains";
+import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
+
+export const WAGMI_CONFIG: Config = createConfig({
+	chains: [mainnet, base],
+	connectors: [
+		injected(),
+		walletConnect({ projectId: "YOUR_PROJECT_ID" }),
+		metaMask(),
+		safe(),
+	],
+	transports: {
+		[mainnet.id]: http(),
+		[base.id]: http(),
+	},
+});`;
+
+const queryClientCode = `import { QueryClient } from "@tanstack/react-query"
+
+const queryClient = new QueryClient();
+
+export function Providers({ children }: { children: React.ReactNode }) {
+	return (
+		<WagmiProvider config={WAGMI_CONFIG}>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+		</WagmiProvider>
+	);
+}`;
+
+const indexTsxExample = `import React from "react";
+import ReactDOM from "react-dom/client";
+import { Providers } from "./providers";
+import App from "./App";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Providers>
+      <App />
+    </Providers>
+  </React.StrictMode>
+);`;
+
+const headerTsxExample = `<header className="flex items-center justify-between p-4">
+  <h1 className="text-2xl font-bold">My DApp</h1>
+  <ConnectWallet />
+</header>`;
 ---
 
 <RootLayout title="Wallet Connect">
@@ -86,7 +137,47 @@ const shadcnReqComponentsScript = shadcnReqComponents.map(
       <CodeSnippet title="ConnectWallet.tsx" code={connectWalletTsx} />
     </StepSection>
 
-    <StepSection title="Example" />
+    <StepSection title="Example" className="gap-8">
+      <div class="space-y-4">
+        <p>
+          A continuación te muestro un ejemplo básico de cómo integrar el
+          componente en tu aplicación de React paso a paso desde cero. Primero
+          configura el proveedor de wagmi, deberás obtener un identificador del
+          proyecto si vas a usar WalletConnect.
+        </p>
+
+        <CodeSnippet title="providers.tsx" code={wagmiConfigCode} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          Configura el QueryClient y establece el componente Providers que
+          envolverá tu aplicación.
+        </p>
+
+        <CodeSnippet title="providers.tsx" code={queryClientCode} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          Ahora toca envolver toda tu aplicación de React con el componente
+          Providers.tsx creado anteriormente, si estas usando storybook debo
+          recordarte que en el archivo .storybook/preview.tsx es donde deberás
+          envolver a storybook con el componente Providers.tsx.
+        </p>
+
+        <CodeSnippet title="index.tsx" code={indexTsxExample} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          Y una vez hecho lo anterior puedes poner el componente ConnectWallet
+          en cualquier lugar de tu aplicación.
+        </p>
+
+        <CodeSnippet title="header.tsx" code={headerTsxExample} />
+      </div>
+    </StepSection>
   </div>
 </RootLayout>
 
