@@ -5,5 +5,9 @@
 	},
 	"[snippets]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"cSpell.enabledFileTypes": {
+		"*": true,
+		"markdown": false
 	}
 }

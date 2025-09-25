@@ -1,121 +1,88 @@
 ---
 import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
 import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
-import walletConnectDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
+import chainSelectorQuickDesc from "@/assets/content/quick-start/chainSelectorQuickDesc.md?raw";
+import connectWalletQuickDesc from "@/assets/content/quick-start/connectWalletQuickDesc.md?raw";
+import wcDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
 import CodeSnippet from "@/components/code.astro";
 import Script from "@/components/script.astro";
 import StepSection from "@/components/step.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
 import { parseMinimalMdToHtml } from "@/lib/markdown";
 
-const wcInitialDescriptionHtml = parseMinimalMdToHtml(walletConnectDesc);
+const wcDescHtml = parseMinimalMdToHtml(wcDesc);
+const csQuickDescHtml = parseMinimalMdToHtml(chainSelectorQuickDesc);
+const connectWalletQuickDescHtml = parseMinimalMdToHtml(connectWalletQuickDesc);
+
+const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
+  (name) => ({
+    name: name,
+    command: `pnpm add ${name.toLowerCase().replaceAll(" ", "-")}`,
+    url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
+  }),
+);
+
+const shadcnReqComponentsScript = shadcnReqComponents.map(
+  ({ command }) => command,
+);
 ---
 
 <RootLayout title="Wallet Connect">
   <div class="flex flex-col gap-18 overflow-y-scroll size-full pb-8">
     <StepSection title="Getting Started" className="mt-10 gap-8">
-      <p set:html={wcInitialDescriptionHtml} />
+      <p set:html={wcDescHtml} />
 
-      <h3 class="text-2xl">Requisitos</h3>
+      <div class="space-y-4">
+        <h3 class="text-2xl">Requisitos</h3>
 
-      <ol class="flex flex-col gap-6">
-        <div class="flex flex-col gap-4">
-          <li>Wagmi & Viem</li>
+        <ol class="flex flex-col gap-6">
+          <div class="flex flex-col gap-4">
+            <li>Wagmi & Viem</li>
 
-          <Script scripts="pnpm add wagmi viem@2.x @tanstack/react-query" />
-        </div>
+            <Script scripts="pnpm add wagmi viem@2.x @tanstack/react-query" />
+          </div>
 
-        <div class="flex flex-col gap-4">
-          <li>Shadcn</li>
+          <div class="flex flex-col gap-4">
+            <li>Shadcn</li>
 
-          <a
-            class="text-blue-500"
-            href="https://ui.shadcn.com/docs/installation"
-            target="_blank"
-          >
-            https://ui.shadcn.com/docs/installation
-          </a>
-        </div>
+            <a
+              class="text-blue-500 hover:underline w-max"
+              href="https://ui.shadcn.com/docs/installation"
+              target="_blank"
+            >
+              https://ui.shadcn.com/docs/installation
+            </a>
+          </div>
 
-        <div class="flex flex-col gap-4">
-          <li>Shadcn Components</li>
+          <div class="flex flex-col gap-4">
+            <li>Shadcn Components</li>
 
-          <ul>
-            <li>
-              Avatar
-              <a
-                class="text-blue-500"
-                href="https://ui.shadcn.com/docs/components/avatar"
-                target="_blank"
-              >
-                {"(link)"}
-              </a>
-            </li>
+            <ul>
+              {
+                shadcnReqComponents.map(({ name, url }) => (
+                  <li>
+                    {name}
+                    <a class="text-blue-500" href={url} target="_blank">
+                      {"(link)"}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
 
-            <li>
-              Alert Dialog
-              <a
-                class="text-blue-500"
-                href="https://ui.shadcn.com/docs/components/alert-dialog"
-                target="_blank"
-              >
-                {"(link)"}
-              </a>
-            </li>
+            <Script scripts={shadcnReqComponentsScript} />
+          </div>
+        </ol>
+      </div>
 
-            <li>
-              Button
-              <a
-                class="text-blue-500"
-                href="https://ui.shadcn.com/docs/components/button"
-                target="_blank"
-              >
-                {"(link)"}
-              </a>
-            </li>
-
-            <li>
-              Sonner
-              <a
-                class="text-blue-500"
-                href="https://ui.shadcn.com/docs/components/sonner"
-                target="_blank"
-              >
-                {"(link)"}
-              </a>
-            </li>
-          </ul>
-
-          <Script
-            scripts={[
-              "pnpm add avatar",
-              "pnpm add alert-dialog",
-              "pnpm add button",
-              "pnpm add sonner",
-            ]}
-          />
-        </div>
-      </ol>
-
-      <p>
-        Primero deberás crear un nuevo archivo
-        <em class="highlight">ChainSelector.tsx</em>
-        que tendrá como contenido el código que se mostrará a continuación, este
-        componente se encargará de permitir que se pueda cambiar la cadena.
-      </p>
-
+      <p set:html={csQuickDescHtml} />
       <CodeSnippet title="ChainSelector.tsx" code={chainSelectorTsx} />
 
-      <p>
-        Ahora solo deberás crear el archivo
-        <em class="highlight">ConnectWallet.tsx</em> que usa el componente
-        <b>ChainSelector.tsx</b>. Una vez pegado el código que sale a
-        continuación podrás usar el componente en cualquier parte de tu
-        aplicación.
-      </p>
-
+      <p set:html={connectWalletQuickDescHtml} />
       <CodeSnippet title="ConnectWallet.tsx" code={connectWalletTsx} />
     </StepSection>
+
+    <StepSection title="Example" />
   </div>
 </RootLayout>
 
