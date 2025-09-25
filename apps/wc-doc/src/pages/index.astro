@@ -1,5 +1,235 @@
 ---
+import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
+import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
+import chainSelectorQuickDesc from "@/assets/content/quick-start/chainSelectorQuickDesc.md?raw";
+import connectWalletQuickDesc from "@/assets/content/quick-start/connectWalletQuickDesc.md?raw";
+import wcDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
+import CodeSnippet from "@/components/code.astro";
+import Script from "@/components/script.astro";
+import StepSection from "@/components/step.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
+import { parseMinimalMdToHtml } from "@/lib/markdown";
+
+const wcDescHtml = parseMinimalMdToHtml(wcDesc);
+const csQuickDescHtml = parseMinimalMdToHtml(chainSelectorQuickDesc);
+const connectWalletQuickDescHtml = parseMinimalMdToHtml(connectWalletQuickDesc);
+
+const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
+  (name) => ({
+    name: name,
+    command: `pnpm dlx shadcn@latest add ${name.toLowerCase().replaceAll(" ", "-")}`,
+    url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
+  }),
+);
+
+const shadcnReqComponentsScript = shadcnReqComponents.map(
+  ({ command }) => command,
+);
+
+const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
+import { base, mainnet } from "wagmi/chains";
+import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
+
+export const WAGMI_CONFIG: Config = createConfig({
+	chains: [mainnet, base],
+	connectors: [
+		injected(),
+		walletConnect({ projectId: "YOUR_PROJECT_ID" }),
+		metaMask(),
+		safe(),
+	],
+	transports: {
+		[mainnet.id]: http(),
+		[base.id]: http(),
+	},
+});`;
+
+const queryClientCode = `import { QueryClient } from "@tanstack/react-query"
+
+const queryClient = new QueryClient();
+
+export function Providers({ children }: { children: React.ReactNode }) {
+	return (
+		<WagmiProvider config={WAGMI_CONFIG}>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+		</WagmiProvider>
+	);
+}`;
+
+const indexTsxExample = `import React from "react";
+import ReactDOM from "react-dom/client";
+import { Providers } from "./providers";
+import App from "./App";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Providers>
+      <App />
+    </Providers>
+  </React.StrictMode>
+);`;
+
+const headerTsxExample = `<header className="flex items-center justify-between p-4">
+  <h1 className="text-2xl font-bold">My DApp</h1>
+  <ConnectWallet />
+</header>`;
 ---
 
-<RootLayout title="Wallet Connect"> Bienvenidos </RootLayout>
+<RootLayout title="Wallet Connect">
+  <div class="flex flex-col gap-18 overflow-y-scroll size-full pb-8">
+    <StepSection title="Getting Started" className="mt-10 gap-8">
+      <p set:html={wcDescHtml} />
+
+      <div class="space-y-4">
+        <h3 class="text-2xl">Requisitos</h3>
+
+        <ol class="flex flex-col gap-6">
+          <div class="flex flex-col gap-4">
+            <li>Wagmi & Viem</li>
+
+            <Script scripts="pnpm add wagmi viem@2.x @tanstack/react-query" />
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <li>Shadcn</li>
+
+            <a
+              class="text-blue-500 hover:underline w-max"
+              href="https://ui.shadcn.com/docs/installation"
+              target="_blank"
+            >
+              https://ui.shadcn.com/docs/installation
+            </a>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <li>Shadcn Components</li>
+
+            <ul>
+              {
+                shadcnReqComponents.map(({ name, url }) => (
+                  <li>
+                    {name}
+                    <a
+                      class="text-blue-500 hover:underline"
+                      href={url}
+                      target="_blank"
+                    >
+                      {"(link)"}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <Script scripts={shadcnReqComponentsScript} />
+          </div>
+        </ol>
+      </div>
+
+      <p set:html={csQuickDescHtml} />
+      <CodeSnippet title="ChainSelector.tsx" code={chainSelectorTsx} />
+
+      <p set:html={connectWalletQuickDescHtml} />
+      <CodeSnippet title="ConnectWallet.tsx" code={connectWalletTsx} />
+    </StepSection>
+
+    <StepSection title="Example" className="gap-8">
+      <div class="space-y-4">
+        <p>
+          A continuación, se presenta un ejemplo básico para integrar los
+          componentes en una aplicación de React. El primer paso es configurar{
+            " "
+          }
+          <code>wagmi</code>. Si planeas utilizar WalletConnect, necesitarás un{
+            " "
+          }
+          <code>projectId</code> que puedes obtener en{" "}
+          <a
+            href="https://cloud.walletconnect.com"
+            target="_blank"
+            class="text-blue-500 hover:underline"
+          >
+            WalletConnect Cloud
+          </a>.
+        </p>
+
+        <CodeSnippet title="providers.tsx" code={wagmiConfigCode} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          A continuación, configura <code>QueryClient</code> y crea un componente
+          <code>Providers</code> que envuelva tu aplicación. Esto proporcionará el
+          contexto necesario para <code>wagmi</code> y{" "}
+          <code>react-query</code>.
+        </p>
+
+        <CodeSnippet title="providers.tsx" code={queryClientCode} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          Envuelve tu aplicación de React con el componente <code
+            >Providers</code
+          > que creaste. Si utilizas Storybook, recuerda hacer lo mismo en tu archivo
+          de configuración, como <code>.storybook/preview.tsx</code>, para
+          asegurar que los componentes tengan acceso al contexto de{" "}
+          <code>wagmi</code>.
+        </p>
+
+        <CodeSnippet title="index.tsx" code={indexTsxExample} />
+      </div>
+
+      <div class="space-y-4">
+        <p>
+          Una vez completada la configuración, puedes integrar el componente{
+            " "
+          }
+          <code>ConnectWallet</code> en cualquier parte de tu aplicación para gestionar
+          la conexión de la billetera.
+        </p>
+
+        <CodeSnippet title="header.tsx" code={headerTsxExample} />
+      </div>
+    </StepSection>
+  </div>
+</RootLayout>
+
+<style is:inline>
+  ol {
+    list-style-type: none;
+    counter-reset: custom-counter;
+    padding-left: 0;
+  }
+
+  ol li {
+    counter-increment: custom-counter;
+    position: relative;
+    font-size: 1.25em;
+  }
+
+  ol li::before {
+    content: counter(custom-counter) ". ";
+    color: white;
+    opacity: 0.5;
+    font-size: 0.75em;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  ul li {
+    padding-left: 1.25rem;
+  }
+
+  ul li::before {
+    content: "• ";
+  }
+</style>

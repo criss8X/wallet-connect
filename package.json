@@ -6,7 +6,7 @@
 	"keywords": [],
 	"license": "ISC",
 	"scripts": {
-		"wcs-app": "pnpm --filter wallet-connect-shadcn",
+		"wcs-app": "pnpm --filter wc-shadcn",
 		"wcs": "pnpm --filter wcs-npm",
 		"doc": "pnpm --filter wc-doc",
 		"check": "biome check"

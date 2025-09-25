@@ -1,0 +1,1 @@
+A continuación, crea el archivo **ConnectWallet.tsx**, que importará y usará el componente **ChainSelector.tsx**. Pega el siguiente código. ¡Y listo! Ya puedes integrar el componente para conectar wallets en cualquier lugar de tu aplicación.

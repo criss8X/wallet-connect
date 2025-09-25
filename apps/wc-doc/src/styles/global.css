@@ -1,6 +1,26 @@
-/** biome-ignore-all lint/suspicious/noUnknownAtRules: <explanation> */
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: false positive */
 @import "tailwindcss";
 
 body {
 	@apply text-neutral-100;
+}
+
+.highlight {
+	@apply bg-blue-900/50 px-1;
+}
+
+em {
+	@apply not-italic;
+}
+
+::-webkit-scrollbar {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #262626;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
 }

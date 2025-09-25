@@ -1,0 +1,31 @@
+---
+import cn from "@/lib/cn";
+import CopyButton from "./copy-button.astro";
+import { Copy } from "./icon.astro";
+
+interface Props {
+  className?: string;
+  scripts: string[] | string;
+}
+
+const { className, scripts } = Astro.props;
+
+const scriptBody = Array.isArray(scripts) ? scripts.join("<br />") : scripts;
+---
+
+<div
+  class={cn(
+    "flex justify-between min-h-12 max-w-xl w-full p-4 bg-neutral-900/50 border border-neutral-800",
+    className,
+  )}
+>
+  <span
+    class="text-neutral-100/80 flex items-center"
+    set:html={scriptBody}
+    data-copy
+  />
+
+  <CopyButton
+    contentToCopy={typeof scripts === "string" ? scripts : scripts.join("\n")}
+  />
+</div>
