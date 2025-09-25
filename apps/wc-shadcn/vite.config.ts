@@ -26,6 +26,6 @@ export default defineConfig({
 				},
 			},
 		},
-		outDir: "dist",
+		outDir: "../../docs/preview",
 	},
 });

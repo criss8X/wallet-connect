@@ -11,4 +11,6 @@ export default defineConfig({
 			include: ["class-variance-authority"],
 		},
 	},
+
+	outDir: "../../docs/docs",
 });

@@ -8,7 +8,7 @@
 		"build": "vite build && vite-plugin-dts",
 		"typecheck": "tsc -p tsconfig.json --noEmit",
 		"storybook": "storybook dev -p 6006 --no-open",
-		"storybook:build": "storybook build",
+		"storybook:build": "storybook build --output-dir ../../docs/preview",
 		"build-storybook": "storybook build",
 		"deploy-storybook": "pnpm run build-storybook && gh-pages -d storybook-static -b gh-pages"
 	},
