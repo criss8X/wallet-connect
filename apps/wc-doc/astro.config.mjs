@@ -13,5 +13,5 @@ export default defineConfig({
 	},
 
 	outDir: "../../docs",
-	base: "wallet-connect/",
+	base: "wallet-connect",
 });

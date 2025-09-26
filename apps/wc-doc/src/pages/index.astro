@@ -1,6 +1,10 @@
 ---
 import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
 import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
+import finishSetupDesc from "@/assets/content/example/finishSetupDesc.md?raw";
+import providersSetupDesc from "@/assets/content/example/providersSetupDesc.md?raw";
+import queryClientDesc from "@/assets/content/example/queryClientDesc.md?raw";
+import wagmiSetupDesc from "@/assets/content/example/wagmiSetupDesc.md?raw";
 import chainSelectorQuickDesc from "@/assets/content/quick-start/chainSelectorQuickDesc.md?raw";
 import connectWalletQuickDesc from "@/assets/content/quick-start/connectWalletQuickDesc.md?raw";
 import wcDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
@@ -13,6 +17,10 @@ import { parseMinimalMdToHtml } from "@/lib/markdown";
 const wcDescHtml = parseMinimalMdToHtml(wcDesc);
 const csQuickDescHtml = parseMinimalMdToHtml(chainSelectorQuickDesc);
 const connectWalletQuickDescHtml = parseMinimalMdToHtml(connectWalletQuickDesc);
+const wagmiSetupDescHtml = parseMinimalMdToHtml(wagmiSetupDesc);
+const queryClientDescHtml = parseMinimalMdToHtml(queryClientDesc);
+const providersSetupDescHtml = parseMinimalMdToHtml(providersSetupDesc);
+const finishSetupDescHtml = parseMinimalMdToHtml(finishSetupDesc);
 
 const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
   (name) => ({
@@ -139,59 +147,25 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
     <StepSection title="Example" className="gap-8">
       <div class="space-y-4">
-        <p>
-          A continuación, se presenta un ejemplo básico para integrar los
-          componentes en una aplicación de React. El primer paso es configurar{
-            " "
-          }
-          <code>wagmi</code>. Si planeas utilizar WalletConnect, necesitarás un{
-            " "
-          }
-          <code>projectId</code> que puedes obtener en{" "}
-          <a
-            href="https://cloud.walletconnect.com"
-            target="_blank"
-            class="text-blue-500 hover:underline"
-          >
-            WalletConnect Cloud
-          </a>.
-        </p>
+        <p set:html={wagmiSetupDescHtml} />
 
         <CodeSnippet title="providers.tsx" code={wagmiConfigCode} />
       </div>
 
       <div class="space-y-4">
-        <p>
-          A continuación, configura <code>QueryClient</code> y crea un componente
-          <code>Providers</code> que envuelva tu aplicación. Esto proporcionará el
-          contexto necesario para <code>wagmi</code> y{" "}
-          <code>react-query</code>.
-        </p>
+        <p set:html={queryClientDescHtml} />
 
         <CodeSnippet title="providers.tsx" code={queryClientCode} />
       </div>
 
       <div class="space-y-4">
-        <p>
-          Envuelve tu aplicación de React con el componente <code
-            >Providers</code
-          > que creaste. Si utilizas Storybook, recuerda hacer lo mismo en tu archivo
-          de configuración, como <code>.storybook/preview.tsx</code>, para
-          asegurar que los componentes tengan acceso al contexto de{" "}
-          <code>wagmi</code>.
-        </p>
+        <p set:html={providersSetupDescHtml} />
 
         <CodeSnippet title="index.tsx" code={indexTsxExample} />
       </div>
 
       <div class="space-y-4">
-        <p>
-          Una vez completada la configuración, puedes integrar el componente{
-            " "
-          }
-          <code>ConnectWallet</code> en cualquier parte de tu aplicación para gestionar
-          la conexión de la billetera.
-        </p>
+        <p set:html={finishSetupDescHtml} />
 
         <CodeSnippet title="header.tsx" code={headerTsxExample} />
       </div>

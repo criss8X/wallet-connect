@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
-import background from "public/background.jpg";
+import background from "public/background.webp";
+import favicon from "public/favicon.svg";
 import NavSection from "@/components/nav.astro";
 
 import cn from "@/lib/cn";
@@ -16,7 +17,7 @@ const { title, className } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
     <meta name="viewport" content="width=device-width" />
 
     <meta
@@ -53,8 +54,14 @@ const { title, className } = Astro.props;
         <NavSection
           title="COMPONENTS"
           items={[
-            { name: "WalletConnect", href: "/ui/wallet-connect" },
-            { name: "ChainSelector", href: "/ui/chain-selector" },
+            {
+              name: "ConnectWallet",
+              href: "/ui/connect-wallet",
+            },
+            {
+              name: "ChainSelector",
+              href: "/ui/chain-selector",
+            },
           ]}
         />
       </div>

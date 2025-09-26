@@ -1,0 +1,1 @@
+ Una vez completada la configuración, puedes integrar el componente **ConnectWallet** en cualquier parte de tu aplicación para gestionar la conexión de la billetera.
