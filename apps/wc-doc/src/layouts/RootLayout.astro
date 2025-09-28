@@ -58,10 +58,6 @@ const { title, className } = Astro.props;
               name: "ConnectWallet",
               href: "/ui/connect-wallet",
             },
-            {
-              name: "ChainSelector",
-              href: "/ui/chain-selector",
-            },
           ]}
         />
       </div>
@@ -69,7 +65,7 @@ const { title, className } = Astro.props;
       <footer class="flex-1 border-t border-neutral-900"></footer>
     </aside>
 
-    <main class="flex-1 max-h-screen overflow-hidden">
+    <main class="flex-1 max-h-screen overflow-hidden pt-12">
       <slot />
     </main>
   </body>

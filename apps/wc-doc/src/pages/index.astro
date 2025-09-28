@@ -1,11 +1,9 @@
 ---
-import chainSelectorTsx from "@wcs/components/ChainSelector?raw";
 import connectWalletTsx from "@wcs/components/ConnectWallet?raw";
 import finishSetupDesc from "@/assets/content/example/finishSetupDesc.md?raw";
 import providersSetupDesc from "@/assets/content/example/providersSetupDesc.md?raw";
 import queryClientDesc from "@/assets/content/example/queryClientDesc.md?raw";
 import wagmiSetupDesc from "@/assets/content/example/wagmiSetupDesc.md?raw";
-import chainSelectorQuickDesc from "@/assets/content/quick-start/chainSelectorQuickDesc.md?raw";
 import connectWalletQuickDesc from "@/assets/content/quick-start/connectWalletQuickDesc.md?raw";
 import wcDesc from "@/assets/content/quick-start/walletConnectDesc.md?raw";
 import CodeSnippet from "@/components/code.astro";
@@ -15,7 +13,6 @@ import RootLayout from "@/layouts/RootLayout.astro";
 import { parseMinimalMdToHtml } from "@/lib/markdown";
 
 const wcDescHtml = parseMinimalMdToHtml(wcDesc);
-const csQuickDescHtml = parseMinimalMdToHtml(chainSelectorQuickDesc);
 const connectWalletQuickDescHtml = parseMinimalMdToHtml(connectWalletQuickDesc);
 const wagmiSetupDescHtml = parseMinimalMdToHtml(wagmiSetupDesc);
 const queryClientDescHtml = parseMinimalMdToHtml(queryClientDesc);
@@ -88,7 +85,7 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
 <RootLayout title="Wallet Connect">
   <div class="flex flex-col gap-18 overflow-y-scroll size-full pb-8">
-    <StepSection title="Getting Started" className="mt-10 gap-8">
+    <StepSection id="getting-started" title="Getting Started" className="gap-8">
       <p set:html={wcDescHtml} />
 
       <div class="space-y-4">
@@ -138,14 +135,11 @@ const headerTsxExample = `<header className="flex items-center justify-between p
         </ol>
       </div>
 
-      <p set:html={csQuickDescHtml} />
-      <CodeSnippet title="ChainSelector.tsx" code={chainSelectorTsx} />
-
       <p set:html={connectWalletQuickDescHtml} />
       <CodeSnippet title="ConnectWallet.tsx" code={connectWalletTsx} />
     </StepSection>
 
-    <StepSection title="Example" className="gap-8">
+    <StepSection id="example" title="Example" className="gap-8">
       <div class="space-y-4">
         <p set:html={wagmiSetupDescHtml} />
 
