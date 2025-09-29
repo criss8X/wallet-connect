@@ -1,0 +1,68 @@
+---
+import ImageDesc from "@/components/imageDesc.astro";
+import walletNotConnectedScreenshot from "../../public/screenshots/connectWalletBtn.webp";
+
+type WalletConnectedInfoItem = {
+  name: string;
+  description?: string;
+};
+
+const walletConnectedListInfo: WalletConnectedInfoItem[] = [
+  { name: "Saldo Disponible" },
+  { name: "Dirección de Billetera" },
+  {
+    name: "ENS Avatar",
+    description:
+      "Si el usuario no cuenta con un ENS Avatar predefinido, se le establecerá uno autogenerado a partir de su dirección de billetera.",
+  },
+  {
+    name: "Botón de cambiar de red",
+    description:
+      "Da la posibilidad al usuario de cambiar de red (se explicará de una forma más especifica más adelante).",
+  },
+  {
+    name: "Información de la billetera",
+    description:
+      "Si el usuario hace click sobre el componente que muestra el saldo disponible se abrirá un modal que le permite al usuario hacer acciones extra en su cuenta.",
+  },
+].map(({ name, description }) => ({
+  name: description ? `${name}:` : name,
+  description,
+}));
+---
+
+<ol class="space-y-8 text-lg">
+  <li class="space-y-2">
+    <h3 class="text-2xl">1. Wallet no Connected</h3>
+
+    Cuando la billetera no esta conectada solo se mostrará un botón, este le
+    permitirá al usuario abrir un modal para seleccionar la billetera de su
+    preferencia para proceder con la conexión.
+
+    <div class="h-1"></div>
+
+    <ImageDesc
+      size="sm"
+      alt="Wallet not connected status screenshot"
+      src={walletNotConnectedScreenshot.src}
+      description="Previsualización de el boton de conectar billetera, es lo que sale cuando no hay billetera conectada"
+    />
+  </li>
+
+  <li>
+    <h3 class="text-2xl">2. Wallet Connected</h3>
+    En este estado ya se encuentra disponible la información sobre la cuenta de la
+    billetera conectada, a continuación se lista la información que se muestra.
+
+    <ol class="mt-2 ml-2 space-y-1 [&_li]:[&_span]:opacity-60">
+      {
+        walletConnectedListInfo.map(({ name, description }, index) => (
+          <li>
+            <span>{index + 1}.</span>
+            <b>{name}</b> {description && description}
+          </li>
+        ))
+      }
+    </ol>
+  </li>
+</ol>

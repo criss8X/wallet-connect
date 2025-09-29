@@ -1,202 +1,116 @@
 ---
-import { codeToHtml } from "shiki";
 import StepSection from "@/components/step.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
-
-const md = codeToHtml(
-  `En este estado ya se muestra la información basica de la billetera como:
-  - Saldo disponible
-  - ENS Avatar: Si el usuario no cuenta con un ENS Avatar predefinido, se le establecerá uno autogenerado a partir de su direccion de billetera`,
-  { lang: "markdown", theme: "one-dark-pro" },
-);
+import WCStatus from "@/sections/wc-status.astro";
 ---
 
 <RootLayout title="ConnectWallet.tsx">
-  <div class="flex flex-col gap-18 overflow-y-scroll size-full pb-8">
+  <div class="flex flex-col gap-10 size-full pb-8 max-w-6xl">
     <StepSection title="Connect Wallet" className="space-y-2">
-      <p>
+      <p class="opacity-80 text-lg">
         Componente principal, en su interior se encuentran varias partes que
         conforman su funcionamiento, cuenta con dos estados, y sub componentes
         reutilizables que muestran la informacion correcta dependiendo del
         estado en que se encuentra. Todo será explicado a continuación.
       </p>
+    </StepSection>
 
-      <ol class="space-y-8">
-        <li class="flex flex-col gap-2">
-          <span class="text-3xl">
-            <span class="text-lg">1. </span>
+    <StepSection title="Estados">
+      <WCStatus />
+    </StepSection>
 
-            <b>Estados</b>
-          </span>
+    <StepSection title="Componentes internos">
+      <ul class="space-y-8">
+        <li class="space-y-2">
+          <h4 class="text-2xl">1. Connect Wallet Dialog</h4>
 
-          <ul class="space-y-4">
-            <li>
-              <b class="text-xl">{"-"} Wallet no Connected</b>
+          <p>
+            Componente encargado de mostrar al usuario el diálogo que permite
+            conectar una wallet de la lista de conectore disponibles. El listado
+            de <strong>conectores</strong> se establece en la configuración de <strong
+              >wagmi</strong
+            > como se explica en: [poner link de la documentacion de wagmi aqui].
+            Cuantos más conectores permitas será mejor para el usuario final!
+          </p>
 
-              <p>
-                Cuando la billetera no esta conectada solo se mostrará un botón,
-                este le permitirá al usuario abrir un modal para seleccionar la
-                billetera de su preferencia para proceder con la conexión.
-              </p>
-
-              <span>[Poner una foto aquí]</span>
-            </li>
-
-            <li>
-              <b class="text-xl">{"-"} Wallet Connected</b>
-
-              <p>
-                En este estado ya se muestra la información básica de la
-                billetera como:
-              </p>
-
-              <ul class="mt-2">
-                <li>
-                  <p>
-                    {"-"}
-                    <b>Saldo disponible.</b>
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    {"-"}
-                    <b>Dirección de la Billetera.</b>
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    {"-"}
-                    <b>ENS Avatar</b>: Si el usuario no cuenta con un ENS Avatar
-                    predefinido, se le establecerá uno autogenerado a partir de
-                    su dirección de billetera.
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    {"-"}
-                    <b>Botón de cambiar red</b>: Da la posibilidad al usuario de
-                    cambiar de red (se explicará de una forma más especifica más
-                    adelante.)
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    {"-"}
-                    <b>Información de la billetera</b>: Si el usuario hace click
-                    sobre el componente que muestra el <em>saldo disponible</em>
-                    se abrirá un modal que le permite al usuario hacer acciones extra
-                    en su cuenta.
-                  </p>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <p>[poner captura aqui]</p>
         </li>
 
-        <li class="flex flex-col gap-2">
-          <span class="text-3xl">
-            <span class="text-lg">2. </span>
+        <li class="space-y-2">
+          <h4 class="text-2xl">Wagmi Account</h4>
 
-            <b>Componentes internos</b>
-          </span>
+          <p>
+            Además de proveer información como el saldo de la cuenta, el avatar
+            y la dirección de billetera. También, a modo de modal, se le permite
+            al usuario cerrar sessión o copiar su dirección de billetera, no se
+            implementaron más funciones para mantenerlo minimalista, pero como
+            desarrollador puedes agregarle mas funciones, la base ya esta
+            hecha!!
+          </p>
 
-          <ul class="space-y-8">
-            <li class="space-y-2">
-              <h4 class="text-2xl">Connect Wallet Dialog</h4>
-
-              <p>
-                Componente encargado de mostrar al usuario el diálogo que
-                permite conectar una wallet de la lista de conectore
-                disponibles. El listado de <strong>conectores</strong> se establece
-                en la configuración de <strong>wagmi</strong> como se explica en:
-                [poner link de la documentacion de wagmi aqui]. Cuantos más conectores
-                permitas será mejor para el usuario final!
-              </p>
-
-              <p>[poner captura aqui]</p>
-            </li>
-
-            <li class="space-y-2">
-              <h4 class="text-2xl">Wagmi Account</h4>
-
-              <p>
-                Además de proveer información como el saldo de la cuenta, el
-                avatar y la dirección de billetera. También, a modo de modal, se
-                le permite al usuario cerrar sessión o copiar su dirección de
-                billetera, no se implementaron más funciones para mantenerlo
-                minimalista, pero como desarrollador puedes agregarle mas
-                funciones, la base ya esta hecha!!
-              </p>
-
-              <p>[poner captura aqui]</p>
-              <p>[poner captura del diálogo aqui también]</p>
-            </li>
-
-            <li class="space-y-2">
-              <h4 class="text-2xl">Chain Selector Dialog</h4>
-
-              <p>
-                Por defecto, muestra la cadena actual, pero, te permite cambiar
-                a otras cadenas que se encuentren disponibles. El componente
-                internamente utiliza las cadenas que hayas establecido en la
-                configuración de wagmi, si tienes dudas sobre como establecer
-                las cadenas en tu configuración de wagmi consulta en [poner
-                enlace a la documentacion especifica para esto]
-              </p>
-
-              <p>
-                <b>currentChain</b>: Es el parámetro que llega desde el
-                componente ChainSelector que te permite saber el nombre de la
-                cadena actual con la finalidad de que puedas estilar el
-                `Trigger` del selector de cadena.
-              </p>
-
-              <p>[poner captura aqui]</p>
-              <p>[poner captura del diálogo aqui también]</p>
-            </li>
-
-            <li class="space-y-2">
-              <h4 class="text-2xl">AccountAvatarImage</h4>
-
-              <p>
-                No es más que un wrapper del componente `AvatarImage` de shadcn
-                con cierta lógica adicional como la de establecer un avatar en
-                caso de que el usuario no tenga un ENS Avatar establecido.
-              </p>
-
-              <p>
-                - <b>address</b>: Dirección de la wallet a la que se le desea
-                mostrar el avatar.
-
-                <br />
-
-                - <b>defaultAvatarUrl</b>: Es una url alternativa en caso de que
-                el usuario no tenga ENS Avatar, como desarrollador puedes pasar
-                como parametro tu propia url, por defecto se usa:
-                https://effigy.im/a/[address].svg
-              </p>
-            </li>
-
-            <li class="space-y-2">
-              <h4 class="text-2xl">AccountBalance</h4>
-
-              <p>
-                Este componente muestra como texto el saldo actual de la cuenta,
-                es un componente altamente reutilizable.
-              </p>
-
-              <p>
-                - <b>as</b>: Por defecto es "span", este parámetro afecta en con
-                que etiqueta quieres que sea renderizado el elemento.
-              </p>
-            </li>
-          </ul>
+          <p>[poner captura aqui]</p>
+          <p>[poner captura del diálogo aqui también]</p>
         </li>
-      </ol>
+
+        <li class="space-y-2">
+          <h4 class="text-2xl">Chain Selector Dialog</h4>
+
+          <p>
+            Por defecto, muestra la cadena actual, pero, te permite cambiar a
+            otras cadenas que se encuentren disponibles. El componente
+            internamente utiliza las cadenas que hayas establecido en la
+            configuración de wagmi, si tienes dudas sobre como establecer las
+            cadenas en tu configuración de wagmi consulta en [poner enlace a la
+            documentacion especifica para esto]
+          </p>
+
+          <p>
+            <b>currentChain</b>: Es el parámetro que llega desde el componente
+            ChainSelector que te permite saber el nombre de la cadena actual con
+            la finalidad de que puedas estilar el `Trigger` del selector de
+            cadena.
+          </p>
+
+          <p>[poner captura aqui]</p>
+          <p>[poner captura del diálogo aqui también]</p>
+        </li>
+
+        <li class="space-y-2">
+          <h4 class="text-2xl">AccountAvatarImage</h4>
+
+          <p>
+            No es más que un wrapper del componente `AvatarImage` de shadcn con
+            cierta lógica adicional como la de establecer un avatar en caso de
+            que el usuario no tenga un ENS Avatar establecido.
+          </p>
+
+          <p>
+            - <b>address</b>: Dirección de la wallet a la que se le desea
+            mostrar el avatar.
+
+            <br />
+
+            - <b>defaultAvatarUrl</b>: Es una url alternativa en caso de que el
+            usuario no tenga ENS Avatar, como desarrollador puedes pasar como
+            parametro tu propia url, por defecto se usa:
+            https://effigy.im/a/[address].svg
+          </p>
+        </li>
+
+        <li class="space-y-2">
+          <h4 class="text-2xl">AccountBalance</h4>
+
+          <p>
+            Este componente muestra como texto el saldo actual de la cuenta, es
+            un componente altamente reutilizable.
+          </p>
+
+          <p>
+            - <b>as</b>: Por defecto es "span", este parámetro afecta en con que
+            etiqueta quieres que sea renderizado el elemento.
+          </p>
+        </li>
+      </ul>
     </StepSection>
   </div>
 </RootLayout>

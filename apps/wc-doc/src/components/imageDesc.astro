@@ -1,0 +1,44 @@
+---
+import { cva, type VariantProps } from "class-variance-authority";
+import cn from "@/lib/cn";
+
+const imageDescVariants = cva("", {
+  variants: {
+    size: {
+      default: "",
+      sm: "w-48",
+      lg: "",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+interface Props {
+  src: string;
+  alt: string;
+  size?: VariantProps<typeof imageDescVariants>["size"];
+  description?: string;
+  title?: string;
+}
+
+const { alt, src, title, size, description } = Astro.props;
+---
+
+<div class="min-w-xs pt-2 px-2 border border-neutral-500/50 bg-neutral-900/50">
+  <img
+    alt={alt}
+    src={src}
+    title={title}
+    class={cn(imageDescVariants({ size }))}
+  />
+
+  {
+    description ? (
+      <span class="opacity-80 text-sm">{description}</span>
+    ) : (
+      <slot />
+    )
+  }
+</div>
