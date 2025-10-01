@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 import background from "public/background.webp";
 import favicon from "public/favicon.svg";
+import { Github, ScanEye } from "@/components/icon.astro";
 import Example from "@/sections/example.astro";
 import Hero from "@/sections/hero.astro";
 import Installation from "@/sections/installation.astro";
@@ -38,9 +39,20 @@ import UsesIn from "@/sections/usesIn.astro";
         <h1>Wallet Connect</h1>
 
         <div class="flex gap-2">
-          <button>Github</button>
+          <button
+            class="flex gap-6 items-center bg-neutral-900/90 px-3 py-1 rounded-md hover:bg-neutral-800/70"
+          >
+            <span class="leading-relaxed">Github</span>
+            <Github class="size-4" />
+          </button>
 
-          <button>Preview</button>
+          <button
+            class="flex gap-6 items-center bg-neutral-900/90 px-3 py-1 rounded-md hover:bg-neutral-800/70"
+          >
+            <span class="leading-relaxed">Preview</span>
+
+            <ScanEye class="size-4" />
+          </button>
         </div>
       </div>
     </header>

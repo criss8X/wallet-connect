@@ -1,5 +1,11 @@
 ---
-import { Palette, Rocket, Shield, Sparkles } from "@/components/icon.astro";
+import {
+  Palette,
+  Rocket,
+  Shadcn,
+  Sparkles,
+  Wallet,
+} from "@/components/icon.astro";
 
 const features = [
   {
@@ -10,7 +16,7 @@ const features = [
   },
   {
     name: "Basado en Shadcn",
-    icon: Shield,
+    icon: Shadcn,
     description:
       "El componente está basado en shadcn, permitiendo la reutilización de componentes.",
   },
@@ -31,7 +37,7 @@ const features = [
 
 <div class="space-y-4">
   <div class="flex gap-4 items-center">
-    <div class="size-14 bg-neutral-900 rounded-md"></div>
+    <Wallet class="size-14 p-3 bg-neutral-900 rounded-md" />
 
     <div>
       <h1 class="text-3xl">Wallet Connect</h1>
