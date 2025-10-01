@@ -1,0 +1,52 @@
+{
+  "es": {
+    "description": "Integra wallets de criptomonedas en tu app de forma rápida y segura.",
+    "features": [
+      {
+        "name": "Conexión instantánea",
+        "iconName": "Rocket",
+        "description": "Vincula tu wallet en segundos con una experiencia moderna y sencilla."
+      },
+      {
+        "name": "Basado en Shadcn",
+        "iconName": "Shadcn",
+        "description": "El componente está basado en shadcn, permitiendo la reutilización de componentes."
+      },
+      {
+        "name": "Compatible con múltiples wallets",
+        "iconName": "Sparkles",
+        "description": "Funciona con MetaMask, WalletConnect, Coinbase Wallet y muchas más."
+      },
+      {
+        "name": "Totalmente personalizable",
+        "iconName": "Palette",
+        "description": "Ajusta el diseño y las funciones según las necesidades de tu proyecto."
+      }
+    ]
+  },
+  "en": {
+    "description": "Integra wallets de criptomonedas en tu app de forma rápida y segura.",
+    "features": [
+      {
+        "name": "Conexión instantánea",
+        "iconName": "Rocket",
+        "description": "Vincula tu wallet en segundos con una experiencia moderna y sencilla."
+      },
+      {
+        "name": "Basado en Shadcn",
+        "iconName": "Shadcn",
+        "description": "El componente está basado en shadcn, permitiendo la reutilización de componentes."
+      },
+      {
+        "name": "Compatible con múltiples wallets",
+        "iconName": "Sparkles",
+        "description": "Funciona con MetaMask, WalletConnect, Coinbase Wallet y muchas más."
+      },
+      {
+        "name": "Totalmente personalizable",
+        "iconName": "Palette",
+        "description": "Ajusta el diseño y las funciones según las necesidades de tu proyecto."
+      }
+    ]
+  }
+}

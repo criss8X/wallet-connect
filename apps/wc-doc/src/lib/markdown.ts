@@ -6,6 +6,23 @@ type ParserOptions = {
 	lineBreak?: "br";
 };
 
+type ParseMinimalObject<T extends object> = {
+	[k in keyof T]: string;
+};
+
+export function parseMinimalMdObject<T extends Record<string, string>>(
+	obj: T,
+	options: ParserOptions = { bold: "em", lineBreak: "br" },
+) {
+	return Object.entries(obj).reduce(
+		(acc, [key, value]) => {
+			acc[key as keyof T] = parseMinimalMdToHtml(value, options);
+			return acc;
+		},
+		{} as ParseMinimalObject<T>,
+	);
+}
+
 export function parseMinimalMdToHtml(
 	md: string,
 	{ bold, lineBreak }: ParserOptions = { bold: "em", lineBreak: "br" },

@@ -4,13 +4,16 @@ import finishSetupEs from "@md/example/finishSetup-Es.md?raw";
 import setupIndexEs from "@md/example/indexSetup-Es.md?raw";
 import queryClientEs from "@md/example/queryClient-Es.md?raw";
 import wagmiSetupEs from "@md/example/wagmiSetup-Es.md?raw";
+import exampleContent from "@/assets/content/example.json";
 import Code from "@/components/code.astro";
-import { parseMinimalMdToHtml } from "@/lib/markdown";
+import { parseMinimalMdObject } from "@/lib/markdown";
 
-const exampleDescEsHtml = parseMinimalMdToHtml(exampleDescEs);
-const wagmiSetupEsHtml = parseMinimalMdToHtml(wagmiSetupEs);
-const queryClientEsHtml = parseMinimalMdToHtml(queryClientEs);
-const setupIndexEsHtml = parseMinimalMdToHtml(setupIndexEs);
+const decodedHtml = parseMinimalMdObject({
+  exampleDescEs,
+  wagmiSetupEs,
+  queryClientEs,
+  setupIndexEs,
+});
 
 const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
 import { base, mainnet } from "wagmi/chains";
@@ -62,16 +65,18 @@ const headerTsxExample = `<header className="flex items-center justify-between p
   <h1 className="text-2xl font-bold">My DApp</h1>
   <ConnectWallet />
 </header>`;
+
+const { title, subtitle } = exampleContent.es;
 ---
 
 <div class="space-y-4">
-  <h1 class="text-2xl">Ejemplo Básico</h1>
+  <h1 class="text-2xl">{title}</h1>
 
-  <span set:html={exampleDescEsHtml} />
+  <span set:html={decodedHtml.exampleDescEs} />
 
-  <h2 class="text-xl font-medium mt-4">Configuración</h2>
+  <h2 class="text-xl font-medium mt-4">{subtitle}</h2>
 
-  <span set:html={wagmiSetupEsHtml} />
+  <span set:html={decodedHtml.wagmiSetupEs} />
 
   <div class="h-1"></div>
 
@@ -79,7 +84,7 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
   <div class="h-2"></div>
 
-  <span set:html={queryClientEsHtml} />
+  <span set:html={decodedHtml.queryClientEs} />
 
   <div class="h-1"></div>
 
@@ -87,7 +92,7 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 
   <div class="h-2"></div>
 
-  <span set:html={setupIndexEsHtml} />
+  <span set:html={decodedHtml.setupIndexEs} />
 
   <div class="h-1"></div>
 

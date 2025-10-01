@@ -1,5 +1,7 @@
 ---
+import heroContent from "@/assets/content/hero.json";
 import {
+  type LucideIcon,
   Palette,
   Rocket,
   Shadcn,
@@ -7,32 +9,22 @@ import {
   Wallet,
 } from "@/components/icon.astro";
 
-const features = [
-  {
-    name: "Conexión instantánea",
-    icon: Rocket,
-    description:
-      "Vincula tu wallet en segundos con una experiencia moderna y sencilla.",
-  },
-  {
-    name: "Basado en Shadcn",
-    icon: Shadcn,
-    description:
-      "El componente está basado en shadcn, permitiendo la reutilización de componentes.",
-  },
-  {
-    name: "Compatible con múltiples wallets",
-    icon: Sparkles,
-    description:
-      "Funciona con MetaMask, WalletConnect, Coinbase Wallet y muchas más.",
-  },
-  {
-    name: "Totalmente personalizable",
-    icon: Palette,
-    description:
-      "Ajusta el diseño y las funciones según las necesidades de tu proyecto.",
-  },
-];
+const internalIconMap: Record<string, LucideIcon> = {
+  Sparkles: Sparkles,
+  Palette: Palette,
+  Rocket: Rocket,
+  Shadcn: Shadcn,
+};
+
+const features = heroContent.es.features.map(
+  ({ name, description, iconName }) => ({
+    name,
+    description,
+    icon: internalIconMap[iconName],
+  }),
+);
+
+const { description } = heroContent.es;
 ---
 
 <div class="space-y-4">
@@ -43,7 +35,7 @@ const features = [
       <h1 class="text-3xl">Wallet Connect</h1>
 
       <span>
-        Integra wallets de criptomonedas en tu app de forma rápida y segura.
+        {description}
       </span>
     </div>
   </div>

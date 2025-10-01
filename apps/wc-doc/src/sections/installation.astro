@@ -1,15 +1,16 @@
 ---
 import connectWalletComp from "@wcs/components/ConnectWallet?raw";
+import installationContent from "@/assets/content/installation.json";
 import Code from "@/components/code.astro";
+
+const { title, description } = installationContent.es;
 ---
 
 <div class="space-y-4">
-  <h1 class="text-2xl">Instalación</h1>
+  <h1 class="text-2xl">{title}</h1>
 
   <span>
-    Un componente listo para integrar: copia el código, crea el archivo y úsalo
-    en tu proyecto. Puedes personalizarlo y reutilizar sus partes internas según
-    tus necesidades.
+    {description}
   </span>
 
   <div class="mt-4">

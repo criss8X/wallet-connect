@@ -1,1 +1,0 @@
-Solo debes crear el archivo **ConnectWallet.tsx**. Luego, pega el siguiente código. ¡Y listo! Ya puedes integrar el componente para conectar wallets en cualquier lugar de tu aplicación.
