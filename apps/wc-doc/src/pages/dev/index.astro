@@ -12,30 +12,33 @@ import {
   Shield,
   Sparkles,
 } from "@/components/icon.astro";
+import Example from "@/sections/example.astro";
+import UsesIn from "@/sections/usesIn.astro";
 
 const features = [
   {
-    name: "Conexión Rápida",
+    name: "Conexión instantánea",
     icon: Rocket,
     description:
-      "Conecta wallets en segundos con una interfaz intuitiva y moderna.",
+      "Vincula tu wallet en segundos con una experiencia moderna y sencilla.",
   },
   {
-    name: "Seguro",
+    name: "Basado en Shadcn",
     icon: Shield,
     description:
-      "Implementa las mejores prácticas de seguridad para proteger a tus usuarios.",
+      "El componente está basado en shadcn, permitiendo la reutilización de componentes.",
   },
   {
-    name: "Multi-Wallet",
+    name: "Compatible con múltiples wallets",
     icon: Sparkles,
-    description: "Soporte para MetaMask, WalletConnect, Coinbase Wallet y más.",
+    description:
+      "Funciona con MetaMask, WalletConnect, Coinbase Wallet y muchas más.",
   },
   {
-    name: "Personalizable",
+    name: "Totalmente personalizable",
     icon: Palette,
     description:
-      "Adapta el diseño y comportamiento a las necesidades de tu aplicación.",
+      "Ajusta el diseño y las funciones según las necesidades de tu proyecto.",
   },
 ];
 ---
@@ -87,7 +90,8 @@ const features = [
               <h1 class="text-3xl">Wallet Connect</h1>
 
               <span>
-                Conecta fácilmente wallets de criptomonedas a tu aplicación
+                Integra wallets de criptomonedas en tu app de forma rápida y
+                segura.
               </span>
             </div>
           </div>
@@ -123,15 +127,23 @@ const features = [
           </div>
         </div>
 
-        <div class="space-y-4">
-          <h1 class="text-2xl">Installación</h1>
+        <UsesIn className="space-y-4" />
 
-          <span>Es un componente copy-and-paste de configuración fácil.</span>
+        <div class="space-y-4">
+          <h1 class="text-2xl">Instalación</h1>
+
+          <span>
+            Un componente listo para integrar: copia el código, crea el archivo
+            y úsalo en tu proyecto. Puedes personalizarlo y reutilizar sus
+            partes internas según tus necesidades.
+          </span>
 
           <div class="mt-4">
             <CodeSnippet title="ConnectWallet.tsx" code={connectWalletComp} />
           </div>
         </div>
+
+        <Example className="space-y-4" />
       </div>
     </main>
   </body>
