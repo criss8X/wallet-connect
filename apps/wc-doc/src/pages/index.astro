@@ -1,135 +1,58 @@
 ---
-import Code from "@/components/code.astro";
-
-interface Props {
-  className?: string;
-}
-
-const { className } = Astro.props;
-
-const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
-import { base, mainnet } from "wagmi/chains";
-import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
-
-export const WAGMI_CONFIG: Config = createConfig({
-	chains: [mainnet, base],
-	connectors: [
-		injected(),
-		walletConnect({ projectId: "YOUR_PROJECT_ID" }),
-		metaMask(),
-		safe(),
-	],
-	transports: {
-		[mainnet.id]: http(),
-		[base.id]: http(),
-	},
-});`;
-
-const queryClientCode = `import { QueryClient } from "@tanstack/react-query"
-
-const queryClient = new QueryClient();
-
-export function Providers({ children }: { children: React.ReactNode }) {
-	return (
-		<WagmiProvider config={WAGMI_CONFIG}>
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-		</WagmiProvider>
-	);
-}`;
-
-const indexTsxExample = `import React from "react";
-import ReactDOM from "react-dom/client";
-import { Providers } from "./providers";
-import App from "./App";
-import "./index.css";
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Providers>
-      <App />
-    </Providers>
-  </React.StrictMode>
-);`;
-
-const headerTsxExample = `<header className="flex items-center justify-between p-4">
-  <h1 className="text-2xl font-bold">My DApp</h1>
-  <ConnectWallet />
-</header>`;
+import "@/styles/global.css";
+import background from "public/background.webp";
+import favicon from "public/favicon.svg";
+import Example from "@/sections/example.astro";
+import Hero from "@/sections/hero.astro";
+import Installation from "@/sections/installation.astro";
+import UsesIn from "@/sections/usesIn.astro";
 ---
 
-<div class={className}>
-  <h1 class="text-2xl">Ejemplo Básico</h1>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+    <meta name="viewport" content="width=device-width" />
 
-  <span>
-    En un entorno donde el proyecto ya tiene shadcn y los respectivos
-    componentes necesarios, además que cuente ya con wagmi & viem instalados el
-    proceso de integrar el componente a su proyecto puede ser de la forma en la
-    que se le explicará a continuación.
+    <meta
+      name="description"
+      content="A shadcn-based component for wallet connections with wagmi & viem."
+    />
 
-    <br />
-    <br />
+    <title>Dev</title>
+  </head>
 
-    En lugar de usar el ejemplo que se muestra a continuación, usted puede
-    seguir los pasos que dicta la documentación oficial de wagmi. Aquí solo
-    tratamos de simplificar el proceso dedicado a el componente en cuestión.
-    <br />
+  <body class="h-screen overflow-y-auto bg-neutral-950 space-y-8">
+    <img
+      src={background.src}
+      alt="App background"
+      class="fixed opacity-20 -z-50 size-full"
+    />
 
-    <a
-      href="https://wagmi.sh/react/getting-started"
-      class="text-blue-500 hover:underline"
+    <header
+      class="sticky top-0 border-b border-b-neutral-900 h-20 w-full bg-neutral-950/50 backdrop-blur-xl"
     >
-      https://wagmi.sh/react/getting-started
-    </a>
-  </span>
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between size-full xs:px-2 lg:px-4"
+      >
+        <h1>Wallet Connect</h1>
 
-  <h2 class="text-xl font-medium mt-4">Configuración</h2>
+        <div class="flex gap-2">
+          <button>Github</button>
 
-  <span>
-    El primer paso es configurar **wagmi**. Si planeas utilizar WalletConnect,
-    necesitarás un **projectId** que puedes obtener en (WalletConnect
-    Cloud)[https://cloud.walletconnect.com].
-  </span>
+          <button>Preview</button>
+        </div>
+      </div>
+    </header>
 
-  <div class="h-1"></div>
+    <main class="max-w-6xl mx-auto pb-12 space-y-12">
+      <Hero />
 
-  <Code title="providers.tsx" code={wagmiConfigCode} />
+      <UsesIn />
 
-  <div class="h-2"></div>
+      <Installation />
 
-  <span>
-    Luego, configura QueryClient y crea un componente Providers que envuelva tu
-    aplicación. Esto proporcionará el contexto necesario para wagmi y
-    react-query.
-  </span>
-
-  <div class="h-1"></div>
-
-  <Code title="providers.tsx" code={queryClientCode} />
-
-  <div class="h-2"></div>
-
-  <span>
-    Envuelve tu aplicación de React con el componente **Providers** que creaste.
-    Si utilizas Storybook, recuerda hacer lo mismo en tu archivo de
-    configuración, como **.storybook/preview.tsx**, para asegurar que los
-    componentes tengan acceso al contexto de **wagmi**.
-  </span>
-
-  <div class="h-1"></div>
-
-  <Code title="index.tsx" code={indexTsxExample} />
-
-  <div class="h-2"></div>
-
-  <span>
-    Una vez completada la configuración, puedes integrar el componente
-    **ConnectWallet** en cualquier parte de tu aplicación para gestionar la
-    conexión de la billetera.
-  </span>
-
-  <div class="h-1"></div>
-
-  <Code title="header.tsx" code={headerTsxExample} />
-</div>
+      <Example />
+    </main>
+  </body>
+</html>

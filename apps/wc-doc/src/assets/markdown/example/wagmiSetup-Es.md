@@ -1,0 +1,1 @@
+El primer paso es configurar **wagmi**. Si planeas utilizar WalletConnect, necesitarás un **projectId** que puedes obtener en (WalletConnect Cloud)[https://cloud.walletconnect.com].

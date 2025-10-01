@@ -1,0 +1,1 @@
+Luego, configura **QueryClient** y crea un componente **Providers** que envuelva tu aplicación. Esto proporcionará el contexto necesario para **wagmi** y **react-query**.

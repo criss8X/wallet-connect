@@ -32,7 +32,7 @@ function decodeLinkCase(match: string) {
 		throw new Error(`${match} Is not a markdown link valid!!!`);
 	}
 
-	const hrefOfLink = match.slice(endOfName + 1, -2);
+	const hrefOfLink = match.slice(endOfName + 2, -1);
 
 	return { nameOfLink, hrefOfLink };
 }
