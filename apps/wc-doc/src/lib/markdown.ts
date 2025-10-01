@@ -16,7 +16,7 @@ export function parseMinimalMdToHtml(
 		} else if (match.startsWith("(") && match.endsWith("]")) {
 			const { nameOfLink, hrefOfLink } = decodeLinkCase(match);
 
-			return `<a href="{${hrefOfLink}}" class="text-blue-500 hover:underline">${nameOfLink}</a>`;
+			return `<a href="${hrefOfLink}" target="_blank" class="text-blue-500 hover:underline">${nameOfLink}</a>`;
 		}
 
 		return `<${bold} class="highlight">${match.slice(2, -2)}</${bold}>`;
