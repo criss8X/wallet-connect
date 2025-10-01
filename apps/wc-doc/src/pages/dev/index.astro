@@ -1,0 +1,138 @@
+---
+import "@/styles/global.css";
+import connectWalletComp from "@wcs/components/ConnectWallet?raw";
+import background from "public/background.webp";
+import favicon from "public/favicon.svg";
+import CodeSnippet from "@/components/code.astro";
+import {
+  Github,
+  Linkedin,
+  Palette,
+  Rocket,
+  Shield,
+  Sparkles,
+} from "@/components/icon.astro";
+
+const features = [
+  {
+    name: "Conexión Rápida",
+    icon: Rocket,
+    description:
+      "Conecta wallets en segundos con una interfaz intuitiva y moderna.",
+  },
+  {
+    name: "Seguro",
+    icon: Shield,
+    description:
+      "Implementa las mejores prácticas de seguridad para proteger a tus usuarios.",
+  },
+  {
+    name: "Multi-Wallet",
+    icon: Sparkles,
+    description: "Soporte para MetaMask, WalletConnect, Coinbase Wallet y más.",
+  },
+  {
+    name: "Personalizable",
+    icon: Palette,
+    description:
+      "Adapta el diseño y comportamiento a las necesidades de tu aplicación.",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+    <meta name="viewport" content="width=device-width" />
+
+    <meta
+      name="description"
+      content="A shadcn-based component for wallet connections with wagmi & viem."
+    />
+
+    <title>Dev</title>
+  </head>
+
+  <body class="h-screen overflow-y-auto bg-neutral-950 space-y-8">
+    <img
+      src={background.src}
+      alt="App background"
+      class="fixed opacity-20 -z-50 size-full"
+    />
+
+    <header
+      class="sticky top-0 border-b border-b-neutral-900 h-20 w-full bg-neutral-950/50 backdrop-blur-xl"
+    >
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between size-full xs:px-2 lg:px-4"
+      >
+        <h1>Wallet Connect</h1>
+
+        <div class="flex gap-2">
+          <button>Github</button>
+
+          <button>Preview</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto pb-12">
+      <div class="space-y-12">
+        <div class="space-y-4">
+          <div class="flex gap-4 items-center">
+            <div class="size-14 bg-neutral-900 rounded-md"></div>
+
+            <div>
+              <h1 class="text-3xl">Wallet Connect</h1>
+
+              <span>
+                Conecta fácilmente wallets de criptomonedas a tu aplicación
+              </span>
+            </div>
+          </div>
+
+          <div class="flex gap-4 flex-wrap">
+            {
+              ["Typescript", "React", "Wagmi & Viem"].map((tech) => (
+                <span class="bg-neutral-800 px-2 py-0.5 rounded-md text-sm">
+                  {tech}
+                </span>
+              ))
+            }
+          </div>
+
+          <div class="max-w-4xl grid grid-cols-2 grid-rows-2 gap-4">
+            {
+              features.map(({ name, description, icon: Icon }) => (
+                <div class="h-36 border border-neutral-800 rounded-md p-4 flex flex-col justify-between py-6 from-neutral-700/10 to-transparent bg-gradient-to-t">
+                  <div class="flex gap-2">
+                    <div class="flex items-center justify-center bg-neutral-800 size-8 rounded-md">
+                      <Icon class="size-5" />
+                    </div>
+
+                    <h2 class="font-mono text-xl mb-2 leading-relaxed">
+                      {name}
+                    </h2>
+                  </div>
+
+                  <p class="text-neutral-400 text-sm">{description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h1 class="text-2xl">Installación</h1>
+
+          <span>Es un componente copy-and-paste de configuración fácil.</span>
+
+          <div class="mt-4">
+            <CodeSnippet title="ConnectWallet.tsx" code={connectWalletComp} />
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
