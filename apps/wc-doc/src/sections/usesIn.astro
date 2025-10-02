@@ -1,17 +1,21 @@
 ---
+import usesInContent from "@/assets/content/usesIn.json";
+
 const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
   (name) => ({
     name: name,
     url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
   }),
 );
+
+const { title, web3_sub, comp_sub, shadcn_comp_sub } = usesInContent.es;
 ---
 
 <div class="space-y-4">
-  <h1 class="text-2xl">Que utilizamos aquí?</h1>
+  <h1 class="text-2xl">{title}</h1>
 
   <ol class="flex flex-col gap-4 [&_li]:pl-2 [&_li]:before:content-['•']">
-    <h2 class="text-xl font-medium">Librerías Web3</h2>
+    <h2 class="text-xl font-medium">{web3_sub}</h2>
 
     <li>
       Wagmi (React) <br />
@@ -20,7 +24,7 @@ const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
       </a>
     </li>
 
-    <h2 class="text-xl font-medium">Librería de Componentes</h2>
+    <h2 class="text-xl font-medium">{comp_sub}</h2>
 
     <li>
       Shadcn <br />
@@ -29,7 +33,7 @@ const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
       </a>
     </li>
 
-    <h2 class="text-xl font-medium">Shadcn Components</h2>
+    <h2 class="text-xl font-medium">{shadcn_comp_sub}</h2>
 
     {
       shadcnReqComponents.map(({ name, url }) => (

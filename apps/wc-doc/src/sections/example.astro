@@ -71,38 +71,21 @@ const { title, subtitle } = exampleContent.es;
 
 <div class="space-y-4">
   <h1 class="text-2xl">{title}</h1>
-
   <span set:html={decodedHtml.exampleDescEs} />
 
   <h2 class="text-xl font-medium mt-4">{subtitle}</h2>
 
-  <span set:html={decodedHtml.wagmiSetupEs} />
+  <div class="space-y-3">
+    <span set:html={decodedHtml.wagmiSetupEs} />
+    <Code title="providers.tsx" code={wagmiConfigCode} className="mt-2" />
 
-  <div class="h-1"></div>
+    <span set:html={decodedHtml.queryClientEs} />
+    <Code title="providers.tsx" code={queryClientCode} className="mt-2" />
 
-  <Code title="providers.tsx" code={wagmiConfigCode} />
+    <span set:html={decodedHtml.setupIndexEs} />
+    <Code title="index.tsx" code={indexTsxExample} className="mt-2" />
 
-  <div class="h-2"></div>
-
-  <span set:html={decodedHtml.queryClientEs} />
-
-  <div class="h-1"></div>
-
-  <Code title="providers.tsx" code={queryClientCode} />
-
-  <div class="h-2"></div>
-
-  <span set:html={decodedHtml.setupIndexEs} />
-
-  <div class="h-1"></div>
-
-  <Code title="index.tsx" code={indexTsxExample} />
-
-  <div class="h-2"></div>
-
-  <span set:html={finishSetupEs} />
-
-  <div class="h-1"></div>
-
-  <Code title="header.tsx" code={headerTsxExample} />
+    <span set:html={finishSetupEs} />
+    <Code title="header.tsx" code={headerTsxExample} className="mt-2" />
+  </div>
 </div>

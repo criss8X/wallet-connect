@@ -1,4 +1,14 @@
 {
-  "es": {},
-  "en": {}
+  "es": {
+    "title": "Que utilizamos aquí?",
+    "web3_sub": "Librerías Web3",
+    "comp_sub": "Librería de Componentes",
+    "shadcn_comp_sub": "Componentes Shadcn"
+  },
+  "en": {
+    "title": "Que utilizamos aquí?",
+    "web3_sub": "Librerías Web3",
+    "comp_sub": "Librería de Componentes",
+    "shadcn_comp_sub": "Componentes Shadcn"
+  }
 }
