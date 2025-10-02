@@ -1,5 +1,6 @@
 ---
 import usesInContent from "@/assets/content/usesIn.json";
+import { getLocalesByLang } from "@/lib/locale";
 
 const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
   (name) => ({
@@ -8,7 +9,10 @@ const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
   }),
 );
 
-const { title, web3_sub, comp_sub, shadcn_comp_sub } = usesInContent.es;
+const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
+  usesInContent,
+  Astro.currentLocale,
+);
 ---
 
 <div class="space-y-4">

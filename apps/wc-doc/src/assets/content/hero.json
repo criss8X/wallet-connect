@@ -33,7 +33,7 @@
         "description": "Vincula tu wallet en segundos con una experiencia moderna y sencilla."
       },
       {
-        "name": "Basado en Shadcn",
+        "name": "Shadcn Based",
         "iconName": "Shadcn",
         "description": "El componente está basado en shadcn, permitiendo la reutilización de componentes."
       },
@@ -43,7 +43,7 @@
         "description": "Funciona con MetaMask, WalletConnect, Coinbase Wallet y muchas más."
       },
       {
-        "name": "Totalmente personalizable",
+        "name": "Customizable",
         "iconName": "Palette",
         "description": "Ajusta el diseño y las funciones según las necesidades de tu proyecto."
       }

@@ -5,15 +5,13 @@
 	},
 	"[snippets]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
-<<<<<<< HEAD
 	},
 	"cSpell.enabledFileTypes": {
 		"*": true,
-		"markdown": false
+		"markdown": false,
+		"json": false
 	},
 	"files.associations": {
 		"*.css": "tailwindcss"
-=======
->>>>>>> 52edd2f (feat: Implement getting started basic)
 	}
 }

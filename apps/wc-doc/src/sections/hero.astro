@@ -8,6 +8,7 @@ import {
   Sparkles,
   Wallet,
 } from "@/components/icon.astro";
+import { getLocalesByLang } from "@/lib/locale";
 
 const internalIconMap: Record<string, LucideIcon> = {
   Sparkles: Sparkles,
@@ -16,15 +17,15 @@ const internalIconMap: Record<string, LucideIcon> = {
   Shadcn: Shadcn,
 };
 
-const features = heroContent.es.features.map(
-  ({ name, description, iconName }) => ({
-    name,
-    description,
-    icon: internalIconMap[iconName],
-  }),
-);
+const locales = getLocalesByLang(heroContent, Astro.currentLocale);
 
-const { description } = heroContent.es;
+const features = locales.features.map(({ name, description, iconName }) => ({
+  name,
+  description,
+  icon: internalIconMap[iconName],
+}));
+
+const { description } = locales;
 ---
 
 <div class="space-y-4">

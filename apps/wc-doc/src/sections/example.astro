@@ -6,6 +6,7 @@ import queryClientEs from "@md/example/queryClient-Es.md?raw";
 import wagmiSetupEs from "@md/example/wagmiSetup-Es.md?raw";
 import exampleContent from "@/assets/content/example.json";
 import Code from "@/components/code.astro";
+import { getLocalesByLang } from "@/lib/locale";
 import { parseMinimalMdObject } from "@/lib/markdown";
 
 const decodedHtml = parseMinimalMdObject({
@@ -66,7 +67,10 @@ const headerTsxExample = `<header className="flex items-center justify-between p
   <ConnectWallet />
 </header>`;
 
-const { title, subtitle } = exampleContent.es;
+const { title, subtitle } = getLocalesByLang(
+  exampleContent,
+  Astro.currentLocale,
+);
 ---
 
 <div class="space-y-4">
