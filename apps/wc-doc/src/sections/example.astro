@@ -9,13 +9,16 @@ import Code from "@/components/code.astro";
 import { getLocalesByLang, parseMdLocalesObject } from "@/lib/locale";
 import { parseMinimalMdObject } from "@/lib/markdown";
 
-const mdLocales = parseMdLocalesObject({
-  exampleDescEs,
-  wagmiSetupEs,
-  queryClientEs,
-  setupIndexEs,
-  finishSetupEs,
-});
+const mdLocales = parseMdLocalesObject(
+  {
+    exampleDescEs,
+    wagmiSetupEs,
+    queryClientEs,
+    setupIndexEs,
+    finishSetupEs,
+  },
+  Astro.currentLocale,
+);
 
 const decodedHtml = parseMinimalMdObject(mdLocales);
 

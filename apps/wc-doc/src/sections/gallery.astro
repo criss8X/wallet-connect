@@ -7,6 +7,7 @@ import ImageDesc from "@/components/imageDesc.astro";
 import { getLocalesByLang } from "@/lib/locale";
 
 const {
+  title,
   accountDialogImgDesc,
   chainSelectorDialogImgDesc,
   connectWalletBtnImgDesc,
@@ -14,7 +15,7 @@ const {
 ---
 
 <div class="space-y-4">
-  <h1 class="text-2xl">Gallery</h1>
+  <h1 class="text-2xl">{title}</h1>
 
   <div class="columns-2 gap-2">
     <ImageDesc

@@ -1,10 +1,12 @@
 {
   "es": {
+    "title": "Galería",
     "connectWalletBtnImgDesc": "Captura del botón cuando hay una cuenta conectada.",
     "chainSelectorDialogImgDesc": "Captura del diálogo de selección de cadena.",
     "accountDialogImgDesc": "Captura del diálogo de la cuenta del usuario."
   },
   "en": {
+    "title": "Gallery",
     "connectWalletBtnImgDesc": "Screenshot of the button when an account is connected.",
     "chainSelectorDialogImgDesc": "Screenshot of the chain selection dialog.",
     "accountDialogImgDesc": "Screenshot of the user account dialog."
