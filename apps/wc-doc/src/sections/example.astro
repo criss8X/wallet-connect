@@ -6,15 +6,18 @@ import queryClientEs from "@md/example/queryClient-Es.md?raw";
 import wagmiSetupEs from "@md/example/wagmiSetup-Es.md?raw";
 import exampleContent from "@/assets/content/example.json";
 import Code from "@/components/code.astro";
-import { getLocalesByLang } from "@/lib/locale";
+import { getLocalesByLang, parseMdLocalesObject } from "@/lib/locale";
 import { parseMinimalMdObject } from "@/lib/markdown";
 
-const decodedHtml = parseMinimalMdObject({
+const mdLocales = parseMdLocalesObject({
   exampleDescEs,
   wagmiSetupEs,
   queryClientEs,
   setupIndexEs,
+  finishSetupEs,
 });
+
+const decodedHtml = parseMinimalMdObject(mdLocales);
 
 const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
 import { base, mainnet } from "wagmi/chains";
@@ -89,7 +92,7 @@ const { title, subtitle } = getLocalesByLang(
     <span set:html={decodedHtml.setupIndexEs} />
     <Code title="index.tsx" code={indexTsxExample} className="mt-2" />
 
-    <span set:html={finishSetupEs} />
+    <span set:html={decodedHtml.finishSetupEs} />
     <Code title="header.tsx" code={headerTsxExample} className="mt-2" />
   </div>
 </div>

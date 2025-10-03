@@ -6,8 +6,8 @@ type ParserOptions = {
 	lineBreak?: "br";
 };
 
-type ParseMinimalObject<T extends object> = {
-	[k in keyof T]: string;
+type ParseMinimalObjectReturn<T extends object> = {
+	[x in keyof T]: string;
 };
 
 export function parseMinimalMdObject<T extends Record<string, string>>(
@@ -19,7 +19,7 @@ export function parseMinimalMdObject<T extends Record<string, string>>(
 			acc[key as keyof T] = parseMinimalMdToHtml(value, options);
 			return acc;
 		},
-		{} as ParseMinimalObject<T>,
+		{} as ParseMinimalObjectReturn<T>,
 	);
 }
 

@@ -16,3 +16,24 @@ function assertTypes(a: unknown, b: unknown) {
 
 	throw new Error(`Locales with diff problem: a !== b look: A: ${a}, B: ${b}`);
 }
+
+export function getMdLocalesByLang(md: string, lang?: string) {
+	const [es, en] = md.split("<END_OF_SPANISH_LOCALE_MD_0x0>");
+
+	return lang === "es" ? es : en;
+}
+
+type ParseLocalesObject<T extends object> = {
+	[k in keyof T]: string;
+};
+
+export function parseMdLocalesObject<T extends object>(obj: T, lang?: string) {
+	return Object.entries(obj).reduce(
+		(acc, [key, value]) => {
+			acc[key as keyof T] = getMdLocalesByLang(value, lang).trim();
+
+			return acc;
+		},
+		{} as ParseLocalesObject<T>,
+	);
+}

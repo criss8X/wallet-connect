@@ -4,6 +4,7 @@ import background from "public/background.webp";
 import favicon from "public/favicon.svg";
 import { Github, ScanEye } from "@/components/icon.astro";
 import Example from "@/sections/example.astro";
+import Gallery from "@/sections/gallery.astro";
 import Hero from "@/sections/hero.astro";
 import Installation from "@/sections/installation.astro";
 import UsesIn from "@/sections/usesIn.astro";
@@ -36,7 +37,7 @@ import UsesIn from "@/sections/usesIn.astro";
       <div
         class="max-w-6xl mx-auto flex items-center justify-between size-full xs:px-2 lg:px-4"
       >
-        <h1>Wallet Connect</h1>
+        <h1>Wallet <b class="bg-blue-800 px-2">Connect</b></h1>
 
         <div class="flex gap-2">
           <button
@@ -49,6 +50,7 @@ import UsesIn from "@/sections/usesIn.astro";
 
           <button
             class="flex gap-6 items-center bg-neutral-900/90 px-3 py-1 rounded-md hover:bg-neutral-800/70"
+            onclick="window.open('wallet-connect/preview')"
           >
             <span class="leading-relaxed">Preview</span>
 
@@ -60,6 +62,8 @@ import UsesIn from "@/sections/usesIn.astro";
 
     <main class="max-w-6xl mx-auto pb-12 space-y-12">
       <Hero />
+
+      <Gallery />
 
       <UsesIn />
 
