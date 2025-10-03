@@ -6,8 +6,8 @@ const imageDescVariants = cva("", {
   variants: {
     size: {
       default: "",
-      sm: "w-48",
-      lg: "",
+      sm: "max-w-xs",
+      lg: "max-w-sm",
     },
   },
   defaultVariants: {
@@ -17,22 +17,22 @@ const imageDescVariants = cva("", {
 
 interface Props {
   src: string;
-  alt: string;
+  description: string;
   size?: VariantProps<typeof imageDescVariants>["size"];
-  description?: string;
+  className?: string;
   title?: string;
 }
 
-const { alt, src, title, size, description } = Astro.props;
+const { src, title, size, description, className } = Astro.props;
 ---
 
-<div class="min-w-xs pt-2 px-2 border border-neutral-500/50 bg-neutral-900/50">
-  <img
-    alt={alt}
-    src={src}
-    title={title}
-    class={cn(imageDescVariants({ size }))}
-  />
+<div
+  class={cn(
+    "min-w-xs h-max pt-2 px-2 border border-neutral-500/30 bg-neutral-900/20",
+    className,
+  )}
+>
+  <img src={src} title={title} class={cn(imageDescVariants({ size }))} />
 
   {
     description ? (
