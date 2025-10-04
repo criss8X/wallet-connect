@@ -32,7 +32,12 @@ const { src, title, size, description, className } = Astro.props;
     className,
   )}
 >
-  <img src={src} title={title} class={cn(imageDescVariants({ size }))} />
+  <img
+    loading="lazy"
+    src={src}
+    title={title}
+    class={cn(imageDescVariants({ size }))}
+  />
 
   {
     description ? (

@@ -2,7 +2,15 @@
 import "@/styles/global.css";
 import background from "public/background.webp";
 import favicon from "public/favicon.svg";
+import Button from "@/components/button.astro";
 import { Github, ScanEye } from "@/components/icon.astro";
+import LangSelector from "@/components/langSelector.astro";
+
+const previewLabelLocale =
+  Astro.currentLocale === "es" ? "Vista previa" : "Preview";
+
+const previewTitleLocale =
+  Astro.currentLocale === "es" ? "Navegar a /preview" : "Navigate to /preview";
 ---
 
 <html lang="en">
@@ -30,32 +38,36 @@ import { Github, ScanEye } from "@/components/icon.astro";
       class="sticky top-0 border-b border-b-neutral-900 h-20 w-full bg-neutral-950/50 backdrop-blur-xl"
     >
       <div
-        class="max-w-6xl mx-auto flex items-center justify-between size-full xs:px-2 lg:px-4"
+        class="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto flex items-center justify-between size-full px-2"
       >
         <h1>Wallet <b class="bg-blue-800 px-2">Connect</b></h1>
 
         <div class="flex gap-2">
-          <button
-            class="flex gap-6 items-center bg-neutral-900/90 px-3 py-1 rounded-md hover:bg-neutral-800/70"
+          <Button
             onclick="window.open('https\://github.com/criss8X/wallet-connect')"
           >
             <span class="leading-relaxed">Github</span>
-            <Github class="size-4" />
-          </button>
 
-          <button
-            class="flex gap-6 items-center bg-neutral-900/90 px-3 py-1 rounded-md hover:bg-neutral-800/70"
-            onclick="window.open('wallet-connect/preview')"
+            <Github class="size-4" />
+          </Button>
+
+          <Button
+            onclick="window.open('/wallet-connect/preview')"
+            title={previewTitleLocale}
           >
-            <span class="leading-relaxed">Preview</span>
+            <span class="leading-relaxed">{previewLabelLocale}</span>
 
             <ScanEye class="size-4" />
-          </button>
+          </Button>
+
+          <LangSelector />
         </div>
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto pb-12 space-y-12">
+    <main
+      class="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto pb-12 space-y-12"
+    >
       <slot />
     </main>
   </body>
