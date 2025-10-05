@@ -14,7 +14,7 @@ const preview: Preview = {
 				dark: "dark",
 			},
 
-			defaultTheme: "light",
+			defaultTheme: "dark",
 		}),
 		(Story) => (
 			<Providers>

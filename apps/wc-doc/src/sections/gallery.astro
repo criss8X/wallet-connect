@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import connectWalletBtnImg from "public/screenshots/wc-btn.webp";
 import galleryContent from "@/assets/content/gallery.json";
 import { getLocalesByLang } from "@/lib/locale";
@@ -15,7 +16,12 @@ const { title, connectWalletBtnImgDesc } = getLocalesByLang(
   <div
     class="w-md h-max pt-2 py-1 px-2 rounded-md border border-neutral-500/30 bg-neutral-900/20"
   >
-    <img width="420" loading="lazy" src={connectWalletBtnImg.src} />
+    <Image
+      src={connectWalletBtnImg}
+      alt={connectWalletBtnImgDesc}
+      width="420"
+      loading="lazy"
+    />
 
     <span class="opacity-80 text-sm">{connectWalletBtnImgDesc}</span>
   </div>

@@ -18,20 +18,20 @@ const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
 <div class="space-y-4">
   <h1 class="text-2xl">{title}</h1>
 
-  <ol class="flex flex-col gap-4 [&_li]:pl-2 [&_li]:before:content-['•']">
+  <div class="flex flex-col gap-4">
     <h2 class="text-xl font-medium">{web3_sub}</h2>
 
-    <li>
-      Wagmi (React) <br />
+    <span class="pl-2">
+      • Wagmi (React) <br />
       <a class="link" href="https://wagmi.sh/react/installation">
         https://wagmi.sh/react/installation
       </a>
-    </li>
+    </span>
 
     <h2 class="text-xl font-medium">{comp_sub}</h2>
 
-    <li>
-      Shadcn <br />
+    <span class="pl-2">
+      • Shadcn <br />
       <a
         class="link"
         href="https://ui.shadcn.com/docs/installation"
@@ -39,19 +39,21 @@ const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
       >
         https://ui.shadcn.com/docs/installation
       </a>
-    </li>
+    </span>
 
     <h2 class="text-xl font-medium">{shadcn_comp_sub}</h2>
 
-    {
-      shadcnReqComponents.map(({ name, url }) => (
-        <li>
-          {name} <br />
-          <a href={url} target="_blank" class="link">
-            {url}
-          </a>
-        </li>
-      ))
-    }
-  </ol>
+    <ul class="pl-2 space-y-3">
+      {
+        shadcnReqComponents.map(({ name, url }) => (
+          <li>
+            • {name} <br />
+            <a href={url} target="_blank" class="link pl-2">
+              {url}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </div>

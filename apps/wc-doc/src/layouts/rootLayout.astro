@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import { Image } from "astro:assets";
 import background from "public/background.webp";
 import favicon from "public/favicon.svg";
 import applicationJsonLocales from "@/assets/content/application.json";
@@ -63,8 +64,8 @@ const applicationJson = getLocalesByLang(
   </head>
 
   <body class="h-screen overflow-y-auto bg-neutral-950 space-y-8">
-    <img
-      src={background.src}
+    <Image
+      src={background}
       loading="lazy"
       alt="App background"
       class="fixed opacity-20 -z-50 size-full"
