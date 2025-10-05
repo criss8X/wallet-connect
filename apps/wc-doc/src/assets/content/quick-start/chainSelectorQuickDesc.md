@@ -1,1 +1,0 @@
- Para comenzar, crea un archivo llamado **ChainSelector.tsx**. Este componente se encargará de gestionar el cambio de cadenas (blockchains). Copia y pega el siguiente código en tu nuevo archivo.

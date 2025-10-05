@@ -6,6 +6,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
+			"@md/*": ["./src/assets/markdown/*"],
 			"@wcs/*": ["../wc-shadcn/src/*"]
 		}
 	}

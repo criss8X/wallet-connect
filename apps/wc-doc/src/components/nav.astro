@@ -1,4 +1,6 @@
 ---
+import { getUrlWithBase } from "@/lib/utils";
+
 interface Props {
   title: string;
   items: {
@@ -7,8 +9,12 @@ interface Props {
   }[];
 }
 
-const { title, items } = Astro.props;
-const pathName = Astro.url.pathname;
+const { title, items: rawItems } = Astro.props;
+
+const items = rawItems.map((rawItem) => ({
+  ...rawItem,
+  href: getUrlWithBase(rawItem.href),
+}));
 ---
 
 <article class="pt-4 flex flex-col gap-1">
@@ -18,9 +24,9 @@ const pathName = Astro.url.pathname;
     {
       items.map(({ name, href }) => (
         <a
-          data-active={pathName === href ? true : false}
+          data-active={Astro.url.pathname === href}
           href={href}
-          class="px-6 h-10 text-md flex items-center select-none hover:bg-neutral-900 data-[active=true]:bg-blue-900/50"
+          class="px-6 h-10 text-md flex items-center select-none hover:bg-neutral-900 data-[active=true]:bg-blue-900/50 data-[active=true]:pointer-events-none"
         >
           {name}
         </a>

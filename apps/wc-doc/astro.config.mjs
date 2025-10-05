@@ -11,7 +11,15 @@ export default defineConfig({
 			include: ["class-variance-authority"],
 		},
 	},
+	i18n: {
+		defaultLocale: "en",
+		locales: ["en", "es"],
+		routing: {
+			prefixDefaultLocale: false,
+			redirectToDefaultLocale: true,
+		},
+	},
 
 	outDir: "../../docs",
-	base: "wallet-connect/",
+	base: "wallet-connect",
 });

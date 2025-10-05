@@ -1,0 +1,101 @@
+---
+import exampleDescEs from "@md/example/exampleDesc-Es.md?raw";
+import finishSetupEs from "@md/example/finishSetup-Es.md?raw";
+import setupIndexEs from "@md/example/indexSetup-Es.md?raw";
+import queryClientEs from "@md/example/queryClient-Es.md?raw";
+import wagmiSetupEs from "@md/example/wagmiSetup-Es.md?raw";
+import exampleContent from "@/assets/content/example.json";
+import Code from "@/components/code.astro";
+import { getLocalesByLang, parseMdLocalesObject } from "@/lib/locale";
+import { parseMinimalMdObject } from "@/lib/markdown";
+
+const mdLocales = parseMdLocalesObject(
+  {
+    exampleDescEs,
+    wagmiSetupEs,
+    queryClientEs,
+    setupIndexEs,
+    finishSetupEs,
+  },
+  Astro.currentLocale,
+);
+
+const decodedHtml = parseMinimalMdObject(mdLocales);
+
+const wagmiConfigCode = `import { type Config, createConfig, http } from "wagmi";
+import { base, mainnet } from "wagmi/chains";
+import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
+
+export const WAGMI_CONFIG: Config = createConfig({
+	chains: [mainnet, base],
+	connectors: [
+		injected(),
+		walletConnect({ projectId: "YOUR_PROJECT_ID" }),
+		metaMask(),
+		safe(),
+	],
+	transports: {
+		[mainnet.id]: http(),
+		[base.id]: http(),
+	},
+});`;
+
+const queryClientCode = `import { QueryClient } from "@tanstack/react-query"
+
+const queryClient = new QueryClient();
+
+export function Providers({ children }: { children: React.ReactNode }) {
+	return (
+		<WagmiProvider config={WAGMI_CONFIG}>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+		</WagmiProvider>
+	);
+}`;
+
+const indexTsxExample = `import React from "react";
+import ReactDOM from "react-dom/client";
+import { Providers } from "./providers";
+import App from "./App";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Providers>
+      <App />
+    </Providers>
+  </React.StrictMode>
+);`;
+
+const headerTsxExample = `<header className="flex items-center justify-between p-4">
+  <h1 className="text-2xl font-bold">My DApp</h1>
+  <ConnectWallet />
+</header>`;
+
+const { title, subtitle } = getLocalesByLang(
+  exampleContent,
+  Astro.currentLocale,
+);
+---
+
+<div class="space-y-4">
+  <h1 class="text-2xl">{title}</h1>
+  <span set:html={decodedHtml.exampleDescEs} />
+
+  <h2 class="text-xl font-medium mt-4">{subtitle}</h2>
+
+  <div class="space-y-3">
+    <span set:html={decodedHtml.wagmiSetupEs} />
+    <Code title="providers.tsx" code={wagmiConfigCode} className="mt-2" />
+
+    <span set:html={decodedHtml.queryClientEs} />
+    <Code title="providers.tsx" code={queryClientCode} className="mt-2" />
+
+    <span set:html={decodedHtml.setupIndexEs} />
+    <Code title="index.tsx" code={indexTsxExample} className="mt-2" />
+
+    <span set:html={decodedHtml.finishSetupEs} />
+    <Code title="header.tsx" code={headerTsxExample} className="mt-2" />
+  </div>
+</div>

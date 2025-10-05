@@ -1,17 +1,23 @@
-/** biome-ignore-all lint/suspicious/noUnknownAtRules: false positive */
 @import "tailwindcss";
 
 body {
 	@apply text-neutral-100;
+	font-family: 'Jetbrains Mono', sans-serif;
 }
+
 
 .highlight {
 	@apply bg-blue-900/50 px-1;
 }
 
-em {
+em {	
 	@apply not-italic;
 }
+
+a {
+	@apply text-blue-500 hover:underline
+}
+
 
 ::-webkit-scrollbar {
 	background-color: transparent;

@@ -1,0 +1,53 @@
+---
+import usesInContent from "@/assets/content/usesIn.json";
+import { getLocalesByLang } from "@/lib/locale";
+
+const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
+  (name) => ({
+    name: name,
+    url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
+  }),
+);
+
+const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
+  usesInContent,
+  Astro.currentLocale,
+);
+---
+
+<div class="space-y-4">
+  <h1 class="text-2xl">{title}</h1>
+
+  <ol class="flex flex-col gap-4 [&_li]:pl-2 [&_li]:before:content-['•']">
+    <h2 class="text-xl font-medium">{web3_sub}</h2>
+
+    <li>
+      Wagmi (React) <br />
+      <a href="https://wagmi.sh/react/installation">
+        https://wagmi.sh/react/installation
+      </a>
+    </li>
+
+    <h2 class="text-xl font-medium">{comp_sub}</h2>
+
+    <li>
+      Shadcn <br />
+      <a href="https://ui.shadcn.com/docs/installation" target="_blank">
+        https://ui.shadcn.com/docs/installation
+      </a>
+    </li>
+
+    <h2 class="text-xl font-medium">{shadcn_comp_sub}</h2>
+
+    {
+      shadcnReqComponents.map(({ name, url }) => (
+        <li>
+          {name} <br />
+          <a href={url} target="_blank">
+            {url}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</div>

@@ -1,0 +1,74 @@
+---
+import "@/styles/global.css";
+import background from "public/background.webp";
+import favicon from "public/favicon.svg";
+import Button from "@/components/button.astro";
+import { Github, ScanEye } from "@/components/icon.astro";
+import LangSelector from "@/components/langSelector.astro";
+
+const previewLabelLocale =
+  Astro.currentLocale === "es" ? "Vista previa" : "Preview";
+
+const previewTitleLocale =
+  Astro.currentLocale === "es" ? "Navegar a /preview" : "Navigate to /preview";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+    <meta name="viewport" content="width=device-width" />
+
+    <meta
+      name="description"
+      content="A shadcn-based component for wallet connections with wagmi & viem."
+    />
+
+    <title>Wallet-Connect</title>
+  </head>
+
+  <body class="h-screen overflow-y-auto bg-neutral-950 space-y-8">
+    <img
+      src={background.src}
+      alt="App background"
+      class="fixed opacity-20 -z-50 size-full"
+    />
+
+    <header
+      class="sticky top-0 border-b border-b-neutral-900 h-20 w-full bg-neutral-950/50 backdrop-blur-xl"
+    >
+      <div
+        class="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto flex items-center justify-between size-full px-2"
+      >
+        <h1>Wallet <b class="bg-blue-800 px-2">Connect</b></h1>
+
+        <div class="flex gap-2">
+          <Button
+            onclick="window.open('https\://github.com/criss8X/wallet-connect')"
+          >
+            <span class="leading-relaxed">Github</span>
+
+            <Github class="size-4" />
+          </Button>
+
+          <Button
+            onclick="window.open('/wallet-connect/preview')"
+            title={previewTitleLocale}
+          >
+            <span class="leading-relaxed">{previewLabelLocale}</span>
+
+            <ScanEye class="size-4" />
+          </Button>
+
+          <LangSelector />
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto pb-12 space-y-12"
+    >
+      <slot />
+    </main>
+  </body>
+</html>

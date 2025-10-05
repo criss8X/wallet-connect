@@ -1,0 +1,23 @@
+---
+import connectWalletComp from "@wcs/components/ConnectWallet?raw";
+import installationContent from "@/assets/content/installation.json";
+import Code from "@/components/code.astro";
+import { getLocalesByLang } from "@/lib/locale";
+
+const { title, description } = getLocalesByLang(
+  installationContent,
+  Astro.currentLocale,
+);
+---
+
+<div class="space-y-4">
+  <h1 class="text-2xl">{title}</h1>
+
+  <span>
+    {description}
+  </span>
+
+  <div class="mt-4">
+    <Code title="ConnectWallet.tsx" code={connectWalletComp} />
+  </div>
+</div>
