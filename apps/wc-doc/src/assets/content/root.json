@@ -1,0 +1,10 @@
+{
+  "es": {
+    "previewLabel": "Vista previa",
+    "previewTitle": "Navegar a /preview"
+  },
+  "en": {
+    "previewLabel": "Preview",
+    "previewTitle": "Navigate to /preview"
+  }
+}

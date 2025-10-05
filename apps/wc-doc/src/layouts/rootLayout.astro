@@ -2,34 +2,73 @@
 import "@/styles/global.css";
 import background from "public/background.webp";
 import favicon from "public/favicon.svg";
+import applicationJsonLocales from "@/assets/content/application.json";
+import rootLocales from "@/assets/content/root.json";
+import seoLocales from "@/assets/content/seo.json";
 import Button from "@/components/button.astro";
 import { Github, ScanEye } from "@/components/icon.astro";
 import LangSelector from "@/components/langSelector.astro";
+import { SOCIAL_NETWORKS } from "@/lib/constants";
+import { getLocalesByLang } from "@/lib/locale";
 
-const previewLabelLocale =
-  Astro.currentLocale === "es" ? "Vista previa" : "Preview";
+const { previewLabel, previewTitle } = getLocalesByLang(
+  rootLocales,
+  Astro.currentLocale,
+);
 
-const previewTitleLocale =
-  Astro.currentLocale === "es" ? "Navegar a /preview" : "Navigate to /preview";
+const { description, canonical, keywords } = getLocalesByLang(
+  seoLocales,
+  Astro.currentLocale,
+);
+
+const applicationJson = getLocalesByLang(
+  applicationJsonLocales,
+  Astro.currentLocale,
+);
 ---
 
-<html lang="en">
+<html lang={Astro.currentLocale}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={favicon.src} />
     <meta name="viewport" content="width=device-width" />
 
-    <meta
-      name="description"
-      content="A shadcn-based component for wallet connections with wagmi & viem."
-    />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content="Cristian Carralero" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keywords} />
 
-    <title>Wallet-Connect</title>
+    <title>Wallet Connect</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Wallet Connect" />
+    <meta property="og:description" content={description} />
+
+    <!-- <meta property="og:image" content="/background.webp" /> -->
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Wallet Connect" />
+    <meta name="twitter:description" content={description} />
+    <!-- <meta name="twitter:image" content="/background.webp" /> -->
+    <meta name="twitter:creator" content={SOCIAL_NETWORKS.XUsername} />
+
+    <!-- Structured Data -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(applicationJson)}
+    />
   </head>
 
   <body class="h-screen overflow-y-auto bg-neutral-950 space-y-8">
     <img
       src={background.src}
+      loading="lazy"
       alt="App background"
       class="fixed opacity-20 -z-50 size-full"
     />
@@ -53,9 +92,9 @@ const previewTitleLocale =
 
           <Button
             onclick="window.open('/wallet-connect/preview')"
-            title={previewTitleLocale}
+            title={previewTitle}
           >
-            <span class="leading-relaxed">{previewLabelLocale}</span>
+            <span class="leading-relaxed">{previewLabel}</span>
 
             <ScanEye class="size-4" />
           </Button>

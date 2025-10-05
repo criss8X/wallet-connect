@@ -1,0 +1,22 @@
+{
+	"es": {
+		"@context": "https://schema.org",
+		"@type": "React component",
+		"name": "Wallet Connect",
+		"url": "https://criss8x.github.io/wallet-connect/",
+		"description": "Un componente de react para connexiones a billeteras de criptomonedas, basado en shadcn y altamente personalizable.",
+		"sameAs": [
+			"https://github.com/criss8X/wallet-connect"
+		]
+	},
+	"en": {
+		"@context": "https://schema.org",
+		"@type": "React component",
+		"name": "Wallet Connect",
+		"url": "https://criss8x.github.io/wallet-connect/",
+		"description": "A customizable react component for wallet connections based on shadcn.",
+		"sameAs": [
+			"https://github.com/criss8X/wallet-connect"
+		]
+	}
+}
