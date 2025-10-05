@@ -23,7 +23,7 @@ const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
 
     <li>
       Wagmi (React) <br />
-      <a href="https://wagmi.sh/react/installation">
+      <a class="link" href="https://wagmi.sh/react/installation">
         https://wagmi.sh/react/installation
       </a>
     </li>
@@ -32,7 +32,11 @@ const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
 
     <li>
       Shadcn <br />
-      <a href="https://ui.shadcn.com/docs/installation" target="_blank">
+      <a
+        class="link"
+        href="https://ui.shadcn.com/docs/installation"
+        target="_blank"
+      >
         https://ui.shadcn.com/docs/installation
       </a>
     </li>
@@ -43,7 +47,7 @@ const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
       shadcnReqComponents.map(({ name, url }) => (
         <li>
           {name} <br />
-          <a href={url} target="_blank">
+          <a href={url} target="_blank" class="link">
             {url}
           </a>
         </li>

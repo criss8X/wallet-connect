@@ -41,20 +41,18 @@ const { description } = locales;
     </div>
   </div>
 
-  <div class="flex gap-4 flex-wrap">
+  <ul class="flex gap-4 flex-wrap">
     {
       ["Typescript", "React", "Wagmi & Viem"].map((tech) => (
-        <span class="bg-neutral-800 px-2 py-0.5 rounded-md text-sm">
-          {tech}
-        </span>
+        <li class="bg-neutral-800 px-2 py-0.5 rounded-md text-sm">{tech}</li>
       ))
     }
-  </div>
+  </ul>
 
-  <div class="max-w-4xl grid grid-cols-2 grid-rows-2 gap-4">
+  <ul class="max-w-4xl grid grid-cols-2 grid-rows-2 gap-4">
     {
       features.map(({ name, description, icon: Icon }) => (
-        <div class="h-36 border border-neutral-800 rounded-md p-4 flex flex-col justify-between py-6 from-neutral-700/10 to-transparent bg-gradient-to-t">
+        <li class="h-36 border border-neutral-800 rounded-md p-4 flex flex-col justify-between py-6 from-neutral-700/10 to-transparent bg-gradient-to-t">
           <div class="flex gap-2">
             <div class="flex items-center justify-center bg-neutral-800 size-8 rounded-md">
               <Icon class="size-5" />
@@ -64,8 +62,8 @@ const { description } = locales;
           </div>
 
           <p class="text-neutral-400 text-sm">{description}</p>
-        </div>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </div>

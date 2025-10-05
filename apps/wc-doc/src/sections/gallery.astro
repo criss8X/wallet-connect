@@ -1,42 +1,22 @@
 ---
-import accountDialogImg from "public/screenshots/accountDialog.webp";
-import connectWalletBtnImg from "public/screenshots/connectWalletBtn-chainSelectorBtn.webp";
-import chainSelectorDialogImg from "public/screenshots/switchChainDialog.webp";
+import connectWalletBtnImg from "public/screenshots/wc-btn.webp";
 import galleryContent from "@/assets/content/gallery.json";
-import ImageDesc from "@/components/imageDesc.astro";
 import { getLocalesByLang } from "@/lib/locale";
 
-const {
-  title,
-  accountDialogImgDesc,
-  chainSelectorDialogImgDesc,
-  connectWalletBtnImgDesc,
-} = getLocalesByLang(galleryContent, Astro.currentLocale);
+const { title, connectWalletBtnImgDesc } = getLocalesByLang(
+  galleryContent,
+  Astro.currentLocale,
+);
 ---
 
 <div class="space-y-4">
   <h1 class="text-2xl">{title}</h1>
 
-  <div class="columns-1 xl:columns-2 gap-2">
-    <ImageDesc
-      size="lg"
-      className="mb-2 break-inside-avoid"
-      src={connectWalletBtnImg.src}
-      description={connectWalletBtnImgDesc}
-    />
+  <div
+    class="w-md h-max pt-2 py-1 px-2 rounded-md border border-neutral-500/30 bg-neutral-900/20"
+  >
+    <img width="420" loading="lazy" src={connectWalletBtnImg.src} />
 
-    <ImageDesc
-      size="sm"
-      className="mb-2 break-inside-avoid"
-      src={chainSelectorDialogImg.src}
-      description={chainSelectorDialogImgDesc}
-    />
-
-    <ImageDesc
-      size="sm"
-      className="mb-2 break-inside-avoid"
-      src={accountDialogImg.src}
-      description={accountDialogImgDesc}
-    />
+    <span class="opacity-80 text-sm">{connectWalletBtnImgDesc}</span>
   </div>
 </div>

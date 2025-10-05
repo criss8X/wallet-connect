@@ -22,15 +22,17 @@ const codeInHtml = await codeToHtml(code, {
 
 <div
   class={cn(
-    "relative flex w-full max-w-4xl max-h-125 bg-neutral-900/50 border border-neutral-800",
+    "flex flex-col w-full max-w-4xl max-h-125 rounded-md bg-neutral-900/50 border border-neutral-800",
     className,
   )}
 >
-  <div class="absolute h-14 w-full flex items-center justify-between px-4">
+  <div
+    class="h-14 shrink-0 w-full flex items-center justify-between px-4 border-b border-b-neutral-800/50"
+  >
     <span class="opacity-50">{title}</span>
 
     <CopyButton contentToCopy={code} />
   </div>
 
-  <div class="flex-1 mt-14 p-4 overflow-auto" set:html={codeInHtml} />
+  <span class="p-4 overflow-auto" set:html={codeInHtml} />
 </div>

@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
+@layer base {
 body {
 	@apply text-neutral-100;
 	font-family: 'Jetbrains Mono', sans-serif;
+}
+
+em {	
+	@apply not-italic;
+}
 }
 
 
@@ -10,15 +16,9 @@ body {
 	@apply bg-blue-900/50 px-1;
 }
 
-em {	
-	@apply not-italic;
-}
-
-a {
-	@apply text-blue-500 hover:underline
-}
-
-
+.link {
+		@apply text-blue-500 px-1 py-0.5 hover:bg-blue-500/10 rounded-md;
+	}
 ::-webkit-scrollbar {
 	background-color: transparent;
 }

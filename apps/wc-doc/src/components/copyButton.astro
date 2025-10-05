@@ -6,11 +6,15 @@ interface Props {
 }
 
 const { contentToCopy } = Astro.props;
+
+const description =
+  Astro.currentLocale === "es" ? "Copiar al portapapeles" : "Copy to clipboard";
 ---
 
 <button
-  class="group text-neutral-100/50 size-5 hover:cursor-pointer hover:text-neutral-100 flex items-center justify-center transition-colors"
-  title="Copy to clipboard"
+  class="text-neutral-100/50 size-5 hover:cursor-pointer hover:text-neutral-100 flex items-center justify-center transition-colors"
+  title={description}
+  aria-label={description}
   data-copy={contentToCopy}
   data-copied={false}
   onclick="copyToClipboard(this);"

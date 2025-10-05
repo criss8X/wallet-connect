@@ -5,16 +5,13 @@ import favicon from "public/favicon.svg";
 import applicationJsonLocales from "@/assets/content/application.json";
 import rootLocales from "@/assets/content/root.json";
 import seoLocales from "@/assets/content/seo.json";
-import Button from "@/components/button.astro";
 import { Github, ScanEye } from "@/components/icon.astro";
 import LangSelector from "@/components/langSelector.astro";
+import LinkButton from "@/components/linkButton.astro";
 import { SOCIAL_NETWORKS } from "@/lib/constants";
 import { getLocalesByLang } from "@/lib/locale";
 
-const { previewLabel, previewTitle } = getLocalesByLang(
-  rootLocales,
-  Astro.currentLocale,
-);
+const { previewLabel } = getLocalesByLang(rootLocales, Astro.currentLocale);
 
 const { description, canonical, keywords } = getLocalesByLang(
   seoLocales,
@@ -82,22 +79,17 @@ const applicationJson = getLocalesByLang(
         <h1>Wallet <b class="bg-blue-800 px-2">Connect</b></h1>
 
         <div class="flex gap-2">
-          <Button
-            onclick="window.open('https\://github.com/criss8X/wallet-connect')"
-          >
+          <LinkButton href="https\://github.com/criss8X/wallet-connect">
             <span class="leading-relaxed">Github</span>
 
             <Github class="size-4" />
-          </Button>
+          </LinkButton>
 
-          <Button
-            onclick="window.open('/wallet-connect/preview')"
-            title={previewTitle}
-          >
+          <LinkButton href="/wallet-connect/preview">
             <span class="leading-relaxed">{previewLabel}</span>
 
             <ScanEye class="size-4" />
-          </Button>
+          </LinkButton>
 
           <LangSelector />
         </div>
