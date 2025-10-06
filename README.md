@@ -1,5 +1,7 @@
 # Wallet Connect Monorepo
 
+<img width="1920" height="1440" alt="Wallet Connect Screenshots" src="https://github.com/user-attachments/assets/f9a31de5-43a9-4f2a-a25b-b5a52ca63c5a" />
+
 Este proyecto es un monorepo que agrupa varias aplicaciones y paquetes relacionados con la integración de Wallet Connect y componentes UI modernos. Utiliza `pnpm` para la gestión de dependencias y workspaces, permitiendo un desarrollo eficiente y modular.
 
 ## Estructura del Proyecto
