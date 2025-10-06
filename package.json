@@ -8,8 +8,8 @@
 	"scripts": {
 		"build:all": "pnpm doc build && pnpm wcs-app storybook:build",
 		"wcs-app": "pnpm --filter wc-shadcn",
-		"wcs": "pnpm --filter wcs-npm",
 		"doc": "pnpm --filter wc-doc",
+		"cli": "pnpm --filter wc-cli",
 		"check": "biome check"
 	},
 	"packageManager": "pnpm@10.17.0",
