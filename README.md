@@ -1,98 +1,135 @@
-# Wallet Connect Monorepo
+<h2 style="text-align: center;">Wallet Connect</h2>
 
-<img width="1920" height="1440" alt="Wallet Connect Screenshots" src="https://github.com/user-attachments/assets/f9a31de5-43a9-4f2a-a25b-b5a52ca63c5a" />
+<p align="center">
+  <img alt="Wallet Connect Screenshots" src="https://github.com/user-attachments/assets/f9a31de5-43a9-4f2a-a25b-b5a52ca63c5a" />
+</p>
 
-Este proyecto es un monorepo que agrupa varias aplicaciones y paquetes relacionados con la integración de Wallet Connect y componentes UI modernos. Utiliza `pnpm` para la gestión de dependencias y workspaces, permitiendo un desarrollo eficiente y modular.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="Astro" />
+  <img src="https://img.shields.io/badge/Shadcn_UI-18181B?style=for-the-badge&logo=shadcnui&logoColor=white" alt="Shadcn UI" />
+  <img src="https://img.shields.io/badge/Wagmi-181717?style=for-the-badge&logo=ethereum&logoColor=white" alt="Wagmi" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License MIT" />
+</p>
 
-## Estructura del Proyecto
+---
+
+**Wallet Connect** is a plug-and-play component that simplifies the integration of **cryptocurrency wallet connections** into projects, while giving **developers** the ability to **customize** it.
+
+---
+
+### 🧭 Before You Begin
+
+This component was built for React-TS and based on **shadcn**, so it depends on **shadcn** to function.
+My goal is to adapt it to other ecosystems in the future, always prioritizing **customizability**.
+
+#### ⚙️ Technologies Used
+
+1. **Wagmi & Viem** — Handle crypto wallet connections.
+2. **Shadcn** — Modern UI components.
+3. **Lucide React** — Icon library.
+
+---
+
+### 📂 Project Structure
 
 ```
 wallet-connect/
 │
 ├── apps/
-│   ├── wc-doc/         # Documentación y sitio web principal (Astro)
-│   └── wc-shadcn/      # App de componentes UI con Shadcn (React + Vite)
+│   ├── wc-doc/         # Documentation and main website (Astro)
+│   └── wc-shadcn/      # UI components app with Shadcn (React + Vite + Storybook)
 │
 ├── packages/
-│   └── wcs-shadcn/     # Paquete de utilidades y CLI para Wallet Connect y Shadcn
+│   └── wcs-shadcn/     # Utilities and CLI package for Wallet Connect and Shadcn (in development)
 │
-├── biome.json          # Configuración de Biome (linter/formatter)
-├── package.json        # Configuración raíz de pnpm workspace
-├── pnpm-lock.yaml      # Lockfile de pnpm
-├── pnpm-workspace.yaml # Configuración de workspaces
-└── LICENSE             # Licencia del proyecto
+├── biome.json          # Biome configuration (linter/formatter)
+├── package.json        # Root pnpm workspace configuration
+├── pnpm-lock.yaml      # pnpm lockfile
+├── pnpm-workspace.yaml # Workspace configuration
+└── LICENSE             # Project license
 ```
 
-### apps/wc-doc
-- **Framework:** [Astro](https://astro.build/)
-- **Propósito:** Documentación, guía de inicio y showcase de componentes.
-- **Estructura:**
-  - `src/components/`: Componentes Astro reutilizables.
-  - `src/layouts/`: Layouts base para las páginas.
-  - `src/pages/`: Páginas principales y secciones de UI.
-  - `src/styles/`: Estilos globales.
-  - `public/`: Recursos estáticos (favicon, imágenes, etc).
+---
 
-### apps/wc-shadcn
-- **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/)
-- **Propósito:** Biblioteca de componentes UI reutilizables y demo.
-- **Estructura:**
-  - `src/components/`: Componentes UI (Button, Card, Avatar, etc).
-  - `src/hooks/`: Hooks personalizados (useAccountActions).
-  - `src/lib/`: Utilidades compartidas.
-  - `src/sections/`: Proveedores y secciones de la app.
-  - `src/stories/`: Historias para Storybook.
-  - `src/styles/`: Estilos CSS.
+### 🧱 apps/wc-doc
 
-### packages/wcs-shadcn
-- **Propósito:** Paquete de utilidades, CLI y templates para Wallet Connect y Shadcn.
-- **Estructura:**
-  - `src/cli.ts`: CLI para generar componentes y utilidades.
-  - `src/constants.ts`: Constantes globales.
-  - `src/IO.ts`: Utilidades de entrada/salida.
-  - `src/validations.ts`: Validaciones de datos.
-  - `src/templates/`: Templates para generación de componentes y hooks.
-  - `src/wallet-connect/`: Lógica de Wallet Connect.
-  - `test_environment/`: Entorno de pruebas con proyectos de ejemplo.
+* **Framework:** [Astro](https://astro.build/)
+* **Purpose:** Documentation and getting started guide.
+* **Structure:**
 
-## Instalación y Uso
+  * `src/components/` – Reusable Astro components
+  * `src/layouts/` – Base layouts for pages
+  * `src/pages/` – Main pages and UI sections
+  * `src/styles/` – Global styles
+  * `src/lib/` – Shared utilities
 
-1. **Instalar dependencias:**
+---
+
+### 🪄 apps/wc-shadcn
+
+* **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/) + [Storybook](https://storybook.js.org/)
+* **Purpose:** Component development and preview.
+* **Structure:**
+
+  * `src/components/` – UI components (Button, Card, Avatar, etc.)
+  * `src/lib/` – Shared utilities
+  * `src/sections/` – Providers and app sections
+  * `src/stories/` – Storybook stories
+  * `src/styles/` – CSS styles
+
+---
+
+### 📦 packages/wcs-shadcn
+
+* **Purpose:** Utilities, CLI, and templates package for Wallet Connect and Shadcn.
+
+> ⚠️ This package is currently under development.
+
+---
+
+## 🚀 Installation and Usage
+
+1. **Install dependencies**
+
    ```zsh
    pnpm install
    ```
 
-2. **Levantar la documentación (Astro):**
+2. **Run the documentation site (Astro)**
+
    ```zsh
    pnpm --filter wc-doc dev
    ```
 
-3. **Levantar la app de componentes (React/Vite):**
+3. **Run the components app (React/Vite)**
+
    ```zsh
-   pnpm --filter wc-shadcn dev
+   pnpm --filter wc-app dev
    ```
-
-4. **Usar el CLI de wcs-shadcn:**
-   ```zsh
-   pnpm --filter wcs-shadcn cli
-   ```
-
-## Tecnologías Principales
-- **pnpm**: Gestión de monorepo y dependencias.
-- **Astro**: Generación de sitios estáticos y documentación.
-- **React + Vite**: Desarrollo de componentes UI modernos.
-- **Shadcn UI**: Componentes UI accesibles y personalizables.
-- **Biome**: Linter y formateador para TypeScript/JavaScript.
-
-## Contribuir
-1. Haz un fork del repositorio.
-2. Crea una rama con tu feature/fix: `git checkout -b mi-feature`
-3. Realiza tus cambios y haz commit.
-4. Haz push y abre un Pull Request.
-
-## Licencia
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 
-**¡Gracias por contribuir y usar Wallet Connect Monorepo!**
+## 🧩 Main Technologies
+
+* **pnpm** — Monorepo and dependency management
+* **Astro** — Static site generation and documentation
+* **React + Vite + Storybook** — Modern UI component development and preview
+* **Shadcn UI** — Accessible and customizable UI components
+* **Biome** — Linter and formatter for TypeScript/JavaScript
+
+---
+
+## 🤝 Contributing
+
+Contribution guidelines are not yet defined, but if you’d like to contribute, you’re welcome to do so!
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+See the [`LICENSE`](./LICENSE) file for more details.
+
+---
