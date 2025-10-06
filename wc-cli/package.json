@@ -1,5 +1,5 @@
 {
-	"name": "wcs-shadcn",
+	"name": "wc-cli",
 	"version": "1.0.0",
 	"type": "module",
 	"bin": {
@@ -11,10 +11,7 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts --format esm --out-dir dist --clean",
-		"prepack": "pnpm run build",
-		"start": "pnpm build && cd test_environment && node ../dist/cli.js add wallet-connect -in --direct",
-		"dev": "pnpm start",
-		"test": "tsup test/test.ts --format esm --out-dir test_dist --clean && node test_dist/test.js"
+		"dev": "tsx src/cli.ts"
 	},
 	"keywords": [],
 	"author": "",
@@ -24,6 +21,7 @@
 		"@biomejs/biome": "2.2.4",
 		"@types/node": "24.4.0",
 		"tsup": "8.5.0",
+		"tsx": "4.20.6",
 		"typescript": "5.9.2"
 	},
 	"dependencies": {

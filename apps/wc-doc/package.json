@@ -9,11 +9,11 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@tailwindcss/vite": "^4.1.13",
+		"@tailwindcss/vite": "4.1.13",
 		"astro": "5.13.9",
 		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
-		"sharp": "^0.34.4",
+		"sharp": "0.34.4",
 		"shiki": "3.13.0",
 		"tailwind-merge": "3.3.1",
 		"tailwindcss": "4.1.11"
