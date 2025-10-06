@@ -4,7 +4,7 @@ import installationContent from "@/assets/content/installation.json";
 import Code from "@/components/code.astro";
 import { getLocalesByLang } from "@/lib/locale";
 
-const { title, description } = getLocalesByLang(
+const { title, description, installNeededRemember } = getLocalesByLang(
   installationContent,
   Astro.currentLocale,
 );
@@ -16,6 +16,12 @@ const { title, description } = getLocalesByLang(
   <span>
     {description}
   </span>
+
+  <blockquote
+    class="p-4 mt-4 bg-yellow-900/10 border border-neutral-800/80 w-max rounded-md"
+  >
+    ⚠️ {installNeededRemember}
+  </blockquote>
 
   <Code title="ConnectWallet.tsx" code={connectWalletComp} className="mt-4" />
 </div>

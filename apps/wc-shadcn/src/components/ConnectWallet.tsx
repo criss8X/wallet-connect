@@ -34,9 +34,9 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "./AlertDialog";
-import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
-import { Button } from "./Button";
+} from "@/components/AlertDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/Avatar";
+import { Button } from "@/components/Button";
 
 function useAccountActions() {
 	const [isCopied, setIsCopied] = useState(false);
