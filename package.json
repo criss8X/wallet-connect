@@ -7,7 +7,7 @@
 	"license": "ISC",
 	"scripts": {
 		"build:all": "pnpm doc build && pnpm wcs-app storybook:build",
-		"wcs-app": "pnpm --filter wc-shadcn",
+		"app": "pnpm --filter wc-app",
 		"doc": "pnpm --filter wc-doc",
 		"cli": "pnpm --filter wc-cli",
 		"check": "biome check"
