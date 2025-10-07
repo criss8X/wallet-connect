@@ -1,4 +1,4 @@
-import { blue } from "colorette";
+import type { ComponentsJson } from "@/schemas/componentsJson.js";
 import type { PackageJson } from "@/schemas/packageJson.js";
 
 export const NeededDependencies = {
@@ -8,16 +8,19 @@ export const NeededDependencies = {
 	CVA: "class-variance-authority",
 } as const;
 
-const NeededShadcnComponents = {};
+export const NeededShadcnComponents = {
+	Avatar: "avatar",
+	AlertDialog: "alert-dialog",
+	Button: "button",
+	Sonner: "sonner",
+};
 
-// package.json contains needed dependencies?
-function checkPackageJson({ dependencies, devDependencies }: PackageJson) {
-	for (const [_key, value] of Object.entries(NeededDependencies)) {
-		if (dependencies[value] || devDependencies[value]) {
-			continue;
-		}
-
-		console.error(`No tienes instalada la librería  ${value}`);
-		console.log("Desea instalarla? ", blue("Y/n"));
-	}
+// package.json contains needed dependencies or components?
+export function whatsUserNeeds(
+	{ dependencies, devDependencies }: PackageJson,
+	{ aliases }: ComponentsJson,
+) {
+	const depsNoInstalled = Object.entries(NeededDependencies).filter(
+		([key]) => !dependencies[key] && !devDependencies[key],
+	);
 }

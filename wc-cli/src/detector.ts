@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { argv } from "node:process";
 import {
+	type ComponentsJson,
+	validateComponentsJson,
+} from "@/schemas/componentsJson.js";
+import {
 	type PackageJson,
 	validatePackageJson,
 } from "@/schemas/packageJson.js";
@@ -77,16 +81,29 @@ function getPackageJson(): PackageJson {
 	return validatePackageJson(JSON.parse(packageJsonData));
 }
 
-type DefaultEnv = {
+function getComponentsJson(): ComponentsJson {
+	const componentsJsonPath = path.join(process.cwd(), "components.json");
+
+	if (!fs.existsSync(componentsJsonPath)) {
+		throw new Error("You do not have a valid package.json in your project.");
+	}
+
+	const packageJsonData = fs.readFileSync(componentsJsonPath, "utf-8");
+	return validateComponentsJson(JSON.parse(packageJsonData));
+}
+
+export type DefaultEnv = {
 	packageManager: PackageManager;
 	packageJson: PackageJson;
+	componentsJson: ComponentsJson;
 };
 
-type NoDepsEnv = {
+export type NoDepsEnv = {
 	packageManager: PackageManager;
+	componentsJson: ComponentsJson;
 };
 
-type ToPathProviderEnv = {
+export type ToPathProviderEnv = {
 	packageManager: PackageManager;
 	destPath: string;
 };
@@ -119,13 +136,17 @@ export function getEnvironment(): AnyEnvironment {
 		case "setup":
 			return {
 				kind: "default",
-				data: { packageManager, packageJson: getPackageJson() },
+				data: {
+					packageManager,
+					packageJson: getPackageJson(),
+					componentsJson: getComponentsJson(),
+				},
 			};
 
 		case "noDeps":
 			return {
 				kind: "noDeps",
-				data: { packageManager },
+				data: { packageManager, componentsJson: getComponentsJson() },
 			};
 
 		case "to":

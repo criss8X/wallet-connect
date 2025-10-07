@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+import { getEnvironment } from "@/detector.js";
 import { INTERFACE } from "@/IO.js";
-import { getEnvironment } from "./detector.js";
+import { defaultInstallation } from "@/sections/default.js";
 
 export const ENVIRONMENT = getEnvironment();
 await startCli();
@@ -8,5 +9,14 @@ await startCli();
 INTERFACE.close();
 
 async function startCli() {
-	console.log({ ENVIRONMENT });
+	switch (ENVIRONMENT.kind) {
+		case "default":
+			return defaultInstallation(ENVIRONMENT.data);
+
+		case "noDeps":
+			return;
+
+		case "toPathProvided":
+			return;
+	}
 }
