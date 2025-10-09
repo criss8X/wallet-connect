@@ -11,7 +11,8 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts --format esm --out-dir dist --clean",
-		"dev": "tsx src/cli.ts"
+		"start": "tsx src/cli.ts",
+		"dev": "tsx src/dev/dev.ts"
 	},
 	"keywords": [],
 	"author": "",

@@ -4,16 +4,16 @@ import { ArrowRight } from "./icon.astro";
 const isEnglish = Astro.currentLocale === "en";
 
 const localeData = isEnglish
-  ? {
-      title: "Switch page to spanish",
-      label: "Spanish",
-      href: "/wallet-connect/es",
-    }
-  : {
-      title: "Cambia la página a inglés",
-      label: "English",
-      href: "/wallet-connect/",
-    };
+	? {
+			title: "Switch page to spanish",
+			label: "Spanish",
+			href: "/wallet-connect/es",
+		}
+	: {
+			title: "Cambia la página a inglés",
+			label: "English",
+			href: "/wallet-connect/",
+		};
 ---
 
 <a

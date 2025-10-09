@@ -10,14 +10,14 @@ import { getLocalesByLang, parseMdLocalesObject } from "@/lib/locale";
 import { parseMinimalMdObject } from "@/lib/markdown";
 
 const mdLocales = parseMdLocalesObject(
-  {
-    exampleDescEs,
-    wagmiSetupEs,
-    queryClientEs,
-    setupIndexEs,
-    finishSetupEs,
-  },
-  Astro.currentLocale,
+	{
+		exampleDescEs,
+		wagmiSetupEs,
+		queryClientEs,
+		setupIndexEs,
+		finishSetupEs,
+	},
+	Astro.currentLocale,
 );
 
 const decodedHtml = parseMinimalMdObject(mdLocales);
@@ -74,8 +74,8 @@ const headerTsxExample = `<header className="flex items-center justify-between p
 </header>`;
 
 const { title, subtitle } = getLocalesByLang(
-  exampleContent,
-  Astro.currentLocale,
+	exampleContent,
+	Astro.currentLocale,
 );
 ---
 

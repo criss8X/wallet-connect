@@ -1,12 +1,12 @@
 {
-  "es": {
-    "canonical": "https://criss8x.github.io/wallet-connect/es",
-    "description": "Conecta tu wallet con un componente shadcn compatible con wagmi & viem. Simple, rápido y personalizable.",
-    "keywords": "react, typescript, criptomonedas, web3, wagmi, viem, shadcn, tailwindcss, billeteras de criptomonedas, connexiones, personalizable, rápido"
-  },
-  "en": {
-    "canonical": "https://criss8x.github.io/wallet-connect/",
-    "description": "Conecta tu wallet con un componente shadcn compatible con wagmi & viem. Simple, rápido y personalizable.",
-    "keywords": "react, typescript, web3, wagmi, viem, shadcn, tailwindcss, crypto wallets, connections, customizable, faster, ready-to-use, copy-and-paste"
-  }
+	"es": {
+		"canonical": "https://criss8x.github.io/wallet-connect/es",
+		"description": "Conecta tu wallet con un componente shadcn compatible con wagmi & viem. Simple, rápido y personalizable.",
+		"keywords": "react, typescript, criptomonedas, web3, wagmi, viem, shadcn, tailwindcss, billeteras de criptomonedas, connexiones, personalizable, rápido"
+	},
+	"en": {
+		"canonical": "https://criss8x.github.io/wallet-connect/",
+		"description": "Conecta tu wallet con un componente shadcn compatible con wagmi & viem. Simple, rápido y personalizable.",
+		"keywords": "react, typescript, web3, wagmi, viem, shadcn, tailwindcss, crypto wallets, connections, customizable, faster, ready-to-use, copy-and-paste"
+	}
 }

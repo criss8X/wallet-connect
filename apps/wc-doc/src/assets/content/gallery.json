@@ -1,10 +1,10 @@
 {
-  "es": {
-    "title": "Capturas",
-    "connectWalletBtnImgDesc": "Captura del botón cuando hay una cuenta conectada."
-  },
-  "en": {
-    "title": "Screenshots",
-    "connectWalletBtnImgDesc": "Screenshot of the button when an account is connected."
-  }
+	"es": {
+		"title": "Capturas",
+		"connectWalletBtnImgDesc": "Captura del botón cuando hay una cuenta conectada."
+	},
+	"en": {
+		"title": "Screenshots",
+		"connectWalletBtnImgDesc": "Screenshot of the button when an account is connected."
+	}
 }

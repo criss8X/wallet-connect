@@ -9,6 +9,11 @@ import {
 	type PackageJson,
 	validatePackageJson,
 } from "@/schemas/packageJson.js";
+import {
+	type TsConfigJson,
+	validateTsConfigJson,
+} from "./schemas/tsconfigJson.js";
+import { resolveFile } from "./utils.js";
 
 type PackageManager = "pnpm" | "npm" | "bun" | "yarn";
 
@@ -92,10 +97,21 @@ function getComponentsJson(): ComponentsJson {
 	return validateComponentsJson(JSON.parse(packageJsonData));
 }
 
+function getTsConfigJson(): TsConfigJson {
+	const tsconfigFile = resolveFile(process.cwd(), "tsconfig.json");
+
+	if (tsconfigFile === null) {
+		throw new Error("You do not have a valid package.json in your project.");
+	}
+
+	return validateTsConfigJson(JSON.parse(tsconfigFile));
+}
+
 export type DefaultEnv = {
 	packageManager: PackageManager;
 	packageJson: PackageJson;
 	componentsJson: ComponentsJson;
+	tsConfigJson: TsConfigJson;
 };
 
 export type NoDepsEnv = {
@@ -140,6 +156,7 @@ export function getEnvironment(): AnyEnvironment {
 					packageManager,
 					packageJson: getPackageJson(),
 					componentsJson: getComponentsJson(),
+					tsConfigJson: getTsConfigJson(),
 				},
 			};
 

@@ -19,8 +19,19 @@ export const NeededShadcnComponents = {
 export function whatsUserNeeds(
 	{ dependencies, devDependencies }: PackageJson,
 	{ aliases }: ComponentsJson,
-) {
-	const depsNoInstalled = Object.entries(NeededDependencies).filter(
-		([key]) => !dependencies[key] && !devDependencies[key],
+): { depsNoInstalled: string[]; componentsNoInstalled: string[] } {
+	const allDeps = { ...dependencies, ...devDependencies };
+
+	const depsNoInstalled = Object.values(NeededDependencies).filter(
+		(depName) => !allDeps[depName],
 	);
+
+	// The ComponentsJson schema only contains path aliases, not a list of installed components.
+	// A file system check is required to verify component installation.
+	const componentsNoInstalled: string[] = [];
+
+	return {
+		depsNoInstalled,
+		componentsNoInstalled,
+	};
 }

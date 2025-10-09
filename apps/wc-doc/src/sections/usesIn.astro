@@ -3,15 +3,15 @@ import usesInContent from "@/assets/content/usesIn.json";
 import { getLocalesByLang } from "@/lib/locale";
 
 const shadcnReqComponents = ["Avatar", "Alert Dialog", "Button", "Sonner"].map(
-  (name) => ({
-    name: name,
-    url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
-  }),
+	(name) => ({
+		name: name,
+		url: `https://ui.shadcn.com/docs/components/${name.toLowerCase().replaceAll(" ", "-")}`,
+	}),
 );
 
 const { title, web3_sub, comp_sub, shadcn_comp_sub } = getLocalesByLang(
-  usesInContent,
-  Astro.currentLocale,
+	usesInContent,
+	Astro.currentLocale,
 );
 ---
 

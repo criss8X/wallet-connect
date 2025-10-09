@@ -1,69 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import z from "zod";
-
-const typeOfPathsSchema = z.string().or(z.array(z.string()));
-
-export function getBaseAliasFromTsConfig(dirToFind: string): string {
-	const tsconfigJson = resolveFile(dirToFind, "tsconfig.json");
-
-	if (tsconfigJson === null) {
-		// TODO: Translate
-		throw new Error(
-			"No se encontró ningún tsconfig.json en el proyecto. Es un proyecto typescript válido?",
-		);
-	}
-
-	const tsconfigInJson = JSON.parse(tsconfigJson);
-	const paths = tsconfigInJson.compilerOptions.paths;
-	const baseAlias = typeOfPathsSchema.safeParse(paths["@/*"]);
-
-	if (!baseAlias.success) {
-		console.error(`More info about this error: ${baseAlias.error.message}`);
-
-		// TODO: Translate
-		throw new Error(
-			"El formato del `tsconfig.json` es erróneo, no se pudo resolver el alias base.",
-		);
-	}
-
-	if (typeof baseAlias.data === "string") {
-		return baseAlias.data;
-	}
-
-	const possibleBaseAlias = baseAlias.data[0];
-
-	return sanitizeAlias(possibleBaseAlias);
-}
-
-// From alias remove * or '**' and '.'
-export function sanitizeAlias(alias: string): string {
-	if (fs.existsSync(alias)) {
-		// TODO: Remove this warn in production.
-		console.warn(`Ya el alias existía, no hubo que sanitizarlo, ${alias}`);
-		return alias;
-	}
-
-	let sanitized = alias;
-
-	if (sanitized.startsWith(".")) {
-		const newAliasSanitized = sanitized.replace(".", "");
-
-		if (fs.existsSync(newAliasSanitized)) {
-			sanitized = newAliasSanitized;
-		}
-	}
-
-	if (sanitized.endsWith("*")) {
-		const newAliasSanitized = sanitized.replaceAll("*", "");
-
-		if (fs.existsSync(newAliasSanitized)) {
-			sanitized = newAliasSanitized;
-		}
-	}
-
-	return sanitized;
-}
 
 export function resolveFile(parent: string, child: string): string | null {
 	const joined = path.join(parent, child);
@@ -83,4 +19,48 @@ export function resolveFile(parent: string, child: string): string | null {
 	}
 
 	return joined;
+}
+
+export function pathJoinAndValidate(
+	parent: string,
+	child: string,
+): string | null {
+	if (!fs.existsSync(parent)) {
+		throw new Error(`The path ${parent} does not exist.`);
+	}
+
+	const stat = fs.statSync(parent);
+
+	if (!stat.isDirectory()) {
+		throw new Error(`The path ${parent} is not a directory.`);
+	}
+
+	const joinResult = path.join(parent, child);
+
+	if (!fs.existsSync(joinResult)) {
+		return null;
+	}
+
+	return joinResult;
+}
+
+type ObjectMapperReturnType<T extends object, K> = {
+	[k in keyof T]: K;
+};
+
+export function objectMapper<T extends object, K>(
+	obj: T,
+	mapper: <Key extends keyof T>(key: Key, value: T[Key]) => K,
+): ObjectMapperReturnType<T, K> {
+	const newObject = {} as ObjectMapperReturnType<T, K>;
+
+	for (const key in obj) {
+		if (Object.hasOwn(obj, key)) {
+			const typedKey = key as keyof T;
+
+			newObject[typedKey] = mapper(typedKey, obj[typedKey]);
+		}
+	}
+
+	return newObject;
 }
