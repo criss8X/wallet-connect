@@ -6,6 +6,14 @@ import {
 	MOCK_PACKAGE_JSON_MISSING_ONE_DEP,
 	MOCK_PACKAGE_JSON_MISSING_TWO_DEPS,
 } from "@mock/packageJson.mock.js";
+import {
+	MOCK_COMPONENTS_JSON_ALL_ALIASES,
+	MOCK_COMPONENTS_JSON_NO_ALIASES,
+} from "@mock/componentsJson.mock.js";
+import {
+	MOCK_TSCONFIG_JSON_MISSING_PATHS,
+	MOCK_TSCONFIG_JSON_ALL_PATHS,
+} from "@mock/tsconfigJson.mock.js";
 import { assert } from "@test/utils.test.js";
 import {
 	NeededDependencies,

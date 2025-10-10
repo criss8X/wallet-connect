@@ -5,7 +5,7 @@ import type { TsConfigJson } from "@/schemas/tsconfigJson.js";
 export function aliasToRelativePath(
 	value: string,
 	paths: TsConfigJson["paths"],
-): string {
+): string | null {
 	if (value.startsWith("@/")) {
 		const relativePath =
 			typeof paths["@/"] === "string" ? paths["@/"] : paths["@/"][0];
@@ -16,7 +16,10 @@ export function aliasToRelativePath(
 	const relativePath = paths[value] ?? paths[`${value}/`];
 
 	if (relativePath === undefined) {
-		throw new Error(`El alias: ${value} no se encontrá en el tsconfig.json`);
+		// TODO: Translate
+		console.error(`El alias ${value} no se encuentra en el tsconfig.json`);
+
+		return null;
 	}
 
 	const finalResult =

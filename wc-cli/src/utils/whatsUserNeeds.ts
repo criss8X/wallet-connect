@@ -51,7 +51,11 @@ export async function whatsComponentsUserNeeds(
 			ui: aliasAsRelativePath.ui,
 		},
 		(_, value) => {
-			if (!fs.existsSync(value) || !fs.statSync(value).isDirectory()) {
+			if (
+				value === null ||
+				!fs.existsSync(value) ||
+				!fs.statSync(value).isDirectory()
+			) {
 				return [];
 			}
 
@@ -81,5 +85,8 @@ export async function whatsComponentsUserNeeds(
 }
 
 function sanitizeComponentsPath(pathOrRelativePath: string): string {
-	return pathOrRelativePath.split("/").at(-1) || pathOrRelativePath;
+	const extractName =
+		pathOrRelativePath.split("/").at(-1) || pathOrRelativePath;
+
+	return extractName.split(".").at(0) || extractName;
 }

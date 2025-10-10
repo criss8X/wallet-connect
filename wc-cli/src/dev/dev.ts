@@ -41,7 +41,7 @@ const componentsJson: ComponentsJson = {
 		components: "@components",
 		hooks: "@/hooks",
 		lib: "@/lib",
-		ui: "@/components/ui",
+		ui: "@components/ui",
 		utils: "@/utils",
 	},
 };
