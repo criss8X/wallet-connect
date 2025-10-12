@@ -64,3 +64,7 @@ export function objectMapper<T extends object, K>(
 
 	return newObject;
 }
+
+export function ifEndsWithSlash(path: string): string {
+	return path.endsWith("/") ? path.slice(0, -1) : path;
+}

@@ -11,7 +11,7 @@ INTERFACE.close();
 async function startCli() {
 	switch (ENVIRONMENT.kind) {
 		case "default":
-			return defaultInstallation(ENVIRONMENT.data);
+			return await defaultInstallation(ENVIRONMENT.data);
 
 		case "noDeps":
 			return;

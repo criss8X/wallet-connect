@@ -13,7 +13,7 @@ import {
 	type TsConfigJson,
 	validateTsConfigJson,
 } from "./schemas/tsconfigJson.js";
-import { resolveFile } from "./utils.js";
+import { pathJoinAndValidate, resolveFile } from "./utils.js";
 
 type PackageManager = "pnpm" | "npm" | "bun" | "yarn";
 
@@ -58,6 +58,9 @@ function decodeCommandArgs(): CommandArgsResult {
 	}
 
 	if (flag === "--noDeps") {
+		if (flag2OrData === "-to") {
+		}
+
 		// is `wcs setup --no-deps`
 		return { type: "noDeps" };
 	} else if (flag === "-to") {
@@ -107,22 +110,26 @@ function getTsConfigJson(): TsConfigJson {
 	return validateTsConfigJson(JSON.parse(tsconfigFile));
 }
 
-export type DefaultEnv = {
+export type EnvironmentMeta = {
 	packageManager: PackageManager;
+	rootDir: string;
+	srcDir?: string;
+};
+
+export type DefaultEnv = {
 	packageJson: PackageJson;
 	componentsJson: ComponentsJson;
 	tsConfigJson: TsConfigJson;
-};
+} & EnvironmentMeta;
 
 export type NoDepsEnv = {
-	packageManager: PackageManager;
 	componentsJson: ComponentsJson;
-};
+	tsConfigJson: TsConfigJson;
+} & EnvironmentMeta;
 
 export type ToPathProviderEnv = {
-	packageManager: PackageManager;
 	destPath: string;
-};
+} & EnvironmentMeta;
 
 type EnvironmentKind = "default" | "noDeps" | "toPathProvided";
 
@@ -145,6 +152,8 @@ type AnyEnvironment =
 	| Environment<"toPathProvided">;
 
 export function getEnvironment(): AnyEnvironment {
+	const rootDir = process.cwd();
+	const srcDir = pathJoinAndValidate(rootDir, "src");
 	const packageManager = detectPackageManager();
 	const commandArgs = decodeCommandArgs();
 
@@ -153,7 +162,9 @@ export function getEnvironment(): AnyEnvironment {
 			return {
 				kind: "default",
 				data: {
+					rootDir,
 					packageManager,
+					srcDir: srcDir ?? undefined,
 					packageJson: getPackageJson(),
 					componentsJson: getComponentsJson(),
 					tsConfigJson: getTsConfigJson(),
@@ -163,15 +174,23 @@ export function getEnvironment(): AnyEnvironment {
 		case "noDeps":
 			return {
 				kind: "noDeps",
-				data: { packageManager, componentsJson: getComponentsJson() },
+				data: {
+					rootDir,
+					packageManager,
+					srcDir: srcDir ?? undefined,
+					tsConfigJson: getTsConfigJson(),
+					componentsJson: getComponentsJson(),
+				},
 			};
 
 		case "to":
 			return {
 				kind: "toPathProvided",
 				data: {
-					destPath: commandArgs.path,
+					rootDir,
 					packageManager,
+					srcDir: srcDir ?? undefined,
+					destPath: commandArgs.path,
 				},
 			};
 	}
