@@ -28,6 +28,7 @@
 	},
 	"dependencies": {
 		"colorette": "2.0.20",
+		"ora": "9.0.0",
 		"zod": "4.1.8"
 	}
 }
