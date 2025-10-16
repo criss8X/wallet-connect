@@ -1,6 +1,6 @@
 import z from "zod";
 
-const pathValueSchema = z.string().or(z.array(z.string()));
+const pathValueSchema = z.array(z.string());
 
 export const TSCONIFG_JSON_SCHEMA = z.object({
 	compilerOptions: z.object({
@@ -10,3 +10,5 @@ export const TSCONIFG_JSON_SCHEMA = z.object({
 });
 
 export type TsConfigJson = z.infer<typeof TSCONIFG_JSON_SCHEMA>;
+
+export type TsConfigPaths = TsConfigJson["compilerOptions"]["paths"];
