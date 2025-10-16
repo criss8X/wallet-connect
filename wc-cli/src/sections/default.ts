@@ -1,6 +1,6 @@
-import type { DefaultEnv } from "@/detector.js";
 import { aliasToRelativePath } from "@/utils/aliases.js";
 import { copyConnectWalletTo } from "@/utils/copier.js";
+import type { DefaultEnv } from "@/utils/packageManager.js";
 import {
 	whatsComponentsUserNeeds,
 	whatsDepsUserNeeds,
@@ -9,18 +9,18 @@ import {
 export async function defaultInstallation({
 	componentsJson,
 	packageJson,
-	packageManager,
+	_packageManager,
 	rootDir,
 	srcDir,
 	tsConfigJson,
 }: DefaultEnv) {
-	const [depsUserNeeds, compsUserNeeds] = await Promise.all([
+	const [depsUserNeeds, _compsUserNeeds] = await Promise.all([
 		Promise.resolve(whatsDepsUserNeeds(packageJson)),
 		Promise.resolve(whatsComponentsUserNeeds(componentsJson, tsConfigJson)),
 	]);
 
 	// TODO: Hacer algo interactivo que se valla mostrando con forme va pasando lo que se esta instalando.
-	const dependencesNeededDisplay = depsUserNeeds.reduce(
+	const _dependencesNeededDisplay = depsUserNeeds.reduce(
 		(acc, value) => acc.concat(`\n${value}`),
 		"Se instalarán las siguientes dependencias:",
 	);

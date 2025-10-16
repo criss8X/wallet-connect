@@ -1,7 +1,7 @@
 import z from "zod";
 
 // Just validate important data.
-const PACKAGE_JSON_SCHEMA = z.object({
+export const PACKAGE_JSON_SCHEMA = z.object({
 	dependencies: z.record(z.string(), z.string()),
 	devDependencies: z.record(z.string(), z.string()),
 });

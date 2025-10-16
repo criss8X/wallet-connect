@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { TsConfigJson } from "@/schemas/tsconfigJson.js";
+import type { TsConfigJson } from "@/schemas/tsconfig.schema.js";
 
 export function aliasToRelativePath(
 	value: string,
-	paths: TsConfigJson["paths"],
+	paths: TsConfigJson["compilerOptions"]["paths"],
 ): string | null {
 	if (value.startsWith("@/")) {
 		const relativePath =

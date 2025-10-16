@@ -1,4 +1,4 @@
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
+import type { ComponentsJson } from "@/schemas/components.schema.js";
 
 export const MOCK_COMPONENTS_JSON_ALL_ALIASES: ComponentsJson = {
 	tailwind: { css: "" },

@@ -1,4 +1,4 @@
-import type { PackageJson } from "@/schemas/packageJson.js";
+import type { PackageJson } from "@/schemas/package.schema.js";
 
 const ALL_DEPS = {
 	wagmi: "1.0.0",

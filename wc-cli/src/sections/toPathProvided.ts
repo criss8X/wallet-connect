@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import type { ToPathProviderEnv } from "@/detector.js";
 import { copyConnectWalletTo } from "@/utils/copier.js";
+import type { ToPathProviderEnv } from "@/utils/packageManager.js";
 
 export function toPathProvided({
 	destPath,

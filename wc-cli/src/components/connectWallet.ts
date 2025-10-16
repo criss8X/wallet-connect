@@ -1,4 +1,4 @@
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
+import type { ComponentsJson } from "@/schemas/components.schema.js";
 import { ifEndsWithSlash } from "@/utils.js";
 
 export function getConnectWalletCode(

@@ -1,59 +1,91 @@
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
-import type { TsConfigJson } from "@/schemas/tsconfigJson.js";
-import { whatsDepsUserNeedsTest } from "@/test/userNeeds.test.js";
-import { aliasToRelativePath } from "@/utils/aliases.js";
-import { whatsComponentsUserNeeds } from "@/utils/whatsUserNeeds.js";
-import { objectMapper } from "@/utils.js";
+// import path from "node:path";
+// import { bold, green, magenta, yellow } from "colorette";
+// import ora from "ora";
+// import { TSCONIFG_COMPILER_OPTS } from "@/schemas/tsconfigJson.js";
+// import { installDepsStep } from "@/steps/installDeps.js";
+// import { getPackageJson, getTsConfigJson } from "@/utils/packageManager.js";
+// import { getFileAndValidate, pathJoinAndValidate } from "@/utils.js";
 
-function _testFirstScene() {
-	// This scene just is for test.
-	const { aliases }: ComponentsJson = {
-		tailwind: { css: "" },
-		tsx: true,
-		aliases: {
-			components: "@components",
-			hooks: "@/hooks",
-			lib: "@/lib",
-			ui: "@/components/ui",
-			utils: "@/utils",
-		},
-	};
+import { COMPONENTS_JSON_SCHEMA } from "@/schemas/components.schema.js";
+import { PACKAGE_JSON_SCHEMA } from "@/schemas/package.schema.js";
+import { TSCONIFG_JSON_SCHEMA } from "@/schemas/tsconfig.schema.js";
+import { resolveFile, resolveFileAndValidate } from "@/utils.js";
 
-	const { paths }: TsConfigJson = {
-		baseUrl: ".",
-		paths: {
-			"@/": ["./src/*"],
-			"@components/": ["./src/components/*"],
-		},
-	};
+// const DEPENDENCIES = ["axios", "react-query", "tailwind-merge"];
+// const SHADCN_COMPONENTS = [
+// 	"Accordion",
+// 	"Alert",
+// 	"Badge",
+// 	"Calendar",
+// 	"Separator",
+// ];
 
-	const aliasAsRelativePath = objectMapper(aliases, (_, value) =>
-		aliasToRelativePath(value, paths),
-	);
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-	console.log(aliasAsRelativePath);
-}
+// async function checkEnvironment() {
+// 	console.log(bold(magenta("--- 1. Revisando Entorno de Desarrollo ---")));
+// 	const spinner = ora({
+// 		spinner: "dots",
+// 		text: "Verificando configuración de proyecto y dependencias base...",
+// 	}).start();
 
-const componentsJson: ComponentsJson = {
-	tailwind: { css: "" },
-	tsx: true,
-	aliases: {
-		components: "@components",
-		hooks: "@/hooks",
-		lib: "@/lib",
-		ui: "@components/ui",
-		utils: "@/utils",
-	},
-};
+// 	await delay(1500);
+// 	spinner.succeed(green("✅ Entorno verificado correctamente."));
+// 	console.log("\n");
+// }
 
-const tsconfigJson: TsConfigJson = {
-	baseUrl: ".",
-	paths: {
-		"@/": ["./src/*"],
-		"@components/": ["./src/components/*"],
-	},
-};
+// async function installDependencies() {
+// 	// console.log(bold(magenta("--- 2. Instalando Dependencias Necesarias ---")));
+// 	// console.log(yellow("Dependencias a instalar:"));
+// 	// DEPENDENCIES.forEach((dep) => console.log(`\t- ${dep}`));
+// 	// console.log("\n");
 
-const result = await whatsComponentsUserNeeds(componentsJson, tsconfigJson);
+// 	for (const dep of DEPENDENCIES) {
+// 		const spinner = ora({
+// 			text: `Instalando dependencia: ${dep}...`,
+// 			spinner: "dots",
+// 		}).start();
 
-console.log({ result });
+// 		await delay(1000);
+// 		spinner.succeed(green(`✅ ${dep} instalado.`));
+// 	}
+// 	console.log(bold(green("\n🎉 Instalación de dependencias completada.")));
+// 	console.log("\n");
+// }
+
+// async function installComponents() {
+// 	console.log(bold(magenta("--- 3. Instalando Componentes Shadcn/UI ---")));
+// 	console.log(yellow("Componentes Shadcn a instalar:"));
+// 	SHADCN_COMPONENTS.forEach((comp) => console.log(`\t- ${comp}`));
+// 	console.log("\n");
+
+// 	for (const component of SHADCN_COMPONENTS) {
+// 		const spinner = ora({
+// 			text: `Instalando componente: ${component}...`,
+// 			spinner: "dots",
+// 		}).start();
+
+// 		await delay(1000);
+// 		spinner.succeed(green(`✅ ${component} instalado.`));
+// 	}
+// 	console.log(
+// 		bold(green("\n🎉 Instalación de componentes Shadcn completada.")),
+// 	);
+// 	console.log("\n");
+// }
+
+// async function startSimulation() {
+// 	console.log({
+// 		// tsConfig: getTsConfigJson(),
+// 		pk: getPackageJson(),
+// 		ts: getTsConfigJson(),
+// 	});
+// 	// await checkEnvironment();
+// 	// await installDependencies();
+// 	// await installComponents();
+// 	// console.log(bold(magenta("--- Proceso Finalizado ---")));
+// }
+
+// startSimulation();
+
+// TEST step handler

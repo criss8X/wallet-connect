@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { getConnectWalletCode } from "@/components/connectWallet.js";
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
+import type { ComponentsJson } from "@/schemas/components.schema.js";
 
 type CopyWalletConnectProps = {
 	to: string;

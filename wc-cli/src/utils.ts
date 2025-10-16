@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type z from "zod";
 
 export function resolveFile(parent: string, child: string): string | null {
 	const joined = path.join(parent, child);
@@ -67,4 +68,24 @@ export function objectMapper<T extends object, K>(
 
 export function ifEndsWithSlash(path: string): string {
 	return path.endsWith("/") ? path.slice(0, -1) : path;
+}
+
+export function resolveFileAndValidate<T>(
+	[parent, child]: string[],
+	schema: z.ZodType<T>,
+): T | null {
+	const file = resolveFile(parent, child);
+
+	if (file === null) {
+		return null;
+	}
+
+	const fileContentRaw = fs.readFileSync(file, "utf-8");
+	const { success, data } = schema.safeParse(JSON.parse(fileContentRaw));
+
+	if (!success) {
+		return null;
+	}
+
+	return data;
 }

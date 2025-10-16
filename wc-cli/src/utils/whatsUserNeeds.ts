@@ -1,7 +1,7 @@
 import fs from "node:fs";
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
-import type { PackageJson } from "@/schemas/packageJson.js";
-import type { TsConfigJson } from "@/schemas/tsconfigJson.js";
+import type { ComponentsJson } from "@/schemas/components.schema.js";
+import type { PackageJson } from "@/schemas/package.schema.js";
+import type { TsConfigJson } from "@/schemas/tsconfig.schema.js";
 import type { EnumOf } from "@/types.js";
 import { objectMapper } from "@/utils.js";
 import { aliasToRelativePath } from "./aliases.js";
@@ -13,7 +13,7 @@ export const NeededDependencies = {
 	CVA: "class-variance-authority",
 } as const;
 
-type DependenceNeeded = EnumOf<typeof NeededDependencies>;
+export type DependenceNeeded = EnumOf<typeof NeededDependencies>;
 
 export function whatsDepsUserNeeds({
 	dependencies,
@@ -39,7 +39,7 @@ type ComponentNeeded = EnumOf<typeof NeededShadcnComponents>;
 
 export async function whatsComponentsUserNeeds(
 	{ aliases }: ComponentsJson,
-	{ paths }: TsConfigJson,
+	{ paths }: TsConfigJson["compilerOptions"],
 ): Promise<ComponentNeeded[]> {
 	const aliasAsRelativePath = objectMapper(aliases, (_, value) =>
 		aliasToRelativePath(value, paths),

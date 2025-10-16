@@ -1,8 +1,8 @@
-import type { NoDepsEnv } from "@/detector.js";
 import { aliasToRelativePath } from "@/utils/aliases.js";
 import { copyConnectWalletTo } from "@/utils/copier.js";
+import type { NoDepsEnv } from "@/utils/packageManager.js";
 
-function noDepsInstallation({
+function _noDepsInstallation({
 	componentsJson,
 	tsConfigJson,
 	rootDir,

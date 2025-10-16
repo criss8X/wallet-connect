@@ -1,5 +1,5 @@
-import type { ComponentsJson } from "@/schemas/componentsJson.js";
-import type { PackageJson } from "@/schemas/packageJson.js";
+import type { ComponentsJson } from "@/schemas/components.schema.js";
+import type { PackageJson } from "@/schemas/package.schema.js";
 
 export const NeededDependencies = {
 	WAGMI: "wagmi",
@@ -18,7 +18,7 @@ export const NeededShadcnComponents = {
 // package.json contains needed dependencies or components?
 export function whatsUserNeeds(
 	{ dependencies, devDependencies }: PackageJson,
-	{ aliases }: ComponentsJson,
+	{ _aliases }: ComponentsJson,
 ): { depsNoInstalled: string[]; componentsNoInstalled: string[] } {
 	const allDeps = { ...dependencies, ...devDependencies };
 
