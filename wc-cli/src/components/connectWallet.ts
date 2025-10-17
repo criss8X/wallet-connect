@@ -1,9 +1,7 @@
-import type { ComponentsJson } from "@/schemas/components.schema.js";
+import type { Aliases } from "@/schemas/components.schema.js";
 import { ifEndsWithSlash } from "@/utils.js";
 
-export function getConnectWalletCode(
-	aliases?: ComponentsJson["aliases"],
-): string {
+export function getConnectWalletCode(aliases?: Aliases): string {
 	const components = ifEndsWithSlash(aliases?.components ?? "@/components/");
 
 	return `import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";

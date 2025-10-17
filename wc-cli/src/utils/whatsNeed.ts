@@ -1,10 +1,8 @@
 import fs from "node:fs";
-import type { ComponentsJson } from "@/schemas/components.schema.js";
 import type { PackageJson } from "@/schemas/package.schema.js";
-import type { TsConfigJson } from "@/schemas/tsconfig.schema.js";
 import type { EnumOf } from "@/types.js";
 import { objectMapper } from "@/utils.js";
-import { aliasToRelativePath } from "./aliases.js";
+import type { DecodedAliases } from "./aliases.js";
 
 export const NeededDependencies = {
 	WAGMI: "wagmi",
@@ -15,7 +13,7 @@ export const NeededDependencies = {
 
 export type DependenceNeeded = EnumOf<typeof NeededDependencies>;
 
-export function whatsDepsUserNeeds({
+export function whatsDepsNeed({
 	dependencies,
 	devDependencies,
 }: PackageJson): DependenceNeeded[] {
@@ -35,20 +33,15 @@ export const NeededShadcnComponents = {
 	Sonner: "sonner",
 } as const;
 
-type ComponentNeeded = EnumOf<typeof NeededShadcnComponents>;
+export type ComponentNeeded = EnumOf<typeof NeededShadcnComponents>;
 
-export async function whatsComponentsUserNeeds(
-	{ aliases }: ComponentsJson,
-	{ paths }: TsConfigJson["compilerOptions"],
+export async function whatsComponentsNeed(
+	decodedAliases: DecodedAliases,
 ): Promise<ComponentNeeded[]> {
-	const aliasAsRelativePath = objectMapper(aliases, (_, value) =>
-		aliasToRelativePath(value, paths),
-	);
-
 	const { ui, components } = objectMapper(
 		{
-			components: aliasAsRelativePath.components,
-			ui: aliasAsRelativePath.ui,
+			components: decodedAliases.components,
+			ui: decodedAliases.ui,
 		},
 		(_, value) => {
 			if (

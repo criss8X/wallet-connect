@@ -41,11 +41,13 @@ export function aliasToRelativePath({
 	);
 }
 
+export type DecodedAliases = MakeNullObject<Aliases>;
+
 export function decodeAliases(
 	rootDir: string,
 	{ compilerOptions: { paths } }: TsConfigJson,
 	{ aliases }: ComponentsJson,
-): MakeNullObject<Aliases> {
+): DecodedAliases {
 	return objectMapper(aliases, (_, value) =>
 		aliasToRelativePath({ paths, value, rootDir }),
 	);

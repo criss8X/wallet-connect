@@ -1,13 +1,17 @@
-import { ComponentsJson } from "@/schemas/components.schema.js";
-import { TsConfigJson } from "@/schemas/tsconfig.schema.js";
-import { aliasToRelativePath } from "@/utils/aliases.js";
-import { copyConnectWalletTo } from "@/utils/copier.js";
+import fs from "node:fs/promises";
+import { getConnectWalletCode } from "@/components/connectWallet.js";
+import { decodeAliases } from "@/utils/aliases.js";
 import type { DefaultEnv } from "@/utils/environment.js";
 import {
-	whatsComponentsUserNeeds,
-	whatsDepsUserNeeds,
-} from "@/utils/whatsUserNeeds.js";
-import { objectMapper } from "@/utils.js";
+	installComponentsNeeded,
+	installDepsNeeded,
+} from "@/utils/installer.js";
+import {
+	type ComponentNeeded,
+	type DependenceNeeded,
+	whatsComponentsNeed,
+	whatsDepsNeed,
+} from "@/utils/whatsNeed.js";
 
 export async function defaultInstallation({
 	componentsJson,
@@ -16,10 +20,33 @@ export async function defaultInstallation({
 	srcDir,
 	tsConfigJson,
 }: DefaultEnv) {
-	// const isCopied = copyConnectWalletTo({
-	// 	componentsJson,
-	// 	to: componentsPath ?? srcDir ?? rootDir,
-	// });
-	// if (isCopied) {
-	// }
+	const aliasesDecoded = decodeAliases(rootDir, tsConfigJson, componentsJson);
+
+	const [depsNeed, componentsNeed] = await Promise.all([
+		whatsDepsNeed(packageJson),
+		whatsComponentsNeed(aliasesDecoded),
+	]);
+
+	console.log(displayNeeds({ depsNeed, componentsNeed }));
+
+	await installDepsNeeded(depsNeed);
+	await installComponentsNeeded(componentsNeed);
+
+	// Implement ora spinner
+	const connectWalletCode = getConnectWalletCode(componentsJson?.aliases);
+
+	await fs.writeFile(
+		aliasesDecoded.components ?? srcDir ?? rootDir,
+		connectWalletCode,
+	);
+	// stop ora spinner
+}
+
+type DisplayNeedsProps = {
+	depsNeed: DependenceNeeded[];
+	componentsNeed: ComponentNeeded[];
+};
+
+function displayNeeds({ depsNeed, componentsNeed }: DisplayNeedsProps): string {
+	return "";
 }
