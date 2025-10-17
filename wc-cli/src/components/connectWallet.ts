@@ -1,5 +1,19 @@
+import fs from "node:fs/promises";
+import path from "node:path";
 import type { Aliases } from "@/schemas/components.schema.js";
 import { ifEndsWithSlash } from "@/utils.js";
+
+export async function copyConnectWalletTo({
+	to,
+	aliases,
+}: {
+	to: string;
+	aliases?: Aliases;
+}) {
+	const connectWalletCode = getConnectWalletCode(aliases);
+
+	await fs.writeFile(path.join(to, "ConnectWallet.tsx"), connectWalletCode);
+}
 
 export function getConnectWalletCode(aliases?: Aliases): string {
 	const components = ifEndsWithSlash(aliases?.components ?? "@/components/");

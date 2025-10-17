@@ -1,5 +1,4 @@
-import fs from "node:fs/promises";
-import { getConnectWalletCode } from "@/components/connectWallet.js";
+import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import { decodeAliases } from "@/utils/aliases.js";
 import type { DefaultEnv } from "@/utils/environment.js";
 import {
@@ -19,6 +18,7 @@ export async function defaultInstallation({
 	rootDir,
 	srcDir,
 	tsConfigJson,
+	packageManager,
 }: DefaultEnv) {
 	const aliasesDecoded = decodeAliases(rootDir, tsConfigJson, componentsJson);
 
@@ -29,16 +29,14 @@ export async function defaultInstallation({
 
 	console.log(displayNeeds({ depsNeed, componentsNeed }));
 
-	await installDepsNeeded(depsNeed);
-	await installComponentsNeeded(componentsNeed);
+	await installDepsNeeded(depsNeed, packageManager);
+	await installComponentsNeeded(componentsNeed, packageManager);
 
 	// Implement ora spinner
-	const connectWalletCode = getConnectWalletCode(componentsJson?.aliases);
-
-	await fs.writeFile(
-		aliasesDecoded.components ?? srcDir ?? rootDir,
-		connectWalletCode,
-	);
+	await copyConnectWalletTo({
+		to: aliasesDecoded.components ?? srcDir ?? rootDir,
+		aliases: componentsJson.aliases,
+	});
 	// stop ora spinner
 }
 

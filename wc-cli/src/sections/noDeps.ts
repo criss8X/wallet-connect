@@ -1,23 +1,23 @@
+import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import { aliasToRelativePath } from "@/utils/aliases.js";
-import { copyConnectWalletTo } from "@/utils/copier.js";
-import type { NoDepsEnv } from "@/utils/packageManager.js";
+import type { NoDepsEnv } from "@/utils/environment.js";
 
-function _noDepsInstallation({
+export async function noDepsInstallation({
 	componentsJson,
 	tsConfigJson,
 	rootDir,
 	srcDir,
 }: NoDepsEnv) {
-	const componentsPath = aliasToRelativePath(
-		componentsJson.aliases.components,
-		tsConfigJson.paths,
-	);
-
-	const isCopied = copyConnectWalletTo({
-		componentsJson,
-		to: componentsPath ?? srcDir ?? rootDir,
+	const componentsPath = aliasToRelativePath({
+		rootDir,
+		value: componentsJson.aliases.components,
+		paths: tsConfigJson.compilerOptions.paths,
 	});
 
-	if (isCopied) {
-	}
+	// Implement ora spinner
+	await copyConnectWalletTo({
+		to: componentsPath ?? srcDir ?? rootDir,
+		aliases: componentsJson.aliases,
+	});
+	// stop ora spinner
 }
