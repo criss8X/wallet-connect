@@ -14,7 +14,7 @@ import {
 } from "@/schemas/tsconfig.schema.js";
 import type { PackageManager } from "@/utils/packageManager.js";
 import { detectPackageManager } from "@/utils/packageManager.js";
-import { pathJoinAndValidate, resolveFileAndValidate } from "@/utils.js";
+import { resolveFileAndValidate, resolveFolder } from "@/utils.js";
 
 export type EnvironmentMeta = {
 	packageManager: PackageManager;
@@ -76,7 +76,7 @@ export async function getEnvironment(): Promise<AnyEnvironment> {
 	);
 
 	const rootDir = process.cwd();
-	const srcDir = pathJoinAndValidate(rootDir, "src");
+	const srcDir = resolveFolder(rootDir, "src");
 	const packageManager = await detectPackageManager();
 	const commandArgs = decodeCommandArgs();
 

@@ -22,10 +22,7 @@ export function resolveFile(parent: string, child: string): string | null {
 	return joined;
 }
 
-export function pathJoinAndValidate(
-	parent: string,
-	child: string,
-): string | null {
+export function resolveFolder(parent: string, child: string): string | null {
 	if (!fs.existsSync(parent)) {
 		throw new Error(`The path ${parent} does not exist.`);
 	}

@@ -12,6 +12,6 @@ if (!Array.prototype.findAndMap) {
 			i++;
 		}
 
-		return undefined;
+		return null;
 	};
 }
