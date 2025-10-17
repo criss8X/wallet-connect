@@ -1,5 +1,7 @@
-import type { TsConfigPaths } from "@/schemas/tsconfig.schema.js";
-import { resolveFolder } from "@/utils.js";
+import type { Aliases, ComponentsJson } from "@/schemas/components.schema.js";
+import type { TsConfigJson, TsConfigPaths } from "@/schemas/tsconfig.schema.js";
+import type { MakeNullObject } from "@/types.js";
+import { objectMapper, resolveFolder } from "@/utils.js";
 
 type AliasToRelativePathProps = {
 	value: string;
@@ -36,5 +38,15 @@ export function aliasToRelativePath({
 
 	return possiblePaths.findAndMap((path) =>
 		resolveFolder(rootDir, path.replaceAll("*", "")),
+	);
+}
+
+export function decodeAliases(
+	rootDir: string,
+	{ compilerOptions: { paths } }: TsConfigJson,
+	{ aliases }: ComponentsJson,
+): MakeNullObject<Aliases> {
+	return objectMapper(aliases, (_, value) =>
+		aliasToRelativePath({ paths, value, rootDir }),
 	);
 }

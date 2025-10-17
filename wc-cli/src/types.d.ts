@@ -7,6 +7,10 @@ export type DynamicFn<isAsync extends boolean, R = void> = isAsync extends true
 	? AsyncFn<R>
 	: Fn<R>;
 
+export type MakeNullObject<O> = {
+	[K in keyof O]: O[K] | null;
+};
+
 declare global {
 	interface Array<T> {
 		findAndMap<U>(

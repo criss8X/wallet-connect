@@ -24,6 +24,7 @@ export const COMPONENTS_JSON_SCHEMA = z.object({
 });
 
 export type ComponentsJson = z.infer<typeof COMPONENTS_JSON_SCHEMA>;
+export type Aliases = ComponentsJson["aliases"];
 
 export function validateComponentsJson(rawData: unknown): ComponentsJson {
 	const { success, data } = COMPONENTS_JSON_SCHEMA.safeParse(rawData);
