@@ -1,3 +1,4 @@
+import { bold } from "colorette";
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import { decodeAliases } from "@/utils/aliases.js";
 import type { DefaultEnv } from "@/utils/environment.js";
@@ -32,12 +33,10 @@ export async function defaultInstallation({
 	await installDepsNeeded(depsNeed, packageManager);
 	await installComponentsNeeded(componentsNeed, packageManager);
 
-	// Implement ora spinner
 	await copyConnectWalletTo({
 		to: aliasesDecoded.components ?? srcDir ?? rootDir,
 		aliases: componentsJson.aliases,
 	});
-	// stop ora spinner
 }
 
 type DisplayNeedsProps = {
@@ -45,6 +44,20 @@ type DisplayNeedsProps = {
 	componentsNeed: ComponentNeeded[];
 };
 
-function displayNeeds({ depsNeed, componentsNeed }: DisplayNeedsProps): string {
-	return "";
+export function displayNeeds({
+	depsNeed,
+	componentsNeed,
+}: DisplayNeedsProps): string {
+	let content = bold("We will install the dependencies:");
+
+	content += "\n";
+	content += depsNeed.map((dep) => `- ${dep}`).join("\n");
+
+	content += "\n\n";
+
+	content += bold("And the shadcn components:");
+	content += "\n";
+	content += componentsNeed.map((comp) => `- ${comp}`).join("\n");
+
+	return content;
 }

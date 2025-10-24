@@ -18,7 +18,7 @@ export const NeededShadcnComponents = {
 // package.json contains needed dependencies or components?
 export function whatsUserNeeds(
 	{ dependencies, devDependencies }: PackageJson,
-	{ _aliases }: ComponentsJson,
+	_componentsJson: ComponentsJson,
 ): { depsNoInstalled: string[]; componentsNoInstalled: string[] } {
 	const allDeps = { ...dependencies, ...devDependencies };
 

@@ -1,3 +1,6 @@
+import { execSync } from "node:child_process";
+import { bold, magenta } from "colorette";
+import ora from "ora";
 import {
 	COMPONENT_SCRIPT_BUILDER,
 	type PackageManager,
@@ -9,14 +12,22 @@ export async function installDepsNeeded(
 	deps: DependenceNeeded[],
 	packageManager: PackageManager,
 ) {
-	// Improve terminal log
-	// Implement ora spinner
+	if (deps.length === 0) {
+		return;
+	}
+
+	console.log();
+	console.log("---- Dependencies Installation ----");
 
 	for (const dependence of deps) {
+		const loader = ora(`Installing ${magenta(bold(dependence))}`).start();
+
 		const scriptToInstall =
 			SCRIPT_BY_PACKAGE_MANAGER[packageManager](dependence);
 
-		// run installation
+		execSync(scriptToInstall);
+
+		loader.succeed();
 	}
 }
 
@@ -24,13 +35,21 @@ export async function installComponentsNeeded(
 	components: ComponentNeeded[],
 	packageManager: PackageManager,
 ) {
-	// Improve terminal log
-	// Implement ora spinner
+	if (components.length === 0) {
+		return;
+	}
+
+	console.log();
+	console.log("---- Shadcn Components Installation ----");
 
 	for (const component of components) {
+		const loader = ora(`Installing ${magenta(bold(component))}`).start();
+
 		const scriptToAddComponent =
 			COMPONENT_SCRIPT_BUILDER[packageManager](component);
 
-		// run addition of this component to the project.
+		execSync(scriptToAddComponent);
+
+		loader.succeed();
 	}
 }

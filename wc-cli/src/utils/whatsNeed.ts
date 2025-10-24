@@ -6,7 +6,8 @@ import type { DecodedAliases } from "./aliases.js";
 
 export const NeededDependencies = {
 	WAGMI: "wagmi",
-	TAILWINDCSS: "tailwindcss",
+	VIEM: "viem",
+	TANSTACK_QUERY: "@tanstack/react-query",
 	CLSX: "clsx",
 	CVA: "class-variance-authority",
 } as const;

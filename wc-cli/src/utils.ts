@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import ora, { type Ora } from "ora";
 import type z from "zod";
 
 export function resolveFile(parent: string, child: string): string | null {
@@ -85,4 +86,11 @@ export function resolveFileAndValidate<T>(
 	}
 
 	return data;
+}
+
+export function spinner(msg: string): Ora {
+	return ora({
+		text: msg,
+		spinner: "dots",
+	}).start();
 }

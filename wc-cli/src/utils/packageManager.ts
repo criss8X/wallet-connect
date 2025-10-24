@@ -20,11 +20,10 @@ export async function detectPackageManager(): Promise<PackageManager> {
 
 type ScriptBuilder = (dep: DependenceNeeded, isDevMode?: boolean) => string;
 
-// TODO: Check if these scripts builder are right.
 export const SCRIPT_BY_PACKAGE_MANAGER: Record<PackageManager, ScriptBuilder> =
 	{
 		pnpm: (dep, _isDev) => `pnpm add ${dep}`,
-		bun: (dep, _isDev) => `bun install ${dep}`,
+		bun: (dep, _isDev) => `bun add ${dep}`,
 		npm: (dep, _isDev) => `npm install ${dep}`,
 		yarn: (dep, _isDev) => `yarn add ${dep}`,
 	} as const;
@@ -36,8 +35,7 @@ export const COMPONENT_SCRIPT_BUILDER: Record<
 	ComponentScriptBuilder
 > = {
 	pnpm: (component) => `pnpm dlx shadcn@latest add ${component}`,
-	// TODO: Put installation scripts for this builder.
-	bun: (component) => `bun install ${component}`,
-	npm: (component) => `npm install ${component}`,
-	yarn: (component) => `yarn add ${component}`,
+	bun: (component) => `bunx --bun shadcn@latest add ${component}`,
+	npm: (component) => `npx shadcn@latest add ${component}`,
+	yarn: (component) => `yarn shadcn@latest add ${component}`,
 } as const;

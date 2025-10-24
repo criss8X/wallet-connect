@@ -14,6 +14,10 @@ export function aliasToRelativePath({
 	rootDir,
 	value,
 }: AliasToRelativePathProps): string | null {
+	if (Object.keys(paths).length === 0) {
+		return null;
+	}
+
 	// If the value to decrypt has the default alias, then decrypt quickly.
 	if (value.startsWith("@/")) {
 		const relativePath = paths["@/"].findAndMap((path) =>

@@ -10,7 +10,5 @@ export async function toPathProvided({ destPath }: ToPathProviderEnv) {
 		);
 	}
 
-	// Implement ora spinner
 	await copyConnectWalletTo({ to: destPath });
-	// stop ora spinner
 }

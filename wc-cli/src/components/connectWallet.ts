@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { gray, green } from "colorette";
 import type { Aliases } from "@/schemas/components.schema.js";
-import { ifEndsWithSlash } from "@/utils.js";
+import { ifEndsWithSlash, spinner } from "@/utils.js";
 
 export async function copyConnectWalletTo({
 	to,
@@ -10,9 +11,16 @@ export async function copyConnectWalletTo({
 	to: string;
 	aliases?: Aliases;
 }) {
+	const copyCompSpinner = spinner("Copying ConnectWallet component...");
+
 	const connectWalletCode = getConnectWalletCode(aliases);
 
-	await fs.writeFile(path.join(to, "ConnectWallet.tsx"), connectWalletCode);
+	const pathForFile = path.join(to, "ConnectWallet.tsx");
+	await fs.writeFile(pathForFile, connectWalletCode);
+
+	copyCompSpinner.succeed(green("ConnectWallet.tsx is copied!"));
+
+	console.log(gray(`-> ${pathForFile}`));
 }
 
 export function getConnectWalletCode(aliases?: Aliases): string {

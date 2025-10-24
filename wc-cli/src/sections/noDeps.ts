@@ -14,10 +14,8 @@ export async function noDepsInstallation({
 		paths: tsConfigJson.compilerOptions.paths,
 	});
 
-	// Implement ora spinner
 	await copyConnectWalletTo({
 		to: componentsPath ?? srcDir ?? rootDir,
 		aliases: componentsJson.aliases,
 	});
-	// stop ora spinner
 }
