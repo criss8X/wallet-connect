@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",
+	"publishConfig": {
+		"access": "public"
+	},
 	"bin": {
 		"wcs": "dist/cli.js"
 	},
