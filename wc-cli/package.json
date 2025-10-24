@@ -1,6 +1,7 @@
 {
-	"name": "wc-cli",
+	"name": "@criss8x/wc-cli",
 	"version": "1.0.0",
+	"private": false,
 	"type": "module",
 	"bin": {
 		"wcs": "dist/cli.js"
