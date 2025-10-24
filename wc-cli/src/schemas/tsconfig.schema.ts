@@ -5,7 +5,7 @@ const pathValueSchema = z.array(z.string());
 export const TSCONIFG_JSON_SCHEMA = z.object({
 	compilerOptions: z.object({
 		baseUrl: z.string(),
-		paths: z.record(z.string(), pathValueSchema),
+		paths: z.record(z.string(), pathValueSchema).default({}),
 	}),
 });
 

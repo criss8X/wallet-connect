@@ -1,5 +1,5 @@
 {
-	"name": "@criss8x/wc-cli",
+	"name": "wallet-connect",
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",

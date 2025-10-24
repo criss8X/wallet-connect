@@ -1,5 +1,4 @@
 import { argv } from "node:process";
-import ora from "ora";
 import {
 	COMPONENTS_JSON_SCHEMA,
 	type ComponentsJson,
@@ -14,7 +13,7 @@ import {
 } from "@/schemas/tsconfig.schema.js";
 import type { PackageManager } from "@/utils/packageManager.js";
 import { detectPackageManager } from "@/utils/packageManager.js";
-import { resolveFileAndValidate, resolveFolder } from "@/utils.js";
+import { resolveFileAndValidate, resolveFolder, spinner } from "@/utils.js";
 
 export type EnvironmentMeta = {
 	packageManager: PackageManager;
@@ -71,9 +70,7 @@ class ComponentsJsonError extends Error {
 }
 
 export async function getEnvironment(): Promise<AnyEnvironment> {
-	const environmentLoader = ora({ spinner: "dots" }).start(
-		"Loading environment...",
-	);
+	const environmentLoader = spinner("Loading environment...");
 
 	const rootDir = process.cwd();
 	const srcDir = resolveFolder(rootDir, "src");
@@ -153,11 +150,7 @@ type CommandArgsResult =
 	  };
 
 function decodeCommandArgs(): CommandArgsResult {
-	const [, , first, flag, flag2OrData] = argv;
-
-	if (first !== "setup") {
-		throw new Error("Command not found, try `setup`");
-	}
+	const [, , flag, flag2OrData] = argv;
 
 	if (flag === undefined) {
 		// is `wcs setup`
@@ -178,9 +171,7 @@ function decodeCommandArgs(): CommandArgsResult {
 		return { type: "to", path: flag2OrData };
 	}
 
-	throw new Error(
-		"Invalid command, you can try `wcs setup -to {path/to}` `wcs setup -noDeps`",
-	);
+	throw new Error("Invalid command, you can try `-to {path/to}` `--noDeps`");
 }
 
 // #region Data decoder

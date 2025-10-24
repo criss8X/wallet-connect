@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import { bold, magenta } from "colorette";
-import ora from "ora";
+import { spinner } from "@/utils.js";
 import {
 	COMPONENT_SCRIPT_BUILDER,
 	type PackageManager,
@@ -20,7 +20,7 @@ export async function installDepsNeeded(
 	console.log("---- Dependencies Installation ----");
 
 	for (const dependence of deps) {
-		const loader = ora(`Installing ${magenta(bold(dependence))}`).start();
+		const loader = spinner(`Installing ${magenta(bold(dependence))}`);
 
 		const scriptToInstall =
 			SCRIPT_BY_PACKAGE_MANAGER[packageManager](dependence);
@@ -43,7 +43,7 @@ export async function installComponentsNeeded(
 	console.log("---- Shadcn Components Installation ----");
 
 	for (const component of components) {
-		const loader = ora(`Installing ${magenta(bold(component))}`).start();
+		const loader = spinner(`Installing ${magenta(bold(component))}`);
 
 		const scriptToAddComponent =
 			COMPONENT_SCRIPT_BUILDER[packageManager](component);
