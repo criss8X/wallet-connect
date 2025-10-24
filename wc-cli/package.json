@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"type": "module",
 	"bin": {
-		"wc-script": "dist/cli.js"
+		"wcs": "dist/cli.js"
 	},
 	"files": [
 		"dist",
