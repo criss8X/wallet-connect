@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "ES2022",
-		"module": "NodeNext",
+		"target": "ESNext",
+		"module": "ESNext",
 		"moduleResolution": "NodeNext",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
@@ -12,11 +12,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
-			"@test/*": ["./src/test/*"],
-			"@mock/*": ["./src/mocks/*"],
 			"@commands/*": ["./src/commands/*"],
 			"@utils/*": ["./src/utils/*"]
 		}
 	},
-	"include": ["src", "test"]
+	"include": ["src"]
 }

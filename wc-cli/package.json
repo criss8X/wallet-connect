@@ -34,7 +34,8 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts",
-		"start": "tsx src/cli.ts"
+		"start": "tsx src/cli.ts",
+		"publish": "pnpm publish --access=public"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
