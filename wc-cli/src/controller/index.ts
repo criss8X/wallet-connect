@@ -69,7 +69,7 @@ type AnyEnvironment =
 async function getEssentialData(rootDir: string) {
 	const [packageJson, tsConfigJson, componentsJson] = await Promise.all([
 		useFile(rootDir, "package.json").parse(PACKAGE_JSON_SCHEMA),
-		useFile(rootDir, "package.json").parse(TSCONIFG_JSON_SCHEMA),
+		useFile(rootDir, "tsconfig.json").parse(TSCONIFG_JSON_SCHEMA),
 		useFile(rootDir, "components.json").parse(COMPONENTS_JSON_SCHEMA),
 	]);
 
