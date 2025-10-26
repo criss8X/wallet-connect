@@ -1,12 +1,12 @@
-import { copyConnectWalletTo } from "@/components/connectWallet.js";
-import type { DefaultAndPathToEnv, PathToEnv } from "@/controller/index.js";
-import { decodeAliases } from "@/utils/aliases.js";
+import { displayNeeds } from "@commands/default.js";
+import { decodeAliases } from "@utils/aliases.js";
 import {
 	installComponentsNeeded,
 	installDepsNeeded,
-} from "@/utils/installer.js";
-import { whatsComponentsNeed, whatsDepsNeed } from "@/utils/whatsNeed.js";
-import { displayNeeds } from "./default.js";
+} from "@utils/installer.js";
+import { whatsComponentsNeed, whatsDepsNeed } from "@utils/whatsNeed.js";
+import { copyConnectWalletTo } from "@/components/connectWallet.js";
+import type { DefaultAndPathToEnv, PathToEnv } from "@/controller/index.js";
 
 export async function pathTo({ destPath }: PathToEnv) {
 	await copyConnectWalletTo({ to: destPath });

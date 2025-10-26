@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import { defaultInstallation } from "@commands/default.js";
+import { noDepsInstallation } from "@commands/noDeps.js";
+import { defaultAndPathTo, pathTo } from "@commands/pathTo.js";
 import { getEnvironment } from "@/controller/index.js";
-import { defaultInstallation } from "./sections/default.js";
-import { noDepsInstallation } from "./sections/noDeps.js";
-import { defaultAndPathTo, pathTo } from "./sections/pathTo.js";
 
 await startCli();
 

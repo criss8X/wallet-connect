@@ -1,7 +1,7 @@
 import type { Aliases, ComponentsJson } from "@/schemas/components.schema.js";
 import type { TsConfigJson, TsConfigPaths } from "@/schemas/tsconfig.schema.js";
 import type { MakeNullObject } from "@/types.js";
-import { objectMapper, resolveFolder } from "@/utils.js";
+import { objectMapper, resolveFolder } from "@/utils/utils.js";
 
 type AliasToRelativePathProps = {
 	value: string;

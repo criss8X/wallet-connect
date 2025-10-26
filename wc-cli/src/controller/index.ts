@@ -15,7 +15,7 @@ import {
 	type PackageManager,
 } from "@/utils/packageManager.js";
 import useFile from "@/utils/useFile.js";
-import { resolveFolder, spinner } from "@/utils.js";
+import { resolveFolder, spinner } from "@/utils/utils.js";
 import { decodeCommandArgs } from "./refiner.js";
 
 export type EnvironmentMeta = {

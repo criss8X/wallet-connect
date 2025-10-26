@@ -13,7 +13,9 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@test/*": ["./src/test/*"],
-			"@mock/*": ["./src/mocks/*"]
+			"@mock/*": ["./src/mocks/*"],
+			"@commands/*": ["./src/commands/*"],
+			"@utils/*": ["./src/utils/*"]
 		}
 	},
 	"include": ["src", "test"]

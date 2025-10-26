@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import type { PackageJson } from "@/schemas/package.schema.js";
 import type { EnumOf } from "@/types.js";
-import { objectMapper } from "@/utils.js";
+import { objectMapper } from "@/utils/utils.js";
 import type { DecodedAliases } from "./aliases.js";
 
 export const NeededDependencies = {

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { gray, green } from "colorette";
 import type { Aliases } from "@/schemas/components.schema.js";
-import { ifEndsWithSlash, spinner } from "@/utils.js";
+import { ifEndsWithSlash, spinner } from "@/utils/utils.js";
 
 export async function copyConnectWalletTo({
 	to,

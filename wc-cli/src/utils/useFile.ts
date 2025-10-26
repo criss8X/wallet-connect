@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import type { ZodType } from "zod";
-import { resolveFile } from "@/utils.js";
+import { resolveFile } from "@/utils/utils.js";
 
 class FileHandler {
 	private content?: string;

@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import { bold, magenta } from "colorette";
-import { spinner } from "@/utils.js";
+import { spinner } from "@/utils/utils.js";
 import {
 	COMPONENT_SCRIPT_BUILDER,
 	type PackageManager,
