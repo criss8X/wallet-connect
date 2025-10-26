@@ -33,7 +33,7 @@
 		"templates"
 	],
 	"scripts": {
-		"build": "tsup src/cli.ts --format esm --out-dir dist --clean",
+		"build": "tsup src/cli.ts",
 		"start": "tsx src/cli.ts"
 	},
 	"devDependencies": {
