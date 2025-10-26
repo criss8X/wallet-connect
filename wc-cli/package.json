@@ -3,6 +3,25 @@
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",
+	"keywords": [
+		"wallet",
+		"crypto",
+		"cryptocurrency",
+		"wallet-connect",
+		"web3",
+		"ethereum",
+		"blockchain",
+		"dapp",
+		"defi",
+		"cli",
+		"wallet-connection",
+		"react",
+		"connector",
+		"typescript"
+	],
+	"author": "Cristian Carralero",
+	"license": "MIT",
+	"description": "A plug-and-play component that simplifies the integration of cryptocurrency wallet connections into projects.",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -17,10 +36,6 @@
 		"build": "tsup src/cli.ts --format esm --out-dir dist --clean",
 		"start": "tsx src/cli.ts"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
 		"@types/node": "24.4.0",
