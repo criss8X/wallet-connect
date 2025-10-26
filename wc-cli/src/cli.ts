@@ -2,7 +2,7 @@
 import { getEnvironment } from "@/controller/index.js";
 import { defaultInstallation } from "./sections/default.js";
 import { noDepsInstallation } from "./sections/noDeps.js";
-import { toPath } from "./sections/toPathProvided.js";
+import { defaultAndPathTo, pathTo } from "./sections/pathTo.js";
 
 await startCli();
 
@@ -16,7 +16,10 @@ async function startCli() {
 		case "noDeps":
 			return noDepsInstallation(data);
 
-		case "toPath":
-			return toPath(data);
+		case "pathTo":
+			return pathTo(data);
+
+		case "defaultAndPathTo":
+			return defaultAndPathTo(data);
 	}
 }

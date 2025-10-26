@@ -35,8 +35,6 @@ export function aliasToRelativePath({
 	const possiblePaths = paths[value] ?? paths[`${value}/`];
 
 	if (possiblePaths.length === 0) {
-		console.error(`El alias ${value} not found in \`tsconfig.json\` file.`);
-
 		return null;
 	}
 

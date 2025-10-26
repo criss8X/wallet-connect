@@ -3,7 +3,7 @@ import fs from "node:fs";
 export type PathToCommand = {
 	type: "to";
 	path: string;
-	withDependencies?: boolean;
+	withAll: boolean;
 };
 
 export function pathToCommandRefiner(nextFlags: string[]): PathToCommand {
@@ -17,11 +17,11 @@ export function pathToCommandRefiner(nextFlags: string[]): PathToCommand {
 		throw new PathToNotValidError(pathTo);
 	}
 
-	if (nextFlags[1] === "--deps") {
-		return { type: "to", path: pathTo, withDependencies: true };
+	if (nextFlags[1] === "--all") {
+		return { type: "to", path: pathTo, withAll: true };
 	}
 
-	return { type: "to", path: pathTo };
+	return { type: "to", path: pathTo, withAll: false };
 }
 
 // Errors

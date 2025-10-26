@@ -35,20 +35,25 @@ export type NoDepsEnv = {
 	tsConfigJson: TsConfigJson;
 } & EnvironmentMeta;
 
-export type ToPathEnv = {
+export type PathToEnv = {
 	destPath: string;
-	withDependencies: boolean;
 } & EnvironmentMeta;
 
-type EnvironmentKind = "default" | "noDeps" | "toPath";
+export type DefaultAndPathToEnv = {
+	destPath: string;
+} & DefaultEnv;
+
+type EnvironmentKind = "default" | "noDeps" | "pathTo" | "defaultAndPathTo";
 
 type EnvironmentOf<T extends EnvironmentKind> = T extends "default"
 	? DefaultEnv
 	: T extends "noDeps"
 		? NoDepsEnv
-		: T extends "toPath"
-			? ToPathEnv
-			: never;
+		: T extends "pathTo"
+			? PathToEnv
+			: T extends "defaultAndPathTo"
+				? DefaultAndPathToEnv
+				: never;
 
 type Environment<T extends EnvironmentKind> = {
 	kind: T;
@@ -58,7 +63,8 @@ type Environment<T extends EnvironmentKind> = {
 type AnyEnvironment =
 	| Environment<"default">
 	| Environment<"noDeps">
-	| Environment<"toPath">;
+	| Environment<"pathTo">
+	| Environment<"defaultAndPathTo">;
 
 async function getEssentialData(rootDir: string) {
 	const [packageJson, tsConfigJson, componentsJson] = await Promise.all([
@@ -131,14 +137,36 @@ export async function getEnvironment(): Promise<AnyEnvironment> {
 		}
 
 		case "to": {
+			if (!commandArgs.withAll) {
+				return {
+					kind: "pathTo",
+					data: {
+						rootDir,
+						packageManager,
+						srcDir: srcDir ?? undefined,
+						destPath: commandArgs.path,
+					},
+				};
+			}
+
+			if (packageJson === null) {
+				throw new PackageJsonError();
+			} else if (!componentsJson) {
+				throw new ComponentsJsonError();
+			} else if (!tsConfigJson) {
+				throw new TsConfigJsonError();
+			}
+
 			return {
-				kind: "toPath",
+				kind: "defaultAndPathTo",
 				data: {
 					rootDir,
 					packageManager,
 					srcDir: srcDir ?? undefined,
 					destPath: commandArgs.path,
-					withDependencies: commandArgs.withDependencies ?? false,
+					componentsJson,
+					packageJson,
+					tsConfigJson,
 				},
 			};
 		}

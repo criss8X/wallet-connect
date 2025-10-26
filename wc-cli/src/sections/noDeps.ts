@@ -10,8 +10,8 @@ export async function noDepsInstallation({
 }: NoDepsEnv) {
 	const componentsPath = aliasToRelativePath({
 		rootDir,
-		value: componentsJson.aliases.components,
 		paths: tsConfigJson.compilerOptions.paths,
+		value: componentsJson.aliases.components,
 	});
 
 	await copyConnectWalletTo({
