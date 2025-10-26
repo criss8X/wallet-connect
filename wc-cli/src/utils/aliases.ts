@@ -20,7 +20,7 @@ export function aliasToRelativePath({
 
 	// If the value to decrypt has the default alias, then decrypt quickly.
 	if (value.startsWith("@/")) {
-		const relativePath = paths["@/"].findAndMap((path) =>
+		const relativePath = paths["@/"]?.findAndMap((path) =>
 			resolveFolder(rootDir, path.replaceAll("*", "")),
 		);
 

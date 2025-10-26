@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { getEnvironment } from "@/utils/environment.js";
+import { getEnvironment } from "@/controller/index.js";
 import { defaultInstallation } from "./sections/default.js";
 import { noDepsInstallation } from "./sections/noDeps.js";
-import { toPathProvided } from "./sections/toPathProvided.js";
+import { toPath } from "./sections/toPathProvided.js";
 
 await startCli();
 
@@ -16,7 +16,7 @@ async function startCli() {
 		case "noDeps":
 			return noDepsInstallation(data);
 
-		case "toPathProvided":
-			return toPathProvided(data);
+		case "toPath":
+			return toPath(data);
 	}
 }
