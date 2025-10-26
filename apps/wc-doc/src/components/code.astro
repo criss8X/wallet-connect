@@ -4,19 +4,19 @@ import cn from "@/lib/cn";
 import CopyButton from "./copyButton.astro";
 
 interface Props {
-  title: string;
-  code: string;
-  className?: string;
+	title: string;
+	code: string;
+	className?: string;
 }
 
 const { className, title, code } = Astro.props;
 
 const codeInHtml = await codeToHtml(code, {
-  lang: "tsx",
-  theme: "one-dark-pro",
-  colorReplacements: {
-    "#282c34": "#17171700",
-  },
+	lang: "tsx",
+	theme: "one-dark-pro",
+	colorReplacements: {
+		"#282c34": "#17171700",
+	},
 });
 ---
 

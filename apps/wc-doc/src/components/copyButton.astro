@@ -2,13 +2,13 @@
 import { Check, Copy } from "./icon.astro";
 
 interface Props {
-  contentToCopy: string;
+	contentToCopy: string;
 }
 
 const { contentToCopy } = Astro.props;
 
 const description =
-  Astro.currentLocale === "es" ? "Copiar al portapapeles" : "Copy to clipboard";
+	Astro.currentLocale === "es" ? "Copiar al portapapeles" : "Copy to clipboard";
 ---
 
 <button

@@ -1,9 +1,13 @@
 {
-	"name": "wc-cli",
+	"name": "wallet-connect",
 	"version": "1.0.0",
+	"private": false,
 	"type": "module",
+	"publishConfig": {
+		"access": "public"
+	},
 	"bin": {
-		"wc-script": "dist/cli.js"
+		"wcs": "dist/cli.js"
 	},
 	"files": [
 		"dist",
@@ -11,7 +15,7 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts --format esm --out-dir dist --clean",
-		"dev": "tsx src/cli.ts"
+		"start": "tsx src/cli.ts"
 	},
 	"keywords": [],
 	"author": "",
@@ -25,6 +29,8 @@
 		"typescript": "5.9.2"
 	},
 	"dependencies": {
+		"colorette": "2.0.20",
+		"ora": "9.0.0",
 		"zod": "4.1.8"
 	}
 }

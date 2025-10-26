@@ -15,13 +15,13 @@ import { getLocalesByLang } from "@/lib/locale";
 const { previewLabel } = getLocalesByLang(rootLocales, Astro.currentLocale);
 
 const { description, canonical, keywords } = getLocalesByLang(
-  seoLocales,
-  Astro.currentLocale,
+	seoLocales,
+	Astro.currentLocale,
 );
 
 const applicationJson = getLocalesByLang(
-  applicationJsonLocales,
-  Astro.currentLocale,
+	applicationJsonLocales,
+	Astro.currentLocale,
 );
 ---
 

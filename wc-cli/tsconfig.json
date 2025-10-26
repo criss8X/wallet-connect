@@ -7,7 +7,16 @@
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
 		"skipLibCheck": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"ignoreDeprecations": "6.0",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@test/*": ["./src/test/*"],
+			"@mock/*": ["./src/mocks/*"],
+			"@commands/*": ["./src/commands/*"],
+			"@utils/*": ["./src/utils/*"]
+		}
 	},
 	"include": ["src", "test"]
 }

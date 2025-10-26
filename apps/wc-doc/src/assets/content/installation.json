@@ -1,12 +1,12 @@
 {
-  "es": {
-    "title": "Instalación",
-    "description": "Un componente listo para integrar: copia el código, crea el archivo y úsalo en tu proyecto. Puedes personalizarlo y reutilizar sus partes internas según tus necesidades.",
-    "installNeededRemember": "Recuerda cambiar las importaciones en el caso de no tenerlas configuradas."
-  },
-  "en": {
-    "title": "Installation",
-    "description": "A ready-to-integrate component: copy the code, create the file, and use it in your project. You can customize it and reuse its internal parts according to your needs.",
-    "installNeededRemember": "Remember to change the imports if you don't have them configured."
-  }
+	"es": {
+		"title": "Instalación",
+		"description": "Un componente listo para integrar: copia el código, crea el archivo y úsalo en tu proyecto. Puedes personalizarlo y reutilizar sus partes internas según tus necesidades.",
+		"installNeededRemember": "Recuerda cambiar las importaciones en el caso de no tenerlas configuradas."
+	},
+	"en": {
+		"title": "Installation",
+		"description": "A ready-to-integrate component: copy the code, create the file, and use it in your project. You can customize it and reuse its internal parts according to your needs.",
+		"installNeededRemember": "Remember to change the imports if you don't have them configured."
+	}
 }

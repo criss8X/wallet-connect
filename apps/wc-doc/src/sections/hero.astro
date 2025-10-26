@@ -1,28 +1,28 @@
 ---
 import heroContent from "@/assets/content/hero.json";
 import {
-  type LucideIcon,
-  Palette,
-  Rocket,
-  Shadcn,
-  Sparkles,
-  Wallet,
+	type LucideIcon,
+	Palette,
+	Rocket,
+	Shadcn,
+	Sparkles,
+	Wallet,
 } from "@/components/icon.astro";
 import { getLocalesByLang } from "@/lib/locale";
 
 const internalIconMap: Record<string, LucideIcon> = {
-  Sparkles: Sparkles,
-  Palette: Palette,
-  Rocket: Rocket,
-  Shadcn: Shadcn,
+	Sparkles: Sparkles,
+	Palette: Palette,
+	Rocket: Rocket,
+	Shadcn: Shadcn,
 };
 
 const locales = getLocalesByLang(heroContent, Astro.currentLocale);
 
 const features = locales.features.map(({ name, description, iconName }) => ({
-  name,
-  description,
-  icon: internalIconMap[iconName],
+	name,
+	description,
+	icon: internalIconMap[iconName],
 }));
 
 const { description } = locales;

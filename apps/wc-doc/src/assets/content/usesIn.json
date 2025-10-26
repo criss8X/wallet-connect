@@ -1,14 +1,14 @@
 {
-  "es": {
-    "title": "Que utilizamos aquí?",
-    "web3_sub": "Librerías Web3",
-    "comp_sub": "Librería de Componentes",
-    "shadcn_comp_sub": "Componentes Shadcn"
-  },
-  "en": {
-    "title": "What's uses here?",
-    "web3_sub": "Web3 Libraries",
-    "comp_sub": "Components Library",
-    "shadcn_comp_sub": "Shadcn Components"
-  }
+	"es": {
+		"title": "Que utilizamos aquí?",
+		"web3_sub": "Librerías Web3",
+		"comp_sub": "Librería de Componentes",
+		"shadcn_comp_sub": "Componentes Shadcn"
+	},
+	"en": {
+		"title": "What's uses here?",
+		"web3_sub": "Web3 Libraries",
+		"comp_sub": "Components Library",
+		"shadcn_comp_sub": "Shadcn Components"
+	}
 }
