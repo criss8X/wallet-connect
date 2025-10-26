@@ -7,6 +7,7 @@ import {
 import { whatsComponentsNeed, whatsDepsNeed } from "@utils/whatsNeed.js";
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import type { DefaultAndPathToEnv, PathToEnv } from "@/controller/index.js";
+import { processWrapper } from "@/utils/utils.js";
 
 export async function pathTo({ destPath }: PathToEnv) {
 	await copyConnectWalletTo({ to: destPath });
@@ -29,8 +30,10 @@ export async function defaultAndPathTo({
 
 	console.log(displayNeeds({ depsNeed, componentsNeed }));
 
-	await installDepsNeeded(depsNeed, packageManager);
-	await installComponentsNeeded(componentsNeed, packageManager);
+	await processWrapper(async () => {
+		await installDepsNeeded(depsNeed, packageManager);
+		await installComponentsNeeded(componentsNeed, packageManager);
+	});
 
 	await copyConnectWalletTo({
 		to: destPath,

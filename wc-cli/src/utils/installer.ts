@@ -1,6 +1,5 @@
-import { execSync } from "node:child_process";
 import { bold, magenta } from "colorette";
-import { spinner } from "@/utils/utils.js";
+import { runCommand, spinner } from "@/utils/utils.js";
 import {
 	COMPONENT_SCRIPT_BUILDER,
 	type PackageManager,
@@ -17,6 +16,8 @@ export async function installDepsNeeded(
 	}
 
 	console.log();
+	console.log("Press \x1b[100m\x1b[97m ESC \x1b[0m to exit.");
+	console.log();
 	console.log("---- Dependencies Installation ----");
 
 	for (const dependence of deps) {
@@ -25,7 +26,7 @@ export async function installDepsNeeded(
 		const scriptToInstall =
 			SCRIPT_BY_PACKAGE_MANAGER[packageManager](dependence);
 
-		execSync(scriptToInstall);
+		await runCommand(scriptToInstall);
 
 		loader.succeed();
 	}
@@ -48,7 +49,7 @@ export async function installComponentsNeeded(
 		const scriptToAddComponent =
 			COMPONENT_SCRIPT_BUILDER[packageManager](component);
 
-		execSync(scriptToAddComponent);
+		runCommand(scriptToAddComponent);
 
 		loader.succeed();
 	}

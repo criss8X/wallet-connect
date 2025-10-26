@@ -1,5 +1,7 @@
+import { exec } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import readline from "node:readline";
 import ora, { type Ora } from "ora";
 
 export function resolveFile(parent: string, child: string): string | null {
@@ -72,4 +74,36 @@ export function spinner(msg: string): Ora {
 		text: msg,
 		spinner: "dots",
 	}).start();
+}
+
+export async function runCommand(command: string) {
+	return new Promise<void>((resolve, reject) => {
+		exec(command, (error) => {
+			if (error) {
+				reject(new Error(`Error executing command: ${command}`));
+			}
+
+			resolve();
+		});
+	});
+}
+
+export async function processWrapper(fn: () => Promise<void>) {
+	readline.emitKeypressEvents(process.stdin);
+
+	if (process.stdin.isTTY) {
+		process.stdin.setRawMode(true);
+	}
+
+	const onKeypress = (_: string, key: { name: string }) => {
+		if (key.name === "escape") {
+			throw new Error("Cancelled by user");
+		}
+	};
+
+	process.stdin.on("keypress", onKeypress);
+
+	await fn();
+
+	process.stdin.removeListener("keypress", onKeypress);
 }

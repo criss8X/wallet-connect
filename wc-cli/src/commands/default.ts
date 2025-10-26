@@ -1,11 +1,12 @@
 import { bold } from "colorette";
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
+import type { DefaultEnv } from "@/controller/index.js";
 import { decodeAliases } from "@/utils/aliases.js";
-import type { DefaultEnv } from "@/utils/environment.js";
 import {
 	installComponentsNeeded,
 	installDepsNeeded,
 } from "@/utils/installer.js";
+import { processWrapper } from "@/utils/utils.js";
 import {
 	type ComponentNeeded,
 	type DependenceNeeded,
@@ -30,8 +31,10 @@ export async function defaultInstallation({
 
 	console.log(displayNeeds({ depsNeed, componentsNeed }));
 
-	await installDepsNeeded(depsNeed, packageManager);
-	await installComponentsNeeded(componentsNeed, packageManager);
+	await processWrapper(async () => {
+		await installDepsNeeded(depsNeed, packageManager);
+		await installComponentsNeeded(componentsNeed, packageManager);
+	});
 
 	await copyConnectWalletTo({
 		to: aliasesDecoded.components ?? srcDir ?? rootDir,
