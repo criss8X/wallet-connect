@@ -1,8 +1,9 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
 import ora, { type Ora } from "ora";
+import type { PackageManager } from "./packageManager.js";
 
 export function resolveFile(parent: string, child: string): string | null {
 	const joined = path.join(parent, child);
@@ -76,14 +77,22 @@ export function spinner(msg: string): Ora {
 	}).start();
 }
 
-export async function runCommand(command: string) {
+export async function runCommand(
+	command: string,
+	packageManager: PackageManager,
+) {
 	return new Promise<void>((resolve, reject) => {
-		exec(command, (error) => {
-			if (error) {
-				reject(new Error(`Error executing command: ${command}`));
+		const install = spawn(packageManager, command.split(" "), {
+			cwd: process.cwd(),
+			stdio: "ignore",
+		});
+
+		install.on("close", (code) => {
+			if (code === 0) {
+				return resolve();
 			}
 
-			resolve();
+			reject(new Error(`failed with code ${code}`));
 		});
 	});
 }
