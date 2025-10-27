@@ -73,7 +73,8 @@ function sanitizeAndPutKeys(pathOrRelativePath: string): string[] {
 	const extractName =
 		pathOrRelativePath.split("/").at(-1) || pathOrRelativePath;
 
-	const sanitizedName = extractName.split(".").at(0) || extractName;
+	const nameWithoutExtension = extractName.split(".").at(0) || extractName;
+	const sanitizedName = nameWithoutExtension.toLowerCase().replaceAll(" ", "-");
 
 	return [sanitizedName, sanitizedName];
 }

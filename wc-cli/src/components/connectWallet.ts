@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { gray, green } from "colorette";
+import { gray } from "colorette";
 import type { Aliases } from "@/schemas/components.schema.js";
 import { ifEndsWithSlash, spinner } from "@/utils/utils.js";
 
@@ -11,20 +11,23 @@ export async function copyConnectWalletTo({
 	to: string;
 	aliases?: Aliases;
 }) {
-	const copyCompSpinner = spinner("Copying ConnectWallet component...");
-
+	const copyCompSpinner = spinner("Copy ConnectWallet.tsx");
 	const connectWalletCode = getConnectWalletCode(aliases);
 
 	const pathForFile = path.join(to, "ConnectWallet.tsx");
-	await fs.writeFile(pathForFile, connectWalletCode);
 
-	copyCompSpinner.succeed(green("ConnectWallet.tsx is copied!"));
+	try {
+		await fs.writeFile(pathForFile, connectWalletCode);
+		copyCompSpinner.succeed();
+	} catch {
+		copyCompSpinner.fail("Failed to copy ConnectWallet.tsx");
+	}
 
 	console.log(gray(`-> ${pathForFile}`));
 }
 
 export function getConnectWalletCode(aliases?: Aliases): string {
-	const components = ifEndsWithSlash(aliases?.components ?? "@/components/");
+	const components = ifEndsWithSlash(aliases?.components ?? "@/components/ui/");
 
 	return `import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import type * as AvatarPrimitive from "@radix-ui/react-avatar";
@@ -62,9 +65,9 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "${components}/AlertDialog";
-import { Avatar, AvatarFallback, AvatarImage } from "${components}/Avatar";
-import { Button } from "${components}/Button";
+} from "${components}/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "${components}/avatar";
+import { Button } from "${components}/button";
 
 function useAccountActions() {
 	const [isCopied, setIsCopied] = useState(false);
