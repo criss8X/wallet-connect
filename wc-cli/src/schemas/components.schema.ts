@@ -10,6 +10,8 @@ const ALIASES_SCHEMA = z.object({
 	hooks: ALIAS_SCHEMA,
 });
 
+export type Aliases = z.infer<typeof ALIASES_SCHEMA>;
+
 export const COMPONENTS_JSON_SCHEMA = z.object({
 	aliases: ALIASES_SCHEMA,
 });
