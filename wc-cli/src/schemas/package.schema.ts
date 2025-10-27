@@ -5,3 +5,5 @@ export const PACKAGE_JSON_SCHEMA = z.object({
 	dependencies: z.record(z.string(), z.string()).default({}),
 	devDependencies: z.record(z.string(), z.string()).default({}),
 });
+
+export type PackageJson = z.infer<typeof PACKAGE_JSON_SCHEMA>;

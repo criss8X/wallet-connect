@@ -13,3 +13,5 @@ const ALIASES_SCHEMA = z.object({
 export const COMPONENTS_JSON_SCHEMA = z.object({
 	aliases: ALIASES_SCHEMA,
 });
+
+export type ComponentsJson = z.infer<typeof COMPONENTS_JSON_SCHEMA>;
