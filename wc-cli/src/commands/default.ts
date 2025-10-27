@@ -1,4 +1,4 @@
-import { bold } from "colorette";
+import { bgBlackBright, bold } from "colorette";
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import type { DefaultEnv } from "@/controller/index.js";
 import { decodeAliases } from "@/utils/aliases.js";
@@ -31,6 +31,10 @@ export async function defaultInstallation({
 
 	console.log(displayNeeds({ depsNeed, componentsNeed }));
 
+	console.log();
+	console.log(`Press ${bgBlackBright("ESC")} to cancel`);
+	console.log();
+
 	await processWrapper(async () => {
 		await installDepsNeeded(depsNeed, packageManager);
 		await installComponentsNeeded(componentsNeed, packageManager);
@@ -51,16 +55,21 @@ export function displayNeeds({
 	depsNeed,
 	componentsNeed,
 }: DisplayNeedsProps): string {
-	let content = bold("We will install the dependencies:");
+	let content = "";
 
-	content += "\n";
-	content += depsNeed.map((dep) => `- ${dep}`).join("\n");
+	if (depsNeed.length > 0) {
+		content += bold("We will install the dependencies:");
+		content += "\n";
+		content += depsNeed.map((dep) => `- ${dep}`).join("\n");
 
-	content += "\n\n";
+		content += "\n\n";
+	}
 
-	content += bold("And the shadcn components:");
-	content += "\n";
-	content += componentsNeed.map((comp) => `- ${comp}`).join("\n");
+	if (componentsNeed.length > 0) {
+		content += bold("And the shadcn components:");
+		content += "\n";
+		content += componentsNeed.map((comp) => `- ${comp}`).join("\n");
+	}
 
 	return content;
 }

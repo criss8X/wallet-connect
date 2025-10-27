@@ -62,6 +62,8 @@ export async function whatsComponentsNeed(
 		.then(([a, b]) => a.concat(b))
 		.then((entries) => Object.fromEntries(entries));
 
+	console.log({ projectComponents });
+
 	const componentsNeeded = Object.values(NeededShadcnComponents).filter(
 		(compNeeded) => projectComponents[compNeeded] === undefined,
 	);

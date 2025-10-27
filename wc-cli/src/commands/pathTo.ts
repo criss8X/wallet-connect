@@ -5,6 +5,7 @@ import {
 	installDepsNeeded,
 } from "@utils/installer.js";
 import { whatsComponentsNeed, whatsDepsNeed } from "@utils/whatsNeed.js";
+import { bgBlackBright } from "colorette";
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
 import type { DefaultAndPathToEnv, PathToEnv } from "@/controller/index.js";
 import { processWrapper } from "@/utils/utils.js";
@@ -29,6 +30,10 @@ export async function defaultAndPathTo({
 	]);
 
 	console.log(displayNeeds({ depsNeed, componentsNeed }));
+
+	console.log();
+	console.log(`Press ${bgBlackBright("ESC")} to cancel`);
+	console.log();
 
 	await processWrapper(async () => {
 		await installDepsNeeded(depsNeed, packageManager);
