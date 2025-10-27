@@ -1,7 +1,7 @@
 import type { Aliases, ComponentsJson } from "@/schemas/components.schema.js";
 import type { TsConfigJson, TsConfigPaths } from "@/schemas/tsconfig.schema.js";
 import type { MakeNullObject } from "@/types.js";
-import { objectMapper, resolveFolder } from "@/utils/utils.js";
+import { objectMapper, resolvePath } from "@/utils/utils.js";
 
 type AliasToRelativePathProps = {
 	value: string;
@@ -14,32 +14,20 @@ export function aliasToRelativePath({
 	rootDir,
 	value,
 }: AliasToRelativePathProps): string | null {
-	if (Object.keys(paths).length === 0) {
-		return null;
-	}
-
 	// If the value to decrypt has the default alias, then decrypt quickly.
 	if (value.startsWith("@/")) {
-		const relativePath = paths["@/"]?.findAndMap((path) =>
-			resolveFolder(rootDir, path.replaceAll("*", "")),
+		const relativePath = (paths["@/"] || []).findAndMap((path) =>
+			resolvePath(rootDir, path.replaceAll("*", "")),
 		);
 
-		if (!relativePath) {
-			return null;
-		}
-
-		return relativePath.concat(value.slice(2));
+		return relativePath?.concat(value.slice(2)) || null;
 	}
 
 	// If it's a custom value, review and look if has be defined in the `tsconfig.json` file.
-	const possiblePaths = paths[value] ?? paths[`${value}/`];
-
-	if (possiblePaths.length === 0) {
-		return null;
-	}
+	const possiblePaths = paths[value] ?? paths[`${value}/`] ?? [];
 
 	return possiblePaths.findAndMap((path) =>
-		resolveFolder(rootDir, path.replaceAll("*", "")),
+		resolvePath(rootDir, path.replaceAll("*", "")),
 	);
 }
 

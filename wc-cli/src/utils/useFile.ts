@@ -1,6 +1,6 @@
 import fs from "node:fs";
+import path from "node:path";
 import type { ZodType } from "zod";
-import { resolveFile } from "@/utils/utils.js";
 
 class FileHandler {
 	private content?: string;
@@ -25,11 +25,7 @@ class FileHandler {
 }
 
 export default function useFile(parent: string, child: string): FileHandler {
-	const file = resolveFile(parent, child);
-
-	if (file === null) {
-		return new FileHandler();
-	}
+	const file = path.join(parent, child);
 
 	try {
 		const fileContent = fs.readFileSync(file, { encoding: "utf-8" });

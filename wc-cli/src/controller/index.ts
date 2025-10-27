@@ -15,7 +15,7 @@ import {
 	type PackageManager,
 } from "@/utils/packageManager.js";
 import useFile from "@/utils/useFile.js";
-import { resolveFolder, spinner } from "@/utils/utils.js";
+import { resolvePath } from "@/utils/utils.js";
 import { decodeCommandArgs } from "./refiner.js";
 
 export type EnvironmentMeta = {
@@ -81,18 +81,13 @@ async function getEssentialData(rootDir: string) {
 }
 
 export async function getEnvironment(): Promise<AnyEnvironment> {
-	const environmentLoader = spinner("Loading environment...");
-
 	const rootDir = process.cwd();
-	const srcDir = resolveFolder(rootDir, "src");
+	const srcDir = resolvePath(rootDir, "src");
 	const packageManager = await detectPackageManager();
 	const commandArgs = decodeCommandArgs();
 
 	const { componentsJson, packageJson, tsConfigJson } =
 		await getEssentialData(rootDir);
-
-	// Stop environment loader
-	environmentLoader.stop();
 
 	switch (commandArgs.type) {
 		case "default": {
