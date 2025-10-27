@@ -1,6 +1,6 @@
 {
 	"name": "@criss8x/wcs",
-	"version": "1.3.1",
+	"version": "1.3.2",
 	"private": false,
 	"type": "module",
 	"keywords": [
@@ -34,8 +34,7 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts",
-		"start": "tsx src/cli.ts",
-		"publish": "pnpm publish --access=public"
+		"start": "tsx src/cli.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
