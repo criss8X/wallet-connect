@@ -1,47 +1,18 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
 import ora, { type Ora } from "ora";
+import type { PackageManager } from "./packageManager.js";
 
-export function resolveFile(parent: string, child: string): string | null {
+export function resolvePath(parent: string, child: string): string | null {
 	const joined = path.join(parent, child);
 
 	if (!fs.existsSync(joined)) {
-		console.error(`The file ${child} is not exists.`);
-
-		return null;
-	}
-
-	const stat = fs.statSync(joined);
-
-	if (!stat.isFile()) {
-		console.error(`The path ${joined} is not a file.`);
-
 		return null;
 	}
 
 	return joined;
-}
-
-export function resolveFolder(parent: string, child: string): string | null {
-	if (!fs.existsSync(parent)) {
-		throw new Error(`The path ${parent} does not exist.`);
-	}
-
-	const stat = fs.statSync(parent);
-
-	if (!stat.isDirectory()) {
-		throw new Error(`The path ${parent} is not a directory.`);
-	}
-
-	const joinResult = path.join(parent, child);
-
-	if (!fs.existsSync(joinResult)) {
-		return null;
-	}
-
-	return joinResult;
 }
 
 type ObjectMapperReturnType<T extends object, K> = {
@@ -76,14 +47,22 @@ export function spinner(msg: string): Ora {
 	}).start();
 }
 
-export async function runCommand(command: string) {
+export async function runCommand(
+	command: string,
+	packageManager: PackageManager,
+) {
 	return new Promise<void>((resolve, reject) => {
-		exec(command, (error) => {
-			if (error) {
-				reject(new Error(`Error executing command: ${command}`));
+		const install = spawn(packageManager, command.split(" "), {
+			cwd: process.cwd(),
+			stdio: "ignore",
+		});
+
+		install.on("close", (code) => {
+			if (code === 0) {
+				return resolve();
 			}
 
-			resolve();
+			reject(new Error(`failed with code ${code}`));
 		});
 	});
 }

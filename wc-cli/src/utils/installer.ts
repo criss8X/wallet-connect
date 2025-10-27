@@ -26,9 +26,13 @@ export async function installDepsNeeded(
 		const scriptToInstall =
 			SCRIPT_BY_PACKAGE_MANAGER[packageManager](dependence);
 
-		await runCommand(scriptToInstall);
+		try {
+			await runCommand(scriptToInstall, packageManager);
 
-		loader.succeed();
+			loader.succeed();
+		} catch {
+			loader.fail();
+		}
 	}
 }
 
@@ -49,8 +53,12 @@ export async function installComponentsNeeded(
 		const scriptToAddComponent =
 			COMPONENT_SCRIPT_BUILDER[packageManager](component);
 
-		runCommand(scriptToAddComponent);
+		try {
+			await runCommand(scriptToAddComponent, packageManager);
 
-		loader.succeed();
+			loader.succeed();
+		} catch {
+			loader.fail();
+		}
 	}
 }

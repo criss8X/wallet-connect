@@ -20,11 +20,9 @@ export function whatsDepsNeed({
 }: PackageJson): DependenceNeeded[] {
 	const allDeps = { ...dependencies, ...devDependencies };
 
-	const depsNoInstalled = Object.values(NeededDependencies).filter(
+	return Object.values(NeededDependencies).filter(
 		(depName) => !allDeps[depName],
 	);
-
-	return depsNoInstalled;
 }
 
 export const NeededShadcnComponents = {
@@ -45,31 +43,24 @@ export async function whatsComponentsNeed(
 			ui: decodedAliases.ui,
 		},
 		(_, value) => {
-			if (
-				value === null ||
-				!fs.existsSync(value) ||
-				!fs.statSync(value).isDirectory()
-			) {
+			try {
+				if (value === null) {
+					return [];
+				}
+
+				return fs.readdirSync(value);
+			} catch {
 				return [];
 			}
-
-			return fs.readdirSync(value);
 		},
 	);
 
 	const projectComponents = await Promise.all([
-		Promise.resolve(ui.map(sanitizeComponentsPath)),
-		Promise.resolve(components.map(sanitizeComponentsPath)),
-	]).then(([a, b]) =>
-		[...a, ...b].reduce(
-			(acc, current) => {
-				acc[current] = current;
-
-				return acc;
-			},
-			{} as Record<string, string>,
-		),
-	);
+		Promise.resolve(ui.map(sanitizeAndPutKeys)),
+		Promise.resolve(components.map(sanitizeAndPutKeys)),
+	])
+		.then(([a, b]) => a.concat(b))
+		.then((entries) => Object.fromEntries(entries));
 
 	const componentsNeeded = Object.values(NeededShadcnComponents).filter(
 		(compNeeded) => projectComponents[compNeeded] === undefined,
@@ -78,9 +69,11 @@ export async function whatsComponentsNeed(
 	return componentsNeeded;
 }
 
-function sanitizeComponentsPath(pathOrRelativePath: string): string {
+function sanitizeAndPutKeys(pathOrRelativePath: string): string[] {
 	const extractName =
 		pathOrRelativePath.split("/").at(-1) || pathOrRelativePath;
 
-	return extractName.split(".").at(0) || extractName;
+	const sanitizedName = extractName.split(".").at(0) || extractName;
+
+	return [sanitizedName, sanitizedName];
 }

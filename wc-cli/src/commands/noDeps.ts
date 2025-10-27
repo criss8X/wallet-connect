@@ -1,6 +1,6 @@
 import { copyConnectWalletTo } from "@/components/connectWallet.js";
+import type { NoDepsEnv } from "@/controller/index.js";
 import { aliasToRelativePath } from "@/utils/aliases.js";
-import type { NoDepsEnv } from "@/utils/environment.js";
 
 export async function noDepsInstallation({
 	componentsJson,

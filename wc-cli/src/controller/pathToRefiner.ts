@@ -10,11 +10,11 @@ export function pathToCommandRefiner(nextFlags: string[]): PathToCommand {
 	const pathTo = nextFlags[0];
 
 	if (pathTo === undefined) {
-		throw new PathToNotFoundError();
+		throw new Error("A destination path was expected.");
 	}
 
 	if (!fs.existsSync(pathTo)) {
-		throw new PathToNotValidError(pathTo);
+		throw new Error(`The path: [${pathTo}] provided does not exist.`);
 	}
 
 	if (nextFlags[1] === "--all") {
@@ -22,18 +22,4 @@ export function pathToCommandRefiner(nextFlags: string[]): PathToCommand {
 	}
 
 	return { type: "to", path: pathTo, withAll: false };
-}
-
-// Errors
-class PathToNotFoundError extends Error {
-	message: string = "A destination path was expected.";
-}
-
-class PathToNotValidError extends Error {
-	message: string;
-
-	constructor(pathTo: string) {
-		super();
-		this.message = `The path: [${pathTo}] provided does not exist.`;
-	}
 }
