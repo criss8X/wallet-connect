@@ -15,6 +15,21 @@ export function resolvePath(parent: string, child: string): string | null {
 	return joined;
 }
 
+export function findAndMap<V, U>(
+	array: Array<V>,
+	fn: (value: V) => U | null,
+): U | null {
+	for (const value of array) {
+		const resultAndMap = fn(value);
+
+		if (resultAndMap !== null) {
+			return resultAndMap;
+		}
+	}
+
+	return null;
+}
+
 type ObjectMapperReturnType<T extends object, K> = {
 	[k in keyof T]: K;
 };

@@ -34,7 +34,8 @@
 	],
 	"scripts": {
 		"build": "tsup src/cli.ts",
-		"start": "tsx src/cli.ts"
+		"start": "tsx src/cli.ts",
+		"test": "pnpm build && cd environment && node ../dist/cli.js"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
