@@ -29,12 +29,13 @@ export async function defaultAndPathTo({
 		whatsComponentsNeed(aliasesDecoded),
 	]);
 
-	console.log(displayNeeds({ depsNeed, componentsNeed }));
+	if (depsNeed.length !== 0 || componentsNeed.length !== 0) {
+		console.log(displayNeeds({ depsNeed, componentsNeed }));
 
-	console.log();
-	console.log(`Press ${bgBlackBright("ESC")} to cancel`);
-	console.log();
-
+		console.log();
+		console.log(`Press ${bgBlackBright("ESC")} to cancel`);
+		console.log();
+	}
 	await processWrapper(async () => {
 		await installDepsNeeded(depsNeed, packageManager);
 		await installComponentsNeeded(componentsNeed, packageManager);
