@@ -10,11 +10,3 @@ export type DynamicFn<isAsync extends boolean, R = void> = isAsync extends true
 export type MakeNullObject<O> = {
 	[K in keyof O]: O[K] | null;
 };
-
-declare global {
-	interface Array<T> {
-		findAndMap<U>(
-			callbackfn: (value: T, index: number, array: T[]) => U | null,
-		): U | null;
-	}
-}
