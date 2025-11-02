@@ -27,7 +27,7 @@ export async function copyConnectWalletTo({
 }
 
 export function getConnectWalletCode(aliases?: Aliases): string {
-	const components = ifEndsWithSlash(aliases?.ui ?? "@/components/ui/");
+	const uiComponents = ifEndsWithSlash(aliases?.ui || "@/components/ui/");
 
 	return `import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import type * as AvatarPrimitive from "@radix-ui/react-avatar";
@@ -65,9 +65,9 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "${components}/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "${components}/avatar";
-import { Button } from "${components}/button";
+} from "${uiComponents}/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "${uiComponents}/avatar";
+import { Button } from "${uiComponents}/button";
 
 function useAccountActions() {
 	const [isCopied, setIsCopied] = useState(false);
