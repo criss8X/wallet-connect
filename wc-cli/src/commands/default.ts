@@ -58,9 +58,10 @@ export function displayNeeds({
 	componentsNeed,
 }: DisplayNeedsProps): string {
 	let content = "";
+	const hasDepsNeed = depsNeed.length > 0;
 
-	if (depsNeed.length > 0) {
-		content += bold("We will install the dependencies:");
+	if (hasDepsNeed) {
+		content += bold("==== Dependencies ====");
 		content += "\n";
 		content += depsNeed.map((dep) => `- ${dep}`).join("\n");
 
@@ -68,7 +69,7 @@ export function displayNeeds({
 	}
 
 	if (componentsNeed.length > 0) {
-		content += bold("And the shadcn components:");
+		content += bold("==== Shadcn Components ====");
 		content += "\n";
 		content += componentsNeed.map((comp) => `- ${comp}`).join("\n");
 	}
