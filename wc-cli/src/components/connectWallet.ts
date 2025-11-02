@@ -27,7 +27,7 @@ export async function copyConnectWalletTo({
 }
 
 export function getConnectWalletCode(aliases?: Aliases): string {
-	const components = ifEndsWithSlash(aliases?.components ?? "@/components/ui/");
+	const components = ifEndsWithSlash(aliases?.ui ?? "@/components/ui/");
 
 	return `import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import type * as AvatarPrimitive from "@radix-ui/react-avatar";
