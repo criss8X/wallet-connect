@@ -1,6 +1,6 @@
 {
-	"name": "@criss8x/wcs",
-	"version": "1.4.0",
+	"name": "wc",
+	"version": "1.0.0",
 	"private": false,
 	"type": "module",
 	"keywords": [
