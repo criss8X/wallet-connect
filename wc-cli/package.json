@@ -1,5 +1,5 @@
 {
-	"name": "wc",
+	"name": "@web3/wallet",
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",
