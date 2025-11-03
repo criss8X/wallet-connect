@@ -1,5 +1,5 @@
 {
-	"name": "@web3/wallet",
+	"name": "wallet-connect",
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",
