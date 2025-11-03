@@ -1,5 +1,5 @@
 {
-	"name": "wallet-connect",
+	"name": "@criss8x/wc",
 	"version": "1.0.0",
 	"private": false,
 	"type": "module",
